@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.bitwise.magnolia.dao.common.ApplicationConstant;
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.exceptions.NoValidDaysException;
 import com.bitwise.magnolia.exceptions.ResourceNotFoundException;
-import com.bitwise.magnolia.service.school.SchoolService;
+import com.bitwise.magnolia.service.SchoolService;
 
 
 public class SchoolInterceptor extends HandlerInterceptorAdapter{

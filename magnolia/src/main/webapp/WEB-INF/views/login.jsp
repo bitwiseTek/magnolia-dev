@@ -1,31 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>Magnolia - ${school.schoolName }</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" type="image/jpeg" href="<c:url value="${school.schoolLogo }" />"/>
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="<c:url value="/resources/assets/plugins/pace/pace-theme-flash.css" /> " rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/assets/plugins/bootstrapv3/css/bootstrap.min.css" /> " rel="stylesheet" type="text/css" />
+    <link href="/resources/assets/plugins/bootstrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="<c:url value="/resources/assets/plugins/animate.min.css" /> " rel="stylesheet" type="text/css" />
+    <link href="<c:url value="/resources/assets/plugins/jquery-scrollbar/jquery.scrollbar.css" /> " rel="stylesheet" type="text/css" />
+    <!-- END PLUGIN CSS -->
+    
+    
+    
+    
+    <!-- BEGIN PLUGIN CSS -->
+    <link href="<c:url value="/resources/assets/plugins/font-awesome/css/font-awesome.css" /> " rel="stylesheet" type="text/css" />
+    <link href="<c:url value="/resources/assets/plugins/bootstrap-datepicker/css/datepicker.css" /> " rel="stylesheet" type="text/css" />
+    <!-- END PLUGIN CSS -->
+    
+    
+    <!-- BEGIN THIRED PARTY CSS -->
+    
+    
+    <!-- BEGIN CORE CSS FRAMEWORK -->
+    <link href="<c:url value="/resources/webarch/css/webarch.css" /> " rel="stylesheet" type="text/css" />
+    <!-- END CORE CSS FRAMEWORK -->
+  </head>
+  <!-- END HEAD -->
+  <!-- BEGIN BODY -->
+  <body class="error-body no-top lazy" data-original="<c:url value="/resources/assets/img/work.jpg" /> " style="background-image: url('<c:url value='/resources/assets/img/work.jpg' /> ')">
+    <div class="container">
 
-<div class="container">
 
-	<!-- BEGIN RADIO/TOGGLE CONTROLS-->
-	<div class="row" style="display: none;">
-	  <div class="col-md-12">
-	    <div class="grid simple">
-	      <div class="grid-body no-border">
-	        <div class="row">
-	          <div class="col-md-4">
-	            <div class="row-fluid">
-	              <div class="slide-primary">
-	                <input type="checkbox" name="switch" class="ios" checked="checked" />
-	              </div>
-	              <div class="slide-success">
-	                <input type="checkbox" name="switch" class="iosblue" checked="checked" />
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<!-- END RADIO/TOGGLE CONTROLS-->
+<!-- BEGIN RADIO/TOGGLE CONTROLS-->
+<div class="row" style="display: none;">
+  <div class="col-md-12">
+    <div class="grid simple">
+      <div class="grid-body no-border">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row-fluid">
+              <div class="slide-primary">
+                <input type="checkbox" name="switch" class="ios" checked="checked" />
+              </div>
+              <div class="slide-success">
+                <input type="checkbox" name="switch" class="iosblue" checked="checked" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END RADIO/TOGGLE CONTROLS-->
     
       <div class="row login-container animated fadeInUp">
         <div class="col-md-7 col-md-offset-2 tiles white no-padding">
@@ -166,7 +204,7 @@
                  </div>
                  
                  <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
-                	<%-- <div class="col-md-6 col-sm-6">
+                	<div class="col-md-6 col-sm-6">
 	                  	<select id="stdFaculty" style="width:100%; font-weight: 0; font-size:12px;">
 	                       <option value="0">Select Faculty</option>
 	                       <c:if test="${facultyList.success }">
@@ -178,7 +216,7 @@
 		                      	<option value="0">${facultyList.error }</option>
 		                      </c:if>
                         </select>
-                    </div> --%>
+                    </div>
                   	<div class="col-md-6 col-sm-6">
                   		<select id="stdDepartment" style="width:100%; font-weight: 0; font-size: 12px;">
 	                       <option value="0">Select Faculty</option>
@@ -347,4 +385,45 @@
           </div>
         </div>
       </div>
- </div>
+    </div>
+    
+    
+    <!-- END CONTAINER -->     
+    
+    <!-- END CONTAINER -->
+    <script src="<c:url value="/resources/resources/assets/plugins/pace/pace.min.js" /> " type="text/javascript"></script>
+    <!-- BEGIN JS DEPENDECENCIES-->
+    <script src="<c:url value="/resources/assets/plugins/jquery/jquery-3.1.1.min.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/plugins/bootstrapv3/js/bootstrap.min.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/plugins/jquery-block-ui/jqueryblockui.min.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/plugins/jquery-unveil/jquery.unveil.min.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/plugins/bootstrap-select2/select2.min.js" /> " type="text/javascript"></script>
+    <!-- END CORE JS DEPENDECENCIES-->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="<c:url value="/resources/webarch/js/webarch.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/js/chat.js" /> " type="text/javascript"></script>
+    <!-- END CORE TEMPLATE JS -->
+    
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="<c:url value="/resources/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/assets/plugins/ios-switch/ios7-switch.js" /> " type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="<c:url value="/resources/assets/js/form_elements.js" /> " type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- END JAVASCRIPTS -->
+    
+    <!-- BEGIN PAGE SPECIFIC SCRIPTS -->
+   	<script type="text/javascript" src="<c:url value="/resources/src/js/common/imagepreview.js" />"></script>
+   	<script type="text/javascript" src="<c:url value="/resources/src/js/common/utils.js" />"></script>
+   	<script type="text/javascript" src="<c:url value="/resources/src/js/frontend/account/studentRegistration.js" />"></script>
+   	<script type="text/javascript" src="<c:url value="/resources/src/js/frontend/account/staffRegistration.js" />"></script>
+   	<script type="text/javascript" src="<c:url value="/resources/src/js/frontend/account/login.js" />"></script>
+    <!-- END PAGE SPECIFIC SCRIPTS -->
+    
+    
+  </body>
+</html>
