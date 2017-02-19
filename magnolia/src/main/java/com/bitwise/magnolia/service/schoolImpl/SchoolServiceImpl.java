@@ -1,19 +1,19 @@
-package com.bitwise.magnolia.service.serviceImpl;
+package com.bitwise.magnolia.service.schoolImpl;
 
-import java.io.File;
+//import java.io.File;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitwise.magnolia.common.ApplicationConstant;
+//import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.common.Response;
 import com.bitwise.magnolia.common.Utils;
-import com.bitwise.magnolia.dao.SchoolDao;
-import com.bitwise.magnolia.model.School;
-import com.bitwise.magnolia.service.SchoolService;
-import com.bitwise.magnolia.vo.SchoolVo;
+import com.bitwise.magnolia.dao.school.SchoolDao;
+import com.bitwise.magnolia.model.school.School;
+import com.bitwise.magnolia.service.school.SchoolService;
+import com.bitwise.magnolia.vo.school.SchoolVo;
 
 @Service("schoolService")
 @Transactional
@@ -67,8 +67,8 @@ public class SchoolServiceImpl implements SchoolService{
 		vo.setAlias(school.getAlias());
 		vo.setWebSite(school.getWebsite());
 		
-		String imageBase64 = Utils.convertFileToBase64(ApplicationConstant.MAGNOLIA_PATH + vo.getAlias() + File.separator + vo.getAlias(), vo.getSchoolLogo());
-		vo.setSchoolLogo(imageBase64);
+		//String imageBase64 = Utils.convertFileToBase64(ApplicationConstant.MAGNOLIA_PATH + vo.getAlias() + File.separator + vo.getAlias(), vo.getSchoolLogo());
+		//vo.setSchoolLogo(imageBase64);
 		response.setObject(vo);
 		response.setSuccess(true);
 		

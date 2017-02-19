@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.model;
+package com.bitwise.magnolia.model.school;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SCHOOL")
+@Table(name = "SCHOOLS")
 public class School implements Serializable{
 
 	/**

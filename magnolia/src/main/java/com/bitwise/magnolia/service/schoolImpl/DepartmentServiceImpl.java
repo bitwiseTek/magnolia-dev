@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.service.serviceImpl;
+package com.bitwise.magnolia.service.schoolImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitwise.magnolia.common.Response;
-import com.bitwise.magnolia.dao.DepartmentDao;
-import com.bitwise.magnolia.model.Department;
-import com.bitwise.magnolia.service.DepartmentService;
-import com.bitwise.magnolia.vo.DepartmentVo;
+import com.bitwise.magnolia.dao.school.DepartmentDao;
+import com.bitwise.magnolia.model.school.Department;
+import com.bitwise.magnolia.service.school.DepartmentService;
+import com.bitwise.magnolia.vo.school.DepartmentVo;
 
 @Service("departmentService")
 @Transactional

@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.model;
+package com.bitwise.magnolia.model.school;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SUB_SCHOOL")
+@Table(name = "SUB_SCHOOLS")
 public class SubSchool implements Serializable{
 
 	/**

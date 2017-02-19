@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.vo;
+package com.bitwise.magnolia.vo.school;
 
 public class DepartmentVo {
 

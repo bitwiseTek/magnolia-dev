@@ -1,9 +1,9 @@
-package com.bitwise.magnolia.dao;
+package com.bitwise.magnolia.dao.school;
 
 import java.util.List;
 
 import com.bitwise.magnolia.common.BaseDao;
-import com.bitwise.magnolia.model.Department;
+import com.bitwise.magnolia.model.school.Department;
 
 public interface DepartmentDao extends BaseDao<Department>{
 

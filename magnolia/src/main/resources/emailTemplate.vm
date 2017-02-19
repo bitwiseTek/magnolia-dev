@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Magnolia Academy Welcome Page</title>
+	</head>
+	<body style="margin:0px; font-family:Tahoma, Geneva, sans-serif;">
+		<div>
+				<a href="https://magnoliacad.com"><img src='cid:traffickonImage' alt="Traffickon"></a>
+		</div>
+		<div style="padding:24px; font-size:13px;">
+			<span style="font-weight:bold">${thanksMessage}, &nbsp; ${firstName} ${lastName}</span>, 
+					${loginDetails}
+				<p>
+					<div>
+						<span style="font-weight:bold">Username: </span>${username}
+					</div>
+					<div>
+						<span style="font-weight:bold">Password: </span>${password}
+					</div>
+				</p>
+
+				<p>
+					<div>
+						<span style="font-weight:bold">So what next?</span>
+					</div>
+					<div>
+						Start by learning the entire process step-by-step <a href="https://magnoliacad.com/help">Magnolia Guide.</a>
+					</div>
+				</p>
+				
+				<p>
+					<div>
+						<span style="font-weight:bold">Note:</span>
+					</div>
+					<div>
+						In the event that you lose password, revert to this email or recover your password.
+					</div>
+				</p>
+			</div>
+			<p>Magnolia powered by ManageMe.</p>
+			<p><span style="font-weight:bold">Magnolia Team.</span></p>
+	</body>
+</html>

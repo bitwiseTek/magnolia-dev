@@ -1,7 +1,7 @@
-package com.bitwise.magnolia.dao;
+package com.bitwise.magnolia.dao.school;
 
 import com.bitwise.magnolia.common.BaseDao;
-import com.bitwise.magnolia.model.Student;
+import com.bitwise.magnolia.model.school.Student;
 
 public interface StudentDao extends BaseDao<Student>{
 

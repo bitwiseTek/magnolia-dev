@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.school.controller;
+package com.bitwise.magnolia.web.restful.controller.school;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.common.Response;
-import com.bitwise.magnolia.service.DepartmentService;
-import com.bitwise.magnolia.service.StudentService;
-import com.bitwise.magnolia.vo.StudentVo;
+import com.bitwise.magnolia.service.school.DepartmentService;
+import com.bitwise.magnolia.service.school.StudentService;
+import com.bitwise.magnolia.vo.school.StudentVo;
 
 @RestController
-public class RegisterStudentController {
+public class StudentController {
 
 	@Autowired
 	private DepartmentService departmentService;

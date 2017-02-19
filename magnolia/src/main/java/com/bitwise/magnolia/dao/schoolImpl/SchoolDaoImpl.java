@@ -1,11 +1,11 @@
-package com.bitwise.magnolia.dao.daoImpl;
+package com.bitwise.magnolia.dao.schoolImpl;
 
 import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
 import com.bitwise.magnolia.common.ApplicationConstant;
-import com.bitwise.magnolia.dao.SchoolDao;
-import com.bitwise.magnolia.model.School;
+import com.bitwise.magnolia.dao.school.SchoolDao;
+import com.bitwise.magnolia.model.school.School;
 
 @Repository("schoolDao")
 public class SchoolDaoImpl extends AbstractDao<Object> implements SchoolDao{

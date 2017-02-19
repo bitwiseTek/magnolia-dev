@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.service;
+package com.bitwise.magnolia.service.school;
 
 import com.bitwise.magnolia.common.Response;
 

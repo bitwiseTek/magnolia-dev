@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.dao.daoImpl;
+package com.bitwise.magnolia.dao.schoolImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
 import com.bitwise.magnolia.common.ApplicationConstant;
-import com.bitwise.magnolia.dao.DepartmentDao;
-import com.bitwise.magnolia.model.Department;
+import com.bitwise.magnolia.dao.school.DepartmentDao;
+import com.bitwise.magnolia.model.school.Department;
 
 @Repository("departmentDao")
 public class DepartmentDaoImpl extends AbstractDao<Department> implements DepartmentDao{

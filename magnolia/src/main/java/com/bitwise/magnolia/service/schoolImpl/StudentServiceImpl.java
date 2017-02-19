@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.service.serviceImpl;
+package com.bitwise.magnolia.service.schoolImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.common.Response;
 import com.bitwise.magnolia.common.Utils;
-import com.bitwise.magnolia.dao.StudentDao;
-import com.bitwise.magnolia.model.Department;
-import com.bitwise.magnolia.model.Student;
-import com.bitwise.magnolia.service.StudentService;
-import com.bitwise.magnolia.vo.StudentVo;
+import com.bitwise.magnolia.dao.school.StudentDao;
+import com.bitwise.magnolia.model.school.Department;
+import com.bitwise.magnolia.model.school.Student;
+import com.bitwise.magnolia.service.school.StudentService;
+import com.bitwise.magnolia.vo.school.StudentVo;
 
 @Service("studentService")
 @Transactional

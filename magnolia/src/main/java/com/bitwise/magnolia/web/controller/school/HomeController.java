@@ -1,11 +1,9 @@
-package com.bitwise.magnolia.school.controller;
+package com.bitwise.magnolia.web.controller.school;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.bitwise.magnolia.common.Utils;
 
 @Controller
 public class HomeController {
