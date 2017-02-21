@@ -44,7 +44,7 @@ public class EmailServiceImpl implements EmailService {
 		String firstName = account.getFirstName();
 		String lastName = account.getLastName();
 		String username = account.getUsername();
-		String password = account.getPassword();
+		String password = account.getTempPassword();
 		String thanksMessage = "Thank You for registering with Magnolia Academy";
 		String loginDetails = "Your login details;";
 		helper.addInline("magnoliaImage", image);

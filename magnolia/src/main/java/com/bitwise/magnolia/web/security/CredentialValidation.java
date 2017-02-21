@@ -4,8 +4,8 @@ package com.bitwise.magnolia.web.security;
  * @author Sika Kay
  * @date 19/02/17
  */
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,7 +18,7 @@ import com.bitwise.magnolia.service.user.UserService;
 @Component
 public class CredentialValidation {
 	
-	protected Log log = LogFactory.getLog(CredentialValidation.class);
+	protected Logger logger = LoggerFactory.getLogger(CredentialValidation.class);
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -32,7 +32,7 @@ public class CredentialValidation {
 	public User validateUsernameAndPassword(String username, CharSequence password) {
 		User user = this.userService.getAccount(username);
 		if (!credentialsMatch(password, user)) {
-			log.info(env.getProperty("validation.signin.invalid"));
+			logger.info(env.getProperty("validation.signin.invalid"));
 			throw new BadCredentialsException(env.getProperty("validation.signin.invalid"));
 		}
 		return user;
