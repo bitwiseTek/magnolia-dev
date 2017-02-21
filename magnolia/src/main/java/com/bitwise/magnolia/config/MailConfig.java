@@ -2,7 +2,7 @@ package com.bitwise.magnolia.config;
 /**
  *  
  * @author Sika Kay
- * @date 03/01/16
+ * @date 19/02/17
  *
  */
 import java.util.Properties;
