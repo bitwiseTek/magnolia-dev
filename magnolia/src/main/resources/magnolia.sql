@@ -111,7 +111,7 @@ insert into web_magnolia_states
 values (37, "Zamfara");
 
 /*LGAs*/
-insert into web_magnolia_lgas
+/*insert into web_magnolia_lgas
 values (1, "Obio-Akpor", 33);
 
 insert into web_magnolia_lgas
@@ -178,384 +178,384 @@ insert into web_magnolia_lgas
 values (22, "Etche", 33);
 
 insert into web_magnolia_lgas
-values (23, "Okrika", 33);
+values (23, "Okrika", 33);*/
+
+insert into web_magnolia_lgas
+values (26, "Aba-North", 2);
+
+insert into web_magnolia_lgas
+values (27, "Aba-South", 2);
+
+insert into web_magnolia_lgas
+values (28, "Arochukwu", 2);
+
+insert into web_magnolia_lgas
+values (29, "Bende", 2);
+
+insert into web_magnolia_lgas
+values (30, "Ikwuano", 2);
+
+insert into web_magnolia_lgas
+values (31, "Isiala Ngwa-North", 2);
+
+insert into web_magnolia_lgas
+values (32, "Isiala Ngwa-South", 2);
+
+insert into web_magnolia_lgas
+values (33, "Isuikwato", 2);
+
+insert into web_magnolia_lgas
+values (34, "Obi Ngwa", 2);
+
+insert into web_magnolia_lgas
+values (35, "Ohafia", 2);
+
+insert into web_magnolia_lgas
+values (36, "Osisioma Ngwa", 2);
+
+insert into web_magnolia_lgas
+values (37, "Ugwunagbo", 2);
+
+insert into web_magnolia_lgas
+values (38, "Ukwa-East", 2);
+
+insert into web_magnolia_lgas
+values (39, "Ukwa-West", 2);
+
+insert into web_magnolia_lgas
+values (40, "Umuahia-North", 2);
+
+insert into web_magnolia_lgas
+values (41, "Umuahia-South", 2);
+
+insert into web_magnolia_lgas
+values (42, "Umu Nneochi", 2);
+
+insert into web_magnolia_lgas
+values (43, "Aboh Mbaise", 18);
+
+insert into web_magnolia_lgas
+values (44, "Ahiazu Mbaise", 18);
+
+insert into web_magnolia_lgas
+values (45, "Ehime Mbano", 18);
+
+insert into web_magnolia_lgas
+values (46, "Ezinihitte Mbaise", 18);
+
+insert into web_magnolia_lgas
+values (47, "Ideato-North", 18);
+
+insert into web_magnolia_lgas
+values (48, "Ideato-South", 18);
+
+insert into web_magnolia_lgas
+values (49, "Ihitte-Uboma", 18);
+
+insert into web_magnolia_lgas
+values (50, "Ikeduru", 18);
+
+insert into web_magnolia_lgas
+values (51, "Isiala Mbano", 18);
+
+insert into web_magnolia_lgas
+values (52, "Isu", 18);
+
+insert into web_magnolia_lgas
+values (53, "Mbaitoli", 18);
+
+insert into web_magnolia_lgas
+values (54, "Ngor Okpala", 18);
+
+insert into web_magnolia_lgas
+values (55, "Njaba", 18);
+
+insert into web_magnolia_lgas
+values (56, "Nkwere", 18);
+
+insert into web_magnolia_lgas
+values (57, "Nwangele", 18);
+
+insert into web_magnolia_lgas
+values (58, "Obowo", 18);
+
+insert into web_magnolia_lgas
+values (59, "Oguta", 18);
+
+insert into web_magnolia_lgas
+values (60, "Ohaji-Egbema", 18);
+
+insert into web_magnolia_lgas
+values (61, "Okigwe", 18);
+
+insert into web_magnolia_lgas
+values (62, "Onuimo", 18);
+
+insert into web_magnolia_lgas
+values (63, "Orlu", 18);
+
+insert into web_magnolia_lgas
+values (64, "Orsu", 18);
+
+insert into web_magnolia_lgas
+values (65, "Oru-East", 18);
+
+insert into web_magnolia_lgas
+values (66, "Oru-West", 18);
+
+insert into web_magnolia_lgas
+values (67, "Owerri Municipal", 18);
+
+insert into web_magnolia_lgas
+values (68, "Owerri-North", 18);
+
+insert into web_magnolia_lgas
+values (69, "Owerri-West", 18);
+
+insert into web_magnolia_lgas
+values (70, "Demsa", 3);
+
+insert into web_magnolia_lgas
+values (71, "Fufore", 3);
+
+insert into web_magnolia_lgas
+values (72, "Ganye", 3);
+
+insert into web_magnolia_lgas
+values (73, "Girei", 3);
+
+insert into web_magnolia_lgas
+values (74, "Gombi", 3);
+
+insert into web_magnolia_lgas
+values (75, "Guyuk", 3);
+
+insert into web_magnolia_lgas
+values (76, "Hong", 3);
+
+insert into web_magnolia_lgas
+values (77, "Jada", 3);
+
+insert into web_magnolia_lgas
+values (78, "Lamurde", 3);
+
+insert into web_magnolia_lgas
+values (79, "Madagali", 3);
+
+insert into web_magnolia_lgas
+values (80, "Maiha", 3);
+
+insert into web_magnolia_lgas
+values (81, "Mayo-Belwa", 3);
+
+insert into web_magnolia_lgas
+values (82, "Michika", 3);
+
+insert into web_magnolia_lgas
+values (83, "Mubi-North", 3);
+
+insert into web_magnolia_lgas
+values (84, "Mubi-South", 3);
+
+insert into web_magnolia_lgas
+values (85, "Numan", 3);
+
+insert into web_magnolia_lgas
+values (86, "Shelleng", 3);
+
+insert into web_magnolia_lgas
+values (87, "Song", 3);
+
+insert into web_magnolia_lgas
+values (88, "Toungo", 3);
+
+insert into web_magnolia_lgas
+values (89, "Yola-North", 3);
+
+insert into web_magnolia_lgas
+values (90, "Yola-South", 3);
+
+insert into web_magnolia_lgas
+values (91, "Abak", 4);
+
+insert into web_magnolia_lgas
+values (92, "Eastern Obolo", 4);
+
+insert into web_magnolia_lgas
+values (93, "Eket", 4);
+
+insert into web_magnolia_lgas
+values (94, "Esit-Eket", 4);
+
+insert into web_magnolia_lgas
+values (95, "Essien Udim", 4);
+
+insert into web_magnolia_lgas
+values (96, "Etim-Ekpo", 4);
+
+insert into web_magnolia_lgas
+values (97, "Etinan", 4);
+
+insert into web_magnolia_lgas
+values (98, "Ibeno", 4);
+
+insert into web_magnolia_lgas
+values (99, "Ibesikpo-Asutan", 4);
+
+insert into web_magnolia_lgas
+values (100, "Ibiono-Ibom", 4);
+
+insert into web_magnolia_lgas
+values (101, "Ika", 4);
+
+insert into web_magnolia_lgas
+values (102, "Ikono", 4);
+
+insert into web_magnolia_lgas
+values (103, "Ikot-Abasi", 4);
+
+insert into web_magnolia_lgas
+values (104, "Ikot-Ekpene", 4);
+
+insert into web_magnolia_lgas
+values (105, "Ini", 4);
+
+insert into web_magnolia_lgas
+values (106, "Itu", 4);
+
+insert into web_magnolia_lgas
+values (107, "Mbo", 4);
+
+insert into web_magnolia_lgas
+values (108, "Mkpat-Enin", 4);
+
+insert into web_magnolia_lgas
+values (109, "Nsit-Atai", 4);
+
+insert into web_magnolia_lgas
+values (110, "Nsit-Ibom", 4);
+
+insert into web_magnolia_lgas
+values (111, "Nsit-Ubium", 4);
+
+insert into web_magnolia_lgas
+values (112, "Obot-Akara", 4);
+
+insert into web_magnolia_lgas
+values (113, "Okobo", 4);
+
+insert into web_magnolia_lgas
+values (114, "Onna", 4);
+
+insert into web_magnolia_lgas
+values (115, "Oron", 4);
+
+insert into web_magnolia_lgas
+values (116, "Oruk Anam", 4);
+
+insert into web_magnolia_lgas
+values (117, "Ukanafun", 4);
+
+insert into web_magnolia_lgas
+values (118, "Udung-Uko",4);
+
+insert into web_magnolia_lgas
+values (119, "Uruan", 4);
+
+insert into web_magnolia_lgas
+values (120, "Urue-Offiong/Oruko", 4);
+
+insert into web_magnolia_lgas
+values (121, "Uyo", 4);
+
+insert into web_magnolia_lgas
+values (122, "Aguata", 5);
+
+insert into web_magnolia_lgas
+values (123, "Awka-North", 5);
+
+insert into web_magnolia_lgas
+values (124, "Awka-South", 5);
+
+insert into web_magnolia_lgas
+values (125, "Anambra-East", 5);
+
+insert into web_magnolia_lgas
+values (126, "Anambra-West", 5);
+
+insert into web_magnolia_lgas
+values (127, "Anaocha", 5);
+
+insert into web_magnolia_lgas
+values (128, "Ayamelum", 5);
+
+insert into web_magnolia_lgas
+values (129, "Dunukofia", 5);
+
+insert into web_magnolia_lgas
+values (130, "Ekwusigo", 5);
+
+insert into web_magnolia_lgas
+values (131, "Idemili-North", 5);
+
+insert into web_magnolia_lgas
+values (132, "Idemili-South", 5);
+
+insert into web_magnolia_lgas
+values (133, "Ihiala", 5);
+
+insert into web_magnolia_lgas
+values (134, "Njikola", 5);
+
+insert into web_magnolia_lgas
+values (135, "Nnewi-North", 5);
+
+insert into web_magnolia_lgas
+values (136, "Nnewi-South", 5);
+
+insert into web_magnolia_lgas
+values (137, "Ogbaru", 5);
+
+insert into web_magnolia_lgas
+values (138, "Onitsha-North", 5);
+
+insert into web_magnolia_lgas
+values (139, "Onitsha-South", 5);
+
+insert into web_magnolia_lgas
+values (140, "Orumba-North", 5);
+
+insert into web_magnolia_lgas
+values (141, "Orumba-South", 5);
+
+insert into web_magnolia_lgas
+values (142, "Oyi", 5);
+
+insert into web_magnolia_lgas
+values (143, "Brass", 7);
+
+insert into web_magnolia_lgas
+values (144, "Ekeremor", 7);
+
+insert into web_magnolia_lgas
+values (145, "Kolokuma/Opokuma", 7);
+
+insert into web_magnolia_lgas
+values (146, "Nembe", 7);
+
+insert into web_magnolia_lgas
+values (147, "Ogbia", 7);
+
+insert into web_magnolia_lgas
+values (148, "Sagbama", 7);
+
+insert into web_magnolia_lgas
+values (149, "Southern Ijaw", 7);
+
+insert into web_magnolia_lgas
+values (150, "Yenegoa", 7);
 
 /*insert into web_magnolia_lgas
-values (26, 0, "AN", "Aba-North");
-
-insert into web_magnolia_lgas
-values (27, 0, "AS", "Aba-South");
-
-insert into web_magnolia_lgas
-values (28, 0, "AR", "Arochukwu");
-
-insert into web_magnolia_lgas
-values (29, 0, "BE", "Bende");
-
-insert into web_magnolia_lgas
-values (30, 0, "IK", "Ikwuano");
-
-insert into web_magnolia_lgas
-values (31, 0, "IN", "Isiala Ngwa-North");
-
-insert into web_magnolia_lgas
-values (32, 0, "IS", "Isiala Ngwa-South");
-
-insert into web_magnolia_lgas
-values (33, 0, "IU", "Isuikwato");
-
-insert into web_magnolia_lgas
-values (34, 0, "ON", "Obi Ngwa");
-
-insert into web_magnolia_lgas
-values (35, 0, "OH", "Ohafia");
-
-insert into web_magnolia_lgas
-values (36, 0, "ON", "Osisioma Ngwa");
-
-insert into web_magnolia_lgas
-values (37, 0, "UG", "Ugwunagbo");
-
-insert into web_magnolia_lgas
-values (38, 0, "UE", "Ukwa-East");
-
-insert into web_magnolia_lgas
-values (39, 0, "UW", "Ukwa-West");
-
-insert into web_magnolia_lgas
-values (40, 0, "UN", "Umuahia-North");
-
-insert into web_magnolia_lgas
-values (41, 0, "US", "Umuahia-South");
-
-insert into web_magnolia_lgas
-values (42, 0, "UM", "Umu Nneochi");
-
-insert into web_magnolia_lgas
-values (43, 0, "AM", "Aboh Mbaise");
-
-insert into web_magnolia_lgas
-values (44, 0, "AH", "Ahiazu Mbaise");
-
-insert into web_magnolia_lgas
-values (45, 0, "EM", "Ehime Mbano");
-
-insert into web_magnolia_lgas
-values (46, 0, "EZ", "Ezinihitte Mbaise");
-
-insert into web_magnolia_lgas
-values (47, 0, "IN", "Ideato-North");
-
-insert into web_magnolia_lgas
-values (48, 0, "IS", "Ideato-South");
-
-insert into web_magnolia_lgas
-values (49, 0, "IM", "Ihitte-Uboma");
-
-insert into web_magnolia_lgas
-values (50, 0, "IK", "Ikeduru");
-
-insert into web_magnolia_lgas
-values (51, 0, "IM", "Isiala Mbano");
-
-insert into web_magnolia_lgas
-values (52, 0, "IS", "Isu");
-
-insert into web_magnolia_lgas
-values (53, 0, "MB", "Mbaitoli");
-
-insert into web_magnolia_lgas
-values (54, 0, "NO", "Ngor Okpala");
-
-insert into web_magnolia_lgas
-values (55, 0, "NJ", "Njaba");
-
-insert into web_magnolia_lgas
-values (56, 0, "NK", "Nkwere");
-
-insert into web_magnolia_lgas
-values (57, 0, "NW", "Nwangele");
-
-insert into web_magnolia_lgas
-values (58, 0, "OB", "Obowo");
-
-insert into web_magnolia_lgas
-values (59, 0, "OG", "Oguta");
-
-insert into web_magnolia_lgas
-values (60, 0, "OE", "Ohaji-Egbema");
-
-insert into web_magnolia_lgas
-values (61, 0, "OK", "Okigwe");
-
-insert into web_magnolia_lgas
-values (62, 0, "ON", "Onuimo");
-
-insert into web_magnolia_lgas
-values (63, 0, "OR", "Orlu");
-
-insert into web_magnolia_lgas
-values (64, 0, "OS", "Orsu");
-
-insert into web_magnolia_lgas
-values (65, 0, "OE", "Oru-East");
-
-insert into web_magnolia_lgas
-values (66, 0, "OW", "Oru-West");
-
-insert into web_magnolia_lgas
-values (67, 0, "OM", "Owerri Municipal");
-
-insert into web_magnolia_lgas
-values (68, 0, "ON", "Owerri-North");
-
-insert into web_magnolia_lgas
-values (69, 0, "OW", "Owerri-West");
-
-insert into web_magnolia_lgas
-values (70, 0, "DM", "Demsa");
-
-insert into web_magnolia_lgas
-values (71, 0, "FU", "Fufore");
-
-insert into web_magnolia_lgas
-values (72, 0, "GA", "Ganye");
-
-insert into web_magnolia_lgas
-values (73, 0, "GI", "Girei");
-
-insert into web_magnolia_lgas
-values (74, 0, "GO", "Gombi");
-
-insert into web_magnolia_lgas
-values (75, 0, "GU", "Guyuk");
-
-insert into web_magnolia_lgas
-values (76, 0, "HO", "Hong");
-
-insert into web_magnolia_lgas
-values (77, 0, "JD", "Jada");
-
-insert into web_magnolia_lgas
-values (78, 0, "LM", "Lamurde");
-
-insert into web_magnolia_lgas
-values (79, 0, "MA", "Madagali");
-
-insert into web_magnolia_lgas
-values (80, 0, "MH", "Maiha");
-
-insert into web_magnolia_lgas
-values (81, 0, "MB", "Mayo-Belwa");
-
-insert into web_magnolia_lgas
-values (82, 0, "MI", "Michika");
-
-insert into web_magnolia_lgas
-values (83, 0, "MN", "Mubi-North");
-
-insert into web_magnolia_lgas
-values (84, 0, "MS", "Mubi-South");
-
-insert into web_magnolia_lgas
-values (85, 0, "NU", "Numan");
-
-insert into web_magnolia_lgas
-values (86, 0, "SH", "Shelleng");
-
-insert into web_magnolia_lgas
-values (87, 0, "SO", "Song");
-
-insert into web_magnolia_lgas
-values (88, 0, "TO", "Toungo");
-
-insert into web_magnolia_lgas
-values (89, 0, "YN", "Yola-North");
-
-insert into web_magnolia_lgas
-values (90, 0, "YS", "Yola-South");
-
-insert into web_magnolia_lgas
-values (91, 0, "AB", "Abak");
-
-insert into web_magnolia_lgas
-values (92, 0, "EB", "Eastern Obolo");
-
-insert into web_magnolia_lgas
-values (93, 0, "EK", "Eket");
-
-insert into web_magnolia_lgas
-values (94, 0, "EE", "Esit-Eket");
-
-insert into web_magnolia_lgas
-values (95, 0, "EU", "Essien Udim");
-
-insert into web_magnolia_lgas
-values (96, 0, "ET", "Etim-Ekpo");
-
-insert into web_magnolia_lgas
-values (97, 0, "EN", "Etinan");
-
-insert into web_magnolia_lgas
-values (98, 0, "IB", "Ibeno");
-
-insert into web_magnolia_lgas
-values (99, 0, "IA", "Ibesikpo-Asutan");
-
-insert into web_magnolia_lgas
-values (100, 0, "II", "Ibiono-Ibom");
-
-insert into web_magnolia_lgas
-values (101, 0, "IK", "Ika");
-
-insert into web_magnolia_lgas
-values (102, 0, "IO", "Ikono");
-
-insert into web_magnolia_lgas
-values (103, 0, "IA", "Ikot-Abasi");
-
-insert into web_magnolia_lgas
-values (104, 0, "IE", "Ikot-Ekpene");
-
-insert into web_magnolia_lgas
-values (105, 0, "IN", "Ini");
-
-insert into web_magnolia_lgas
-values (106, 0, "IT", "Itu");
-
-insert into web_magnolia_lgas
-values (107, 0, "MB", "Mbo");
-
-insert into web_magnolia_lgas
-values (108, 0, "ME", "Mkpat-Enin");
-
-insert into web_magnolia_lgas
-values (109, 0, "NA", "Nsit-Atai");
-
-insert into web_magnolia_lgas
-values (110, 0, "NI", "Nsit-Ibom");
-
-insert into web_magnolia_lgas
-values (111, 0, "NU", "Nsit-Ubium");
-
-insert into web_magnolia_lgas
-values (112, 0, "OA", "Obot-Akara");
-
-insert into web_magnolia_lgas
-values (113, 0, "OK", "Okobo");
-
-insert into web_magnolia_lgas
-values (114, 0, "ON", "Onna");
-
-insert into web_magnolia_lgas
-values (115, 0, "OR", "Oron");
-
-insert into web_magnolia_lgas
-values (116, 0, "OK", "Oruk Anam");
-
-insert into web_magnolia_lgas
-values (117, 0, "UK", "Ukanafun");
-
-insert into web_magnolia_lgas
-values (118, 0, "UU", "Udung-Uko");
-
-insert into web_magnolia_lgas
-values (119, 0, "UR", "Uruan");
-
-insert into web_magnolia_lgas
-values (120, 0, "UF", "Urue-Offiong/Oruko");
-
-insert into web_magnolia_lgas
-values (121, 0, "UY", "Uyo");
-
-insert into web_magnolia_lgas
-values (122, 0, "AG", "Aguata");
-
-insert into web_magnolia_lgas
-values (123, 0, "AN", "Awka-North");
-
-insert into web_magnolia_lgas
-values (124, 0, "AW", "Awka-South");
-
-insert into web_magnolia_lgas
-values (125, 0, "AE", "Anambra-East");
-
-insert into web_magnolia_lgas
-values (126, 0, "AW", "Anambra-West");
-
-insert into web_magnolia_lgas
-values (127, 0, "AN", "Anaocha");
-
-insert into web_magnolia_lgas
-values (128, 0, "AY", "Ayamelum");
-
-insert into web_magnolia_lgas
-values (129, 0, "DU", "Dunukofia");
-
-insert into web_magnolia_lgas
-values (130, 0, "EK", "Ekwusigo");
-
-insert into web_magnolia_lgas
-values (131, 0, "IN", "Idemili-North");
-
-insert into web_magnolia_lgas
-values (132, 0, "IS", "Idemili-South");
-
-insert into web_magnolia_lgas
-values (133, 0, "IH", "Ihiala");
-
-insert into web_magnolia_lgas
-values (134, 0, "NJ", "Njikola");
-
-insert into web_magnolia_lgas
-values (135, 0, "NN", "Nnewi-North");
-
-insert into web_magnolia_lgas
-values (136, 0, "NS", "Nnewi-South");
-
-insert into web_magnolia_lgas
-values (137, 0, "OG", "Ogbaru");
-
-insert into web_magnolia_lgas
-values (138, 0, "ON", "Onitsha-North");
-
-insert into web_magnolia_lgas
-values (139, 0, "OS", "Onitsha-South");
-
-insert into web_magnolia_lgas
-values (140, 0, "OR", "Orumba-North");
-
-insert into web_magnolia_lgas
-values (141, 0, "OS", "Orumba-South");
-
-insert into web_magnolia_lgas
-values (142, 0, "OY", "Oyi");
-
-insert into web_magnolia_lgas
-values (143, 0, "BR", "Brass");
-
-insert into web_magnolia_lgas
-values (144, 0, "EK", "Ekeremor");
-
-insert into web_magnolia_lgas
-values (145, 0, "KO", "Kolokuma/Opokuma");
-
-insert into web_magnolia_lgas
-values (146, 0, "NM", "Nembe");
-
-insert into web_magnolia_lgas
-values (147, 0, "OG", "Ogbia");
-
-insert into web_magnolia_lgas
-values (148, 0, "SB", "Sagbama");
-
-insert into web_magnolia_lgas
-values (149, 0, "SI", "Southern Ijaw");
-
-insert into web_magnolia_lgas
-values (150, 0, "YN", "Yenegoa");
-
-insert into web_magnolia_lgas
 values (151, 0, "AD", "Ado");
 
 insert into web_magnolia_lgas
