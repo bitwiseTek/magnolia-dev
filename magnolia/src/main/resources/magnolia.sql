@@ -1,5 +1,5 @@
 /*States*/
-insert into web_magnolia_states
+/*insert into web_magnolia_states
 values (1, "Abia");
 
 insert into web_magnolia_states
@@ -108,7 +108,7 @@ insert into web_magnolia_states
 values (36, "Yobe");
 
 insert into web_magnolia_states
-values (37, "Zamfara");
+values (37, "Zamfara");*/
 
 /*LGAs*/
 /*insert into web_magnolia_lgas
@@ -3032,7 +3032,7 @@ insert into states
 values (220, "Alberta", 4);*/
 
 /*Schools*/
-insert into schools
+/*insert into schools
 values(1, "mg", "a5ukhxhEObzv8TBW8yxeNYy6hm1knu", "2017-02-19 15:30:43", "admin@magnolia.com", "Choba", "logo", "Magnolia", "active", 356, "https://magnoliacad.com");
 
 /*Roles*/
@@ -3106,4 +3106,4 @@ values(1, "2017-02-19 15:30:43", "Department of Electrical/Electronic Engineerin
 
 /*Users*/
 insert into users
-values(1, "06/06/88", "2017-02-19 15:30:43", "Jeffery", "2017-02-19 15:30:43", "2017-02-19 15:30:43", "Aberdeen", "Teddy", "29acfbf1-6e4a-4584-a5c3-11ae6446d524", "GwaqKaaw", "logo", "jeff.abd@yahoo.com", "080967566787", null, null, "Elizabeth", "What is your mother's name?", "ML", "pending", "Amadi-Flats", "a5ukhxhEObzv8TBW8yxeNY", "jeffery.aberdeen@magnolia.com", 4, 33, "GwaqKaaw");
+values(1, "06/06/88", "2017-02-19 15:30:43", "Jeffery", "2017-02-19 15:30:43", "2017-02-19 15:30:43", "Aberdeen", "Teddy", "29acfbf1-6e4a-4584-a5c3-11ae6446d524", "GwaqKaaw", "logo", "jeff.abd@yahoo.com", "080967566787", null, null, "Elizabeth", "What is your mother's name?", "ML", "pending", "Amadi-Flats", "a5ukhxhEObzv8TBW8yxeNY", "jeffery.aberdeen@magnolia.com", 4, 33, "GwaqKaaw");*/
