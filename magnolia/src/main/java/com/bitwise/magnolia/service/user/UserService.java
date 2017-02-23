@@ -5,25 +5,28 @@ package com.bitwise.magnolia.service.user;
  * @date 18/02/17
  *
  */
-import com.bitwise.magnolia.common.Response;
 import com.bitwise.magnolia.model.user.User;
-import com.bitwise.magnolia.vo.user.UserVo;
+import com.bitwise.magnolia.util.UserList;
 
 public interface UserService {
 
-	public Response findById(long id);
+	public User findById(Long id);
 	
-	public Response findByUsername(String username);
+	public User findByUsername(String username);
 	
-	public Response findAllUsers();
+	public UserList findAllUsers();
 	
-	public Response findAllActiveUsers(String status);
+	public UserList findAllActiveUsers(String status);
 	
-	public Response findAllUsersByStates(String state);
+	public UserList findAllUsersByStateId(Long stateId);
 	
-	public Response findAllUsersByLGAs(String lga);
+	public UserList findAllUsersByLGAId(Long lgaId);
 	
 	public User getAccount(String username);
 	
-	public Response validateUser(UserVo userVo);
+	public User save(User user);
+	
+	public void delete(User user);
+	
+	public User update(User user);
 }

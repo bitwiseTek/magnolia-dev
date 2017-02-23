@@ -1,6 +1,6 @@
 package com.bitwise.magnolia.service.school;
 
-import com.bitwise.magnolia.common.Response;
+import com.bitwise.magnolia.model.school.School;
 
 public interface SchoolService {
 
@@ -9,6 +9,6 @@ public interface SchoolService {
 	//An abstract method to check if a school has any valid days
 	boolean isValidDays(String alias);
 	//An abstract method to retrieve the details of a school
-	Response retrieveSchoolDetails(String alias);
+	School retrieveSchoolDetails(String alias);
 
 }

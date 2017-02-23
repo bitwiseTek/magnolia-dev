@@ -21,7 +21,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import com.bitwise.magnolia.vo.user.UserVo;
+import com.bitwise.magnolia.web.restful.resource.user.UserResource;
 
 @Service("emailService")
 public class EmailServiceImpl implements EmailService {
@@ -37,7 +37,7 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public void sendEmailWithAttachment(String toEmail, UserVo account) throws MessagingException {
+	public void sendEmailWithAttachment(String toEmail, UserResource account) throws MessagingException {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 		Resource image = new ClassPathResource("top_logo.png");

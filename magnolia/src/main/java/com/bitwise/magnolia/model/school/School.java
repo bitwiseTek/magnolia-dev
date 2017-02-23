@@ -16,15 +16,12 @@ import javax.persistence.Table;
 @Table(name = "SCHOOLS")
 public class School implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SCHOOL_ID")
-	private long schoolId;
+	private Long schoolId;
 	
 	@Column(name = "EMAIL")
 	private String email;
@@ -63,15 +60,15 @@ public class School implements Serializable{
 		
 	}
 	
-	public School(long schoolId){
+	public School(Long schoolId){
 		this.schoolId = schoolId;
 	}
 
-	public long getSchoolId() {
+	public Long getSchoolId() {
 		return schoolId;
 	}
 
-	public void setSchoolId(long schoolId) {
+	public void setSchoolId(Long schoolId) {
 		this.schoolId = schoolId;
 	}
 

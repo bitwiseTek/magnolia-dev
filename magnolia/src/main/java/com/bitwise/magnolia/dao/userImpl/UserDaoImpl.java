@@ -1,13 +1,20 @@
 package com.bitwise.magnolia.dao.userImpl;
-
-import java.util.ArrayList;
-import java.util.List;
 /**
  *  
  * @author Sika Kay
  * @date 17/02/17
  *
  */
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
+
+import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
@@ -15,72 +22,84 @@ import com.bitwise.magnolia.dao.user.UserDao;
 import com.bitwise.magnolia.model.user.User;
 
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao<User> implements UserDao{
+public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
+	final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+	
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Override
 	public List<User> findAllUsers() {
-		String sql = "from User u";
-		List<?> list = this.getCurrentSession().createQuery(sql).list();
-		List<User> userList = new ArrayList<User>();
-		for(Object object : list){
-			User temp = (User) object;
-			userList.add(temp);
-		}
-		return userList;
+		String sql = "select u from User u";
+		return this.em.createQuery(sql, User.class).getResultList();
 	}
 
 	@Override
 	public User findByUsername(String username) {
-		String sql = "from User u where u.username = :username";
-		return (User) this.getCurrentSession().createQuery(sql).setParameter("username", username).uniqueResult();
+		String sql = "select distinct u from User u where u.username = :username";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("username", username);
+		List<User> users = query.getResultList();
+		User user = users.size() == 1 ? users.get(0) : null;
+		if (user != null) {
+			Hibernate.initialize(user.getRoles());
+		}
+		return user;
 	}
 
 	@Override
-	public User findById(long id) {
-		String sql = "from User u where u.id = :id";
-		return (User) this.getCurrentSession().createQuery(sql).setParameter("id", id).uniqueResult();
+	public User findById(Long id) {
+		String sql = "select distinct u from User u where u.id = :id";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("id", id);
+		List<User> users = query.getResultList();
+		User user = users.size() == 1 ? users.get(0) : null;
+		return user;
 	}
 	
 	@Override
 	public User findBySystemId(String systemId) {
-		String sql = "from User u where u.systemId = :systemId";
-		return (User) this.getCurrentSession().createQuery(sql).setParameter("systemId", systemId).uniqueResult();
+		String sql = "select distinct u from User u where u.systemId = :systemId";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("systemId", systemId);
+		List<User> users = query.getResultList();
+		User user = users.size() == 1 ? users.get(0) : null;
+		return user;
 	}
 
 	@Override
 	public List<User> findAllActiveUsers(String status) {
-		String sql = "from User u where u.status = :status";
-		List<?> list = this.getCurrentSession().createQuery(sql).setParameter("status", status).list();
-		List<User> userList = new ArrayList<User>();
-		for(Object object : list){
-			User temp = (User) object;
-			userList.add(temp);
-		}
-		return userList;
+		String sql = "select u from User u where u.status = :status";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("status", status);
+		List<User> users = query.getResultList();
+		return users;
 	}
 
 	@Override
-	public List<User> findAllUsersByStates(String state) {
-		String sql = "from User u where u.state.name = :state";
-		List<?> list = this.getCurrentSession().createQuery(sql).setParameter("state", state).list();
-		List<User> userList = new ArrayList<User>();
-		for(Object object : list){
-			User temp = (User) object;
-			userList.add(temp);
-		}
-		return userList;
+	public List<User> findAllUsersByStateId(Long stateId) {
+		String sql = "select u from User u where u.state.id = :stateId";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("stateId", stateId);
+		List<User> users = query.getResultList();
+		return users;
 	}
 
 	@Override
-	public List<User> findAllUsersByLGAs(String lga) {
-		String sql = "from User u where u.lga.name = :lga";
-		List<?> list = this.getCurrentSession().createQuery(sql).setParameter("lga", lga).list();
-		List<User> userList = new ArrayList<User>();
-		for(Object object : list){
-			User temp = (User) object;
-			userList.add(temp);
-		}
-		return userList;
+	public List<User> findAllUsersByLGAId(Long lgaId) {
+		String sql = "select u from User u where u.lga.id = :lgaId";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("lgaId", lgaId);
+		List<User> users = query.getResultList();
+		return users;
 	}
 
+	@Override
+	@Transactional
+	public User save(User user) {
+		logger.info("Adding/Updating user with ID " + user.getId());
+		return this.em.merge(user);
+	}
+
+	@Override
+	@Transactional
+	public void delete(User user) {
+		logger.info("Deleting User with ID: " + user.getId());
+		this.em.remove(em.merge(user));
+	}
 }

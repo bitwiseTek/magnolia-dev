@@ -1,5 +1,10 @@
 package com.bitwise.magnolia.web.controller.login;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 22/02/17
+ *
+ */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

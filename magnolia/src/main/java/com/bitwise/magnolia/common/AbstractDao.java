@@ -7,38 +7,29 @@
  */
 package com.bitwise.magnolia.common;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
  
-public abstract class AbstractDao<E> extends HibernateDaoSupport{
+public abstract class AbstractDao<E> {
 	
-	@Autowired
-	public void currSess(SessionFactory sessionFactory) {
-		setSessionFactory(sessionFactory);
-	}
-    
-	public Session getCurrentSession(){
-    	return this.getHibernateTemplate().getSessionFactory().getCurrentSession();
-    }
+	@PersistenceContext
+	private EntityManager em;
 	
 	public void create(final E entity) {
-		getHibernateTemplate().save(entity);	
+		this.em.persist(entity);
 	}
     
     public void update(final E entity) {
- 		getHibernateTemplate().update(entity);	
+ 		this.em.merge(entity);
  	}
     
     public void saveOrUpdate(final E entity) {
- 		getHibernateTemplate().saveOrUpdate(entity);	
+    	this.em.merge(entity);
  	}
     
     public void delete(final E entity) {
- 		getHibernateTemplate().delete(entity);	
+ 		this.em.remove(em.merge(entity));
  	}
-
 	
     
 }

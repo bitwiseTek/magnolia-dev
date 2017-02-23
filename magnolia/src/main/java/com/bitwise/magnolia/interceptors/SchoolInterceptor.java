@@ -12,12 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
-import com.bitwise.magnolia.exceptions.NoValidDaysException;
-import com.bitwise.magnolia.exceptions.ResourceNotFoundException;
+import com.bitwise.magnolia.exception.NoValidDaysException;
+import com.bitwise.magnolia.exception.ResourceNotFoundException;
+import com.bitwise.magnolia.model.school.School;
 import com.bitwise.magnolia.service.school.SchoolService;
 
 
-public class SchoolInterceptor extends HandlerInterceptorAdapter{
+public class SchoolInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
 	private SchoolService schoolService;
@@ -37,23 +38,22 @@ public class SchoolInterceptor extends HandlerInterceptorAdapter{
 	 * @param modelAndView
 	 */
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception{
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		String schoolAlias = ApplicationConstant.SCHOOL_ALIAS;
 		//Tests if a school exist in the school database
 		if(!schoolService.isSchoolExist(schoolAlias)){
 			//If a school doesn't exist, a ResourceNotFoundException will be thrown
 			throw new ResourceNotFoundException("Oops. Broken link, check and try again");
-		}
-		else{
+		} else {
 			//Check if free trial has expired
 			if(!schoolService.isValidDays(schoolAlias)){
 				//If a school doesn't have any valid days, that means the school has expired or deactivated, 
 				//a NoValidDaysException will the thrown
 				throw new NoValidDaysException("School deactivated...Pls contact administration");
-			}
-			else{
+			} else {
 				//School hasn't expired, retrieve the school Details
-				modelAndView.addObject("school", schoolService.retrieveSchoolDetails(schoolAlias).getObject());
+				School school = this.schoolService.retrieveSchoolDetails(schoolAlias);
+				modelAndView.addObject("school", school);
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package com.bitwise.magnolia.model.school;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,15 +20,12 @@ import javax.persistence.Table;
 @Table(name = "DEPARTMENTS")
 public class Department implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "DEPARTMENT_ID")
-	private long departmentId;
+	private Long departmentId;
 	
 	@Column(name = "NAME")
 	private String name;
@@ -41,8 +39,11 @@ public class Department implements Serializable{
 	@Column(name = "STATUS")
 	private String status;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "department")
-	private List<Student> studentList;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "studentDepartment")
+	private List<Student> students = new ArrayList<Student>();
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "staffDepartment")
+	private List<Staff> staff = new ArrayList<Staff>();
 	
 	@JoinColumn(name = "FACULTY_ID", referencedColumnName = "FACULTY_ID")
 	@ManyToOne
@@ -52,11 +53,11 @@ public class Department implements Serializable{
 		
 	}
 	
-	public Department(long departmentId){
+	public Department(Long departmentId){
 		this.departmentId = departmentId;
 	}
 
-	public long getDepartmentId() {
+	public Long getDepartmentId() {
 		return departmentId;
 	}
 
@@ -105,11 +106,11 @@ public class Department implements Serializable{
 	}
 
 	public List<Student> getStudentList() {
-		return studentList;
+		return students;
 	}
 
-	public void setStudentList(List<Student> studentList) {
-		this.studentList = studentList;
+	public void setStudentList(List<Student> students) {
+		this.students = students;
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class State implements Serializable {
 
 private static final long serialVersionUID = 1L;
 	
-	private long id;
+	private Long id;
 	
 	private String name;
 	
@@ -28,18 +28,18 @@ private static final long serialVersionUID = 1L;
 		
 	}
 	
-	public State(long id) {
+	public State(Long id) {
 		this.id = id;
 	}
 	
 	@Id
 	@Column(name="STATE_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

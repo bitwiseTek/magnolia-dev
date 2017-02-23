@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.exceptions;
+package com.bitwise.magnolia.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

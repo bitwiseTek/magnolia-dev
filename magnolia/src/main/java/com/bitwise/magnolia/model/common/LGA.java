@@ -22,7 +22,7 @@ public class LGA implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
+	private Long id;
 	
 	private String name;
 	
@@ -32,18 +32,18 @@ public class LGA implements Serializable {
 		
 	}
 	
-	public LGA(long id) {
+	public LGA(Long id) {
 		this.id = id;
 	}
 	
 	@Id
 	@Column(name="LGA_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

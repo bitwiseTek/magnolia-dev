@@ -12,17 +12,21 @@ import com.bitwise.magnolia.model.user.User;
 
 public interface UserDao extends BaseDao<User> {
 
-	public User findById(long id);
+	public User findById(Long id);
 	
 	public User findByUsername(String username);
 	
 	public User findBySystemId(String systemId);
 	
+	public User save(User user);
+	
+	public void delete(User user);
+	
 	public List<User> findAllUsers();
 	
 	public List<User> findAllActiveUsers(String status);
 	
-	public List<User> findAllUsersByStates(String state);
+	public List<User> findAllUsersByStateId(Long stateId);
 	
-	public List<User> findAllUsersByLGAs(String lga);
+	public List<User> findAllUsersByLGAId(Long lgaId);
 }

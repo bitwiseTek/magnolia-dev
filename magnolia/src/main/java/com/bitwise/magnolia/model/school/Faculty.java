@@ -20,15 +20,12 @@ import javax.persistence.Table;
 @Table(name = "FACULTIES")
 public class Faculty implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "FACULTY_ID")
-	private long facultyId;
+	private Long facultyId;
 	
 	@Column(name = "NAME")
 	private String name;
@@ -53,11 +50,11 @@ public class Faculty implements Serializable{
 		
 	}
 	
-	public Faculty(long facultyId){
+	public Faculty(Long facultyId){
 		this.facultyId = facultyId;
 	}
 
-	public long getFacultyId() {
+	public Long getFacultyId() {
 		return facultyId;
 	}
 

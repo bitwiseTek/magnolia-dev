@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //import com.bitwise.magnolia.common.ApplicationConstant;
-import com.bitwise.magnolia.common.Response;
+//import com.bitwise.magnolia.common.Response;
 import com.bitwise.magnolia.common.Utils;
 import com.bitwise.magnolia.dao.school.SchoolDao;
 import com.bitwise.magnolia.model.school.School;
 import com.bitwise.magnolia.service.school.SchoolService;
-import com.bitwise.magnolia.vo.school.SchoolVo;
+//import com.bitwise.magnolia.vo.school.SchoolVo;
 
 @Service("schoolService")
 @Transactional
-public class SchoolServiceImpl implements SchoolService{
+public class SchoolServiceImpl implements SchoolService {
 	
 	@Autowired
 	private SchoolDao schoolDao;
@@ -54,25 +54,25 @@ public class SchoolServiceImpl implements SchoolService{
 	}
 
 	@Override
-	public Response retrieveSchoolDetails(String alias) {
-		Response response = new Response();
-		School school = schoolDao.findSchoolByAlias(alias);
-		SchoolVo vo = new SchoolVo();
-		vo.setValidDays(school.getValidDays());
-		vo.setCreatedAt(school.getCreatedAt());
-		vo.setEmail(school.getEmail());
-		vo.setSchoolAddress(school.getSchoolAddress());
-		vo.setSchoolLogo(school.getSchoolLogo());
-		vo.setSchoolName(school.getSchoolName());
-		vo.setAlias(school.getAlias());
-		vo.setWebSite(school.getWebsite());
+	public School retrieveSchoolDetails(String alias) {
+		//Response response = new Response();
+		return this.schoolDao.findSchoolByAlias(alias);
+		//SchoolVo vo = new SchoolVo();
+		//vo.setValidDays(school.getValidDays());
+		//vo.setCreatedAt(school.getCreatedAt());
+		//vo.setEmail(school.getEmail());
+		//vo.setSchoolAddress(school.getSchoolAddress());
+		//vo.setSchoolLogo(school.getSchoolLogo());
+		//vo.setSchoolName(school.getSchoolName());
+		//vo.setAlias(school.getAlias());
+		//vo.setWebSite(school.getWebsite());
 		
 		//String imageBase64 = Utils.convertFileToBase64(ApplicationConstant.MAGNOLIA_PATH + vo.getAlias() + File.separator + vo.getAlias(), vo.getSchoolLogo());
 		//vo.setSchoolLogo(imageBase64);
-		response.setObject(vo);
-		response.setSuccess(true);
+		//response.setObject(vo);
+		//response.setSuccess(true);
 		
-		return response;
+		//return response;
 	}
 
 }

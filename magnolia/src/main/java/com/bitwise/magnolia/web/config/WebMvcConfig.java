@@ -5,7 +5,7 @@
  * @author js4otto
  *
  */
-package com.bitwise.magnolia.config;
+package com.bitwise.magnolia.web.config;
 
 import java.util.List;
 import java.util.Properties;
@@ -22,7 +22,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+//import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -42,7 +42,7 @@ import com.bitwise.magnolia.web.security.MagnoliaUserContext;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.bitwise.magnolia")
-public class AppConfig extends WebMvcConfigurerAdapter{
+public class WebMvcConfig extends WebMvcConfigurerAdapter{
      
 	private static final long MAX_FILE_UPLOAD_SIZE = 1024 * 1024 * 15;
     private static final int FILE_SIZE_THRESHOLD = 1024 * 1024;
@@ -88,10 +88,10 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     }
     
     //Registration of Paths that we want to Intercept
-    public void addInterceptors(InterceptorRegistry registry){
-    	registry.addInterceptor(schoolInterceptor()).addPathPatterns("/**/*")
-    												.addPathPatterns("/**");
-    }
+    //public void addInterceptors(InterceptorRegistry registry){
+    //	registry.addInterceptor(schoolInterceptor()).addPathPatterns("/**/*")
+    //												.addPathPatterns("/**");
+    //}
 
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolver){

@@ -6,11 +6,10 @@ package com.bitwise.magnolia.model.user;
  *
  */
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,17 +42,17 @@ public class User implements Serializable {
 		
 	}
 	
-	public User(long id) {
+	public User(Long id) {
 		this.id = id;
 	}
 	
-	public User(long id, String username, String emailAddress, String oneTimeToken) {
+	public User(Long id, String username, String emailAddress, String oneTimeToken) {
 		this.id = id;
 		this.username = username;
 		this.oneTimeToken = oneTimeToken;
 	}
 	
-	private long id;
+	private Long id;
 	
 	private String systemId;
 	
@@ -99,20 +98,20 @@ public class User implements Serializable {
 	
 	private String photoBase64;
 	
-	private String createdAt = new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date());
+	private String createdAt;
 	
-	private String lastLogin = new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date());
+	private String lastLogin;
 	
 	private String lastLogout;
 
 	@Id
 	@Column(name="USER_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -269,7 +268,7 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="LINK_USERS_ROLES", joinColumns={@JoinColumn(name="USER_ID")}, inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
 	public List<Role> getRoles() {
 		return roles;
@@ -369,8 +368,39 @@ public class User implements Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((systemId == null) ? 0 : systemId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof User))
+			return false;
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (systemId == null) {
+			if (other.systemId != null)
+				return false;
+		} else if (!systemId.equals(other.systemId))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		return "User [id=" + id + ", password=" + password
+		return "User [id=" + id + ", systemId=" + systemId + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", email=" + primaryEmail + "]";
 	}

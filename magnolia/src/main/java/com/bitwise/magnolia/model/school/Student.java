@@ -1,25 +1,34 @@
 package com.bitwise.magnolia.model.school;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 22/02/17
+ *
+ */
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "STUDENTS")
 public class Student implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ID")
+	private Long id;
+	
+	@NotNull
 	@Column(name = "STUDENT_ID")
 	private String studentId;
 	
@@ -58,12 +67,22 @@ public class Student implements Serializable{
 	
 	@JoinColumn(name = "DEPARTMENT_ID", referencedColumnName = "DEPARTMENT_ID")
 	@ManyToOne
-	Department department;
+	Department studentDepartment;
 	
 	public Student(){
 		
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
 	public Student(String studentId){
 		this.studentId = studentId;
 	}
@@ -165,11 +184,11 @@ public class Student implements Serializable{
 	}
 
 	public Department getDepartment() {
-		return department;
+		return studentDepartment;
 	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setDepartment(Department studentDepartment) {
+		this.studentDepartment = studentDepartment;
 	}
 
 	@Override
@@ -177,7 +196,7 @@ public class Student implements Serializable{
 		return "Student [studentId=" + studentId + ", firstName=" + firstName + ", otherNames=" + otherNames
 				+ ", email=" + email + ", dob=" + dob + ", gender=" + gender + ", telephone=" + telephone + ", address="
 				+ address + ", createdAt=" + createdAt + ", apiKey=" + apiKey + ", status=" + status + ", photoBase64="
-				+ photoBase64 + ", department=" + department + "]";
+				+ photoBase64 + ", department=" + studentDepartment + "]";
 	}
 
 	

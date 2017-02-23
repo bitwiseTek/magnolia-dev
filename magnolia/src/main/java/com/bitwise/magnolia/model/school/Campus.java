@@ -15,15 +15,12 @@ import javax.persistence.Table;
 @Table(name = "CAMPUSES")
 public class Campus implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CAMPUS_ID")
-	private long campusId;
+	private Long campusId;
 	
 	@Column(name = "NAME")
 	private String name;
@@ -45,11 +42,11 @@ public class Campus implements Serializable{
 		
 	}
 
-	public long getCampusId() {
+	public Long getCampusId() {
 		return campusId;
 	}
 
-	public void setCampusId(long campusId) {
+	public void setCampusId(Long campusId) {
 		this.campusId = campusId;
 	}
 

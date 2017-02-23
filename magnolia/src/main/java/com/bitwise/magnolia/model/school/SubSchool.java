@@ -1,6 +1,7 @@
 package com.bitwise.magnolia.model.school;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,15 +19,12 @@ import javax.persistence.Table;
 @Table(name = "SUB_SCHOOLS")
 public class SubSchool implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SUB_SCHOOL_ID")
-	private long subSchoolId;
+	private Long subSchoolId;
 	
 	@Column(name = "NAME")
 	private String name;
@@ -47,18 +45,18 @@ public class SubSchool implements Serializable{
 	@ManyToOne
 	School school;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subSchool")
-	private List<Campus> campusList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subSchool", orphanRemoval = true)
+	private List<Campus> campusList = new ArrayList<Campus>();
 	
 	public SubSchool(){
 		
 	}
 
-	public long getSubSchoolId() {
+	public Long getSubSchoolId() {
 		return subSchoolId;
 	}
 
-	public void setSubSchoolId(long subSchoolId) {
+	public void setSubSchoolId(Long subSchoolId) {
 		this.subSchoolId = subSchoolId;
 	}
 

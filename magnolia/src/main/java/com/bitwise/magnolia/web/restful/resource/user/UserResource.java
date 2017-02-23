@@ -1,17 +1,33 @@
-package com.bitwise.magnolia.vo.user;
+package com.bitwise.magnolia.web.restful.resource.user;
 /**
  *  
  * @author Sika Kay
- * @date 18/02/17
+ * @date 22/02/17
  *
  */
-public class UserVo {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.ResourceSupport;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.bitwise.magnolia.common.ApplicationConstant;
+import com.bitwise.magnolia.common.Utils;
+import com.bitwise.magnolia.model.common.LGA;
+import com.bitwise.magnolia.model.common.State;
+import com.bitwise.magnolia.model.user.User;
+
+public class UserResource extends ResourceSupport {
 	
-	public UserVo() {
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	public UserResource() {
 		
 	}
 	
-	private Long id;
+	private Long rid;
 	
 	private String systemId;
 	
@@ -43,7 +59,7 @@ public class UserVo {
 	
 	private String secretQuestion;
 	
-	private String secretAnswer;
+	private String secretAnswer = "Elizabeth";
 	
 	private String status;
 	
@@ -54,13 +70,19 @@ public class UserVo {
 	private String lga;
 	
 	private String photoBase64;
+	
+	private String createdAt;
+	
+	private String lastLogin;
+	
+	private String lastLogout;
 
-	public Long getId() {
-		return id;
+	public Long getRid() {
+		return rid;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setRid(Long rid) {
+		this.rid = rid;
 	}
 
 	public String getSystemId() {
@@ -230,4 +252,60 @@ public class UserVo {
 	public void setPhotoBase64(String photoBase64) {
 		this.photoBase64 = photoBase64;
 	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(String lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
+	public String getLastLogout() {
+		return lastLogout;
+	}
+
+	public void setLastLogout(String lastLogout) {
+		this.lastLogout = lastLogout;
+	}
+
+	public User toUser() {
+		User user = new User();
+		user.setId(rid);
+		user.setBirthday(birthday);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setMiddleName(middleName);
+		user.setPassword(this.passwordEncoder.encode(tempPassword));
+		user.setUsername(firstName.toLowerCase().concat(".").concat(lastName.toLowerCase()).concat("@magnoliacad.com"));
+		user.setPrimaryEmail(primaryEmail);
+		user.setPrimaryNumber(primaryNumber);
+		user.setSecondaryEmail(secondaryEmail);
+		user.setSecondaryNumber(secondaryNumber);
+		user.setStreetAddress(streetAddress);
+		user.setSystemId(Utils.getCustomString(10, ""));
+		user.setSex(sex);
+		user.setSecretQuestion(Utils.getQuestions().get("Q1"));
+		user.setSecretAnswer(secretAnswer);
+		user.setOneTimeToken(Utils.generateUUID());
+		user.setState(new State(Long.parseLong(state)));
+		user.setLga(new LGA(Long.parseLong(lga)));
+		user.setPhotoBase64(Utils.saveBase64ToPath(photoBase64, ApplicationConstant.SCHOOL_ALIAS, systemId + "_photo"));
+		user.setTempPassword(tempPassword);
+		user.setStatus(ApplicationConstant.PENDING_STATUS);
+		user.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		user.setLastLogout(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		return user;
+		
+	}
+	
 }
