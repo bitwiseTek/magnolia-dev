@@ -40,6 +40,11 @@ public class DepartmentServiceImpl implements DepartmentService{
 	public Department findByDepartmentId(Long id) {
 		return this.departmentDao.findByDepartmentId(id);
 	}
+
+	@Override
+	public Department findByName(String name) {
+		return this.departmentDao.findByName(name);
+	}
 	
 	
 	

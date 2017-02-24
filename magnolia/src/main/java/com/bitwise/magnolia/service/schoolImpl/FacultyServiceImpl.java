@@ -35,5 +35,10 @@ public class FacultyServiceImpl implements FacultyService{
 	public Faculty findById(Long id) {
 		return this.facultyDao.findByFacutltyId(id);
 	}
+
+	@Override
+	public Faculty findByName(String name) {
+		return this.facultyDao.findByName(name);
+	}
 	
 }
