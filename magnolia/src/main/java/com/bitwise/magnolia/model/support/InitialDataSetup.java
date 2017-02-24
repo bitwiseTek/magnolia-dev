@@ -320,7 +320,7 @@ public class InitialDataSetup {
 					
 					new StateBuilder() {
 						{
-							state("Nassarawa");
+							state("Nasarawa");
 						}
 					}.build();
 					
