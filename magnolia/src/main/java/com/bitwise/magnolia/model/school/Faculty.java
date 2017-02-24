@@ -42,8 +42,8 @@ public class Faculty implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "faculty")
 	private List<Department> departmentList = new ArrayList<Department>();
 	
-	@JoinColumn(name = "SUB_SCHOOL_ID", referencedColumnName = "SUB_SCHOOL_ID")
 	@ManyToOne
+	@JoinColumn(name = "SUB_SCHOOL_ID", referencedColumnName = "SUB_SCHOOL_ID")
 	SubSchool subSchool;
 	
 	public Faculty(){

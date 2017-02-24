@@ -1,5 +1,9 @@
 package com.bitwise.magnolia.service.schoolImpl;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 24/02/17
+ */
 //import java.io.File;
 
 import javax.transaction.Transactional;
@@ -15,8 +19,8 @@ import com.bitwise.magnolia.model.school.School;
 import com.bitwise.magnolia.service.school.SchoolService;
 //import com.bitwise.magnolia.vo.school.SchoolVo;
 
-@Service("schoolService")
 @Transactional
+@Service("schoolService")
 public class SchoolServiceImpl implements SchoolService {
 	
 	@Autowired

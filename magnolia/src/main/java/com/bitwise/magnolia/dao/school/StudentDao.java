@@ -1,5 +1,10 @@
 package com.bitwise.magnolia.dao.school;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 24/02/17
+ *
+ */
 import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.school.Student;
 

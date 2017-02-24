@@ -730,7 +730,7 @@ insert into web_magnolia_lgas
 values (208, "Calabar Municipal", 10);
 
 insert into web_magnolia_lgas
-values (209, "Calabar-South"), 10;
+values (209, "Calabar-South", 10);
 
 insert into web_magnolia_lgas
 values (210, "Etung", 10);
@@ -988,7 +988,7 @@ insert into web_magnolia_lgas
 values (294, "Enugu-North", 14);
 
 insert into web_magnolia_lgas
-values (295, 0"Enugu-South", 14);
+values (295, "Enugu-South", 14);
 
 insert into web_magnolia_lgas
 values (296, "Ezeagu", 14);
@@ -2367,8 +2367,8 @@ values (754, "Zurmi", 36);
 /*STUDENT ACTIVITY TYPE
 INSERT INTO `rssson`.`web_rssson_student_activity_types` (`STUDENT_ACTIVITY_TYPE_ID`, `ARCHIVED`, `NAME`) VALUES ('1', b'0', 'NONE'), ('2', b'0', 'CLASS REP');*/
 
-/*STATES
-insert into states
+/*STATES*/
+/*insert into states
 values (1, "Abia");
 
 insert into states

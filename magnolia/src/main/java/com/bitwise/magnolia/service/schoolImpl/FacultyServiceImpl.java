@@ -1,44 +1,39 @@
 package com.bitwise.magnolia.service.schoolImpl;
-
-import java.util.List;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 24/02/17
+ */
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bitwise.magnolia.common.Response;
 import com.bitwise.magnolia.dao.school.FacultyDao;
 import com.bitwise.magnolia.model.school.Faculty;
 import com.bitwise.magnolia.service.school.FacultyService;
+import com.bitwise.magnolia.util.FacultyList;
 
-@Service("facultyService")
 @Transactional
+@Service("facultyService")
 public class FacultyServiceImpl implements FacultyService{
 
 	@Autowired
 	private FacultyDao facultyDao;
 
 	@Override
-	public Response getActiveFaculties(String schoolAlias) {
-		Response response = new Response();
-		try{
-			List<Faculty> facultyList = facultyDao.fetchActiveFaculties(schoolAlias);
-			if(facultyList != null && facultyList.size() > 0){
-				response.setObject(facultyList);
-				response.setSuccess(true);
-			}
-			else{
-				response.setSuccess(false);
-				response.setMessage("Empty ResultSet");
-			}
-		}
-		catch(Exception e){
-			response.setSuccess(false);
-			response.setMessage("Empty ResultSet");
-			System.err.println("ERROR:: " + this.getClass().getSimpleName());
-		}
-		return response;
+	public FacultyList findActiveFaculties(String schoolAlias) {
+		return new FacultyList(facultyDao.findActiveFaculties(schoolAlias));
+	}
+
+	@Override
+	public FacultyList findAllFaculties() {
+		return new FacultyList(facultyDao.findAllFaculties());
+	}
+
+	@Override
+	public Faculty findById(Long id) {
+		return this.facultyDao.findByFacutltyId(id);
 	}
 	
 }

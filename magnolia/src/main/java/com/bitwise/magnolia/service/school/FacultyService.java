@@ -1,6 +1,12 @@
 package com.bitwise.magnolia.service.school;
-
-import com.bitwise.magnolia.common.Response;
+/**
+ *  
+ * @author Sika Kay
+ * @date 24/02/17
+ *
+ */
+import com.bitwise.magnolia.model.school.Faculty;
+import com.bitwise.magnolia.util.FacultyList;
 
 public interface FacultyService {
 
@@ -10,6 +16,12 @@ public interface FacultyService {
 	 * @param schoolAlias
 	 * @return
 	 */
-	public Response getActiveFaculties(String schoolAlias);
+	public FacultyList findActiveFaculties(String schoolAlias);
+	
+	public FacultyList findAllFaculties();
+	
+	public Faculty findById(Long id);
+	
+	public Faculty findByName(String name);
 	
 }

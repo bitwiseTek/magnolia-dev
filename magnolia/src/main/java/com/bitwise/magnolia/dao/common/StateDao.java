@@ -13,5 +13,7 @@ public interface StateDao extends BaseDao<Object> {
 
 	public State findById(Long id);
 	
-	public List<State> findAll();
+	public State findByName(String name);
+	
+	public List<State> findAllStates();
 }

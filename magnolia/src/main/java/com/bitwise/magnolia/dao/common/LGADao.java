@@ -13,5 +13,9 @@ public interface LGADao extends BaseDao<Object> {
 
 	public LGA findById(Long id);
 	
+	public LGA findByName(String name);
+	
+	public List<LGA> findLGAsByStateId(Long stateId);
+	
 	public List<LGA> findAll();
 }

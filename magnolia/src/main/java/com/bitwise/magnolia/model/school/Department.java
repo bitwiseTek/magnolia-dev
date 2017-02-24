@@ -61,7 +61,7 @@ public class Department implements Serializable{
 		return departmentId;
 	}
 
-	public void setDepartmentId(long departmentId) {
+	public void setDepartmentId(Long departmentId) {
 		this.departmentId = departmentId;
 	}
 
@@ -105,12 +105,20 @@ public class Department implements Serializable{
 		this.faculty = faculty;
 	}
 
-	public List<Student> getStudentList() {
+	public List<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudentList(List<Student> students) {
+	public void setStudents(List<Student> students) {
 		this.students = students;
+	}
+
+	public List<Staff> getStaff() {
+		return staff;
+	}
+
+	public void setStaff(List<Staff> staff) {
+		this.staff = staff;
 	}
 
 	@Override

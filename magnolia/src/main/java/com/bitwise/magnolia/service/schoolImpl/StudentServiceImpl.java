@@ -1,5 +1,9 @@
 package com.bitwise.magnolia.service.schoolImpl;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 24/02/17
+ */
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,8 +21,8 @@ import com.bitwise.magnolia.model.school.Student;
 import com.bitwise.magnolia.service.school.StudentService;
 import com.bitwise.magnolia.vo.school.StudentVo;
 
-@Service("studentService")
 @Transactional
+@Service("studentService")
 public class StudentServiceImpl implements StudentService{
 	
 	@Autowired

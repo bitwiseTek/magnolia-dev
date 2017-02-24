@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.common.Response;
-import com.bitwise.magnolia.service.school.DepartmentService;
+//import com.bitwise.magnolia.service.school.DepartmentService;
 import com.bitwise.magnolia.service.school.StudentService;
 import com.bitwise.magnolia.vo.school.StudentVo;
 
 @RestController
 public class StudentController {
 
-	@Autowired
-	private DepartmentService departmentService;
+	/*@Autowired
+	private DepartmentService departmentService;*/
 	
 	@Autowired
 	private StudentService studentService;
@@ -28,7 +28,7 @@ public class StudentController {
 	method = RequestMethod.GET, consumes = "application/json")
 	public Response getDepartmentByFacultyId(String apiKey, long facultyId){
 		Response response = new Response();
-		response = departmentService.getActiveDepartmentsByFacultyId(apiKey, facultyId);
+		//response = departmentService.findActiveDepartmentsByFacultyId(apiKey, facultyId);
 		return response;
 	}
 	

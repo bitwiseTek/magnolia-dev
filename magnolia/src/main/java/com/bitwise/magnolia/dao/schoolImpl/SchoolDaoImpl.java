@@ -1,5 +1,9 @@
 package com.bitwise.magnolia.dao.schoolImpl;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 24/02/17
+ */
 import java.util.List;
 
 import javax.persistence.EntityManager;

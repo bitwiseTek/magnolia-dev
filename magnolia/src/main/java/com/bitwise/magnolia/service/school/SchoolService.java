@@ -5,10 +5,10 @@ import com.bitwise.magnolia.model.school.School;
 public interface SchoolService {
 
 	//An abstract method to check if a school actually exist
-	boolean isSchoolExist(String alias);
+	public boolean isSchoolExist(String alias);
 	//An abstract method to check if a school has any valid days
-	boolean isValidDays(String alias);
+	public boolean isValidDays(String alias);
 	//An abstract method to retrieve the details of a school
-	School retrieveSchoolDetails(String alias);
+	public School retrieveSchoolDetails(String alias);
 
 }

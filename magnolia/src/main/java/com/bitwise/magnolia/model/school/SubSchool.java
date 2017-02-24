@@ -48,8 +48,12 @@ public class SubSchool implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subSchool", orphanRemoval = true)
 	private List<Campus> campusList = new ArrayList<Campus>();
 	
-	public SubSchool(){
+	public SubSchool() {
 		
+	}
+	
+	public SubSchool(Long id) {
+		this.subSchoolId = id;
 	}
 
 	public Long getSubSchoolId() {
