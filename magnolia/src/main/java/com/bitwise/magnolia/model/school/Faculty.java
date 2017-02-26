@@ -43,8 +43,8 @@ public class Faculty implements Serializable{
 	private List<Department> departmentList = new ArrayList<Department>();
 	
 	@ManyToOne
-	@JoinColumn(name = "SUB_SCHOOL_ID", referencedColumnName = "SUB_SCHOOL_ID")
-	SubSchool subSchool;
+	@JoinColumn(name = "CAMPUS_ID", referencedColumnName = "CAMPUS_ID")
+	private Campus campus;
 	
 	public Faculty(){
 		
@@ -102,12 +102,12 @@ public class Faculty implements Serializable{
 		this.departmentList = departmentList;
 	}
 
-	public SubSchool getSubSchool() {
-		return subSchool;
+	public Campus getCampus() {
+		return campus;
 	}
 
-	public void setSubSchool(SubSchool subSchool) {
-		this.subSchool = subSchool;
+	public void setCampus(Campus campus) {
+		this.campus = campus;
 	}
 
 }

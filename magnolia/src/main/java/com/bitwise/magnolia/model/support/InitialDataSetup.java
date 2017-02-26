@@ -130,14 +130,14 @@ public class InitialDataSetup {
 				{
 					InitialDataSetup.this.faculty = new FacultyBuilder() {
 						{
-							subSchool(InitialDataSetup.this.subSchool);
+							campus(InitialDataSetup.this.campus);
 							faculty("Faculty of Engineering", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 					
 					new FacultyBuilder() {
 						{
-							subSchool(InitialDataSetup.this.subSchool);
+							campus(InitialDataSetup.this.campus);
 							faculty("Faculty of Sciences", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();

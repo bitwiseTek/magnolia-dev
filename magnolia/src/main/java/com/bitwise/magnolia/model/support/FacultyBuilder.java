@@ -7,8 +7,8 @@ package com.bitwise.magnolia.model.support;
  */
 import org.springframework.stereotype.Component;
 
+import com.bitwise.magnolia.model.school.Campus;
 import com.bitwise.magnolia.model.school.Faculty;
-import com.bitwise.magnolia.model.school.SubSchool;
 
 @Component
 public class FacultyBuilder extends EntityBuilder<Faculty> {
@@ -18,8 +18,8 @@ public class FacultyBuilder extends EntityBuilder<Faculty> {
 		this.product = new Faculty();
 	}
 	
-	public FacultyBuilder subSchool(SubSchool subSchool) {
-		this.product.setSubSchool(subSchool);
+	public FacultyBuilder campus(Campus campus) {
+		this.product.setCampus(campus);
 		return this;
 	}
 	

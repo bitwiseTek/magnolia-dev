@@ -42,6 +42,9 @@ public class Campus implements Serializable{
 		
 	}
 
+	public Campus(Long id) {
+		this.campusId = id;
+	}
 	public Long getCampusId() {
 		return campusId;
 	}

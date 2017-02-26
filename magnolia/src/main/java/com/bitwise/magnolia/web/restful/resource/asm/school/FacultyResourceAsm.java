@@ -26,7 +26,7 @@ public class FacultyResourceAsm extends ResourceAssemblerSupport<Faculty, Facult
 		res.setUpdatedAt(faculty.getUpdatedAt());
 		res.setName(faculty.getName());
 		res.setStatus(faculty.getStatus());
-		res.setSubSchool(faculty.getSubSchool().getName());
+		res.setCampus(faculty.getCampus().getName());
 		res.add(linkTo(methodOn(FacultyController.class).findFaculty(faculty.getFacultyId())).withSelfRel());
 		return res;
 	}

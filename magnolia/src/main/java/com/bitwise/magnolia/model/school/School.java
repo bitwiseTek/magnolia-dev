@@ -1,6 +1,7 @@
 package com.bitwise.magnolia.model.school;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -54,7 +55,7 @@ public class School implements Serializable{
 	private String status;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
-	private List<SubSchool> subSchoolList;
+	private List<SubSchool> subSchoolList = new ArrayList<SubSchool>();
 	
 	public School(){
 		

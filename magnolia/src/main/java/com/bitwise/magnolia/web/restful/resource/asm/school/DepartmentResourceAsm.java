@@ -9,7 +9,6 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import com.bitwise.magnolia.model.school.Department;
-import com.bitwise.magnolia.web.controller.common.LGAController;
 import com.bitwise.magnolia.web.controller.school.DepartmentController;
 import com.bitwise.magnolia.web.restful.resource.school.DepartmentResource;
 
