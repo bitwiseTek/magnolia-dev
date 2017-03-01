@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.web.controller.school;
+package com.bitwise.magnolia.web.controller;
 /**
  * @author js4otto
  *

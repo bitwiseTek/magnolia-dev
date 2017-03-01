@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.bitwise.magnolia.util.StateList;
-import com.bitwise.magnolia.web.controller.common.StateController;
+import com.bitwise.magnolia.web.restful.controller.common.StateController;
 import com.bitwise.magnolia.web.restful.resource.common.StateListResource;
 import com.bitwise.magnolia.web.restful.resource.common.StateResource;
 

@@ -1,5 +1,10 @@
 package com.bitwise.magnolia.model.school;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 22/02/17
+ *
+ */
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

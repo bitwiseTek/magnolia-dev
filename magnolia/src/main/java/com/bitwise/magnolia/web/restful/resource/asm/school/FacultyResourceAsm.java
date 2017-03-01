@@ -9,7 +9,7 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import com.bitwise.magnolia.model.school.Faculty;
-import com.bitwise.magnolia.web.controller.school.FacultyController;
+import com.bitwise.magnolia.web.restful.controller.school.FacultyController;
 import com.bitwise.magnolia.web.restful.resource.school.FacultyResource;
 
 public class FacultyResourceAsm extends ResourceAssemblerSupport<Faculty, FacultyResource> {

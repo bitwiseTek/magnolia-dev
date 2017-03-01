@@ -1,4 +1,4 @@
-package com.bitwise.magnolia.web.controller.common;
+package com.bitwise.magnolia.web.restful.controller.common;
 /**
  *  
  * @author Sika Kay

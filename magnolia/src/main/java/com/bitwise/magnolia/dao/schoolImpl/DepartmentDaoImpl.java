@@ -69,6 +69,4 @@ public class DepartmentDaoImpl extends AbstractDao<Department> implements Depart
 		List<Department> departments = query.getResultList();
 		return departments.size() == 1 ? departments.get(0) : null;
 	}
-
-
 }

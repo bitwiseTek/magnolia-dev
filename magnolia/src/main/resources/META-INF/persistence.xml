@@ -3,15 +3,24 @@
 	<persistence-unit name="magnoliaPU" transaction-type="RESOURCE_LOCAL">
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-	<class>com.bitwise.magnolia.model.common.State</class>
+	<class>com.bitwise.magnolia.model.common.AcademicSemester</class>
 	<class>com.bitwise.magnolia.model.common.LGA</class>
+	<class>com.bitwise.magnolia.model.common.State</class>
+	<class>com.bitwise.magnolia.model.common.StudyProgramme</class>
+	<class>com.bitwise.magnolia.model.common.StudyProgrammeCategory</class>
+	<class>com.bitwise.magnolia.model.course.Course</class>
+	<class>com.bitwise.magnolia.model.course.CourseLength</class>
+	<class>com.bitwise.magnolia.model.school.Campus</class>
+	<class>com.bitwise.magnolia.model.school.Department</class>
 	<class>com.bitwise.magnolia.model.school.Faculty</class>
+	<class>com.bitwise.magnolia.model.school.School</class>
 	<class>com.bitwise.magnolia.model.school.Student</class>
 	<class>com.bitwise.magnolia.model.school.Staff</class>
-	<class>com.bitwise.magnolia.model.school.Department</class>
-	<class>com.bitwise.magnolia.model.school.School</class>
 	<class>com.bitwise.magnolia.model.school.SubSchool</class>
-	<class>com.bitwise.magnolia.model.school.Campus</class>
+	<class>com.bitwise.magnolia.model.staff.Staff</class>
+	<class>com.bitwise.magnolia.model.staff.StaffCourse</class>
+	<class>com.bitwise.magnolia.model.student.Student</class>
+	<class>com.bitwise.magnolia.model.student.StudentCourse</class>
 	<class>com.bitwise.magnolia.model.security.Role</class>
 	<class>com.bitwise.magnolia.model.security.Permission</class>
 	<class>com.bitwise.magnolia.model.user.User</class>

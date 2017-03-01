@@ -11,14 +11,20 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.joda.time.DateTime;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.common.Utils;
+import com.bitwise.magnolia.model.common.AcademicSemester;
 import com.bitwise.magnolia.model.common.LGA;
 import com.bitwise.magnolia.model.common.State;
+import com.bitwise.magnolia.model.common.StudyProgramme;
+import com.bitwise.magnolia.model.common.StudyProgrammeCategory;
+import com.bitwise.magnolia.model.course.Course;
+import com.bitwise.magnolia.model.course.CourseLength;
 import com.bitwise.magnolia.model.school.Campus;
 import com.bitwise.magnolia.model.school.Department;
 import com.bitwise.magnolia.model.school.Faculty;
@@ -26,6 +32,8 @@ import com.bitwise.magnolia.model.school.School;
 import com.bitwise.magnolia.model.school.SubSchool;
 import com.bitwise.magnolia.model.security.Permission;
 import com.bitwise.magnolia.model.security.Role;
+import com.bitwise.magnolia.model.staff.Staff;
+import com.bitwise.magnolia.model.student.Student;
 import com.bitwise.magnolia.model.support.EntityBuilder.EntityBuilderManager;
 import com.bitwise.magnolia.model.user.User;
 
@@ -56,21 +64,35 @@ public class InitialDataSetup {
 	private Role roleManager = new Role("ROLE_MANAGER");
 	private Role roleAccountant = new Role("ROLE_ACCOUNTANT");
 	
-	private School school;
+	private AcademicSemester academiSemester;
 	
-	private SubSchool subSchool;
+	private Campus campus;
 	
-	private LGA lga;
+	private Course course;
 	
-	private State state;
-	
-	private User user;
-	
-	private Faculty faculty;
+	private CourseLength courseLength;
 	
 	private Department department;
 	
-	private Campus campus;
+	private Faculty faculty;
+	
+	private LGA lga;
+	
+	private School school;
+	
+	private Staff staff;
+	
+	private State state;
+	
+	private Student student;
+	
+	private StudyProgramme studyProgramme;
+	
+	private StudyProgrammeCategory studyProgrammeCategory;
+	
+	private SubSchool subSchool;
+	
+	private User user;
 	
 	private TransactionTemplate transactionTemplate;
 	
@@ -83,83 +105,6 @@ public class InitialDataSetup {
 				}
 				
 				//Tables Creation
-				//School
-				{
-					InitialDataSetup.this.school = new SchoolBuilder() {
-						{
-							school("info@magnoliacad.com", "Choba", ApplicationConstant.SCHOOL_ALIAS, "https://magnoliacad.com", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), 365, "logo", "Magnolia", "a5ukhxhEObzv8TBW8yxeNYy6hm1knu", ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-				}
-				
-				//SubSchool
-				{
-					InitialDataSetup.this.subSchool = new SubSchoolBuilder() {
-						{
-							school(InitialDataSetup.this.school);
-							subSchool("School of Undergraduate Studies", "Academic", "Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-					
-					new SubSchoolBuilder() {
-						{
-							school(InitialDataSetup.this.school);
-							subSchool("School of Graduate Studies", "Academic", "Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-				}
-				
-				//Campus
-				{
-					InitialDataSetup.this.campus = new CampusBuilder() {
-						{
-							subSchool(InitialDataSetup.this.subSchool);
-							campus("Abuja", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-					
-					new CampusBuilder() {
-						{
-							subSchool(InitialDataSetup.this.subSchool);
-							campus("Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-				}
-				
-				//Faculty
-				{
-					InitialDataSetup.this.faculty = new FacultyBuilder() {
-						{
-							campus(InitialDataSetup.this.campus);
-							faculty("Faculty of Engineering", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-					
-					new FacultyBuilder() {
-						{
-							campus(InitialDataSetup.this.campus);
-							faculty("Faculty of Sciences", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-				}
-				
-				//Department
-				{
-					InitialDataSetup.this.department = new DepartmentBuilder() {
-						{
-							faculty(InitialDataSetup.this.faculty);
-							department("Department of Electrical/Electronics Engineering", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-					
-					new DepartmentBuilder() {
-						{
-							faculty(InitialDataSetup.this.faculty);
-							department("Department of Petroleum Engineering", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
-						}
-					}.build();
-				}
-				
 				//State
 				{
 					InitialDataSetup.this.state = new StateBuilder() {
@@ -551,7 +496,6 @@ public class InitialDataSetup {
 				}
 				
 				//User
-				//User
 				{
 					InitialDataSetup.this.user = new UserBuilder() {
 						{
@@ -594,6 +538,239 @@ public class InitialDataSetup {
 									InitialDataSetup.this.permissionEditCourses,
 									InitialDataSetup.this.permissionAddCourses,
 									InitialDataSetup.this.permissionGenerateResult);
+						}
+					}.build();
+				}
+				
+				//School
+				{
+					InitialDataSetup.this.school = new SchoolBuilder() {
+						{
+							school("info@magnoliacad.com", "Choba", ApplicationConstant.SCHOOL_ALIAS, "https://magnoliacad.com", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), 365, "logo", "Magnolia", "a5ukhxhEObzv8TBW8yxeNYy6hm1knu", ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+				}
+				
+				//SubSchool
+				{
+					InitialDataSetup.this.subSchool = new SubSchoolBuilder() {
+						{
+							school(InitialDataSetup.this.school);
+							subSchool("School of Undergraduate Studies", "Academic", "Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+					
+					new SubSchoolBuilder() {
+						{
+							school(InitialDataSetup.this.school);
+							subSchool("School of Graduate Studies", "Academic", "Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+				}
+				
+				//Campus
+				{
+					InitialDataSetup.this.campus = new CampusBuilder() {
+						{
+							subSchool(InitialDataSetup.this.subSchool);
+							campus("Abuja", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+					
+					new CampusBuilder() {
+						{
+							subSchool(InitialDataSetup.this.subSchool);
+							campus("Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+				}
+				
+				//Faculty
+				{
+					InitialDataSetup.this.faculty = new FacultyBuilder() {
+						{
+							campus(InitialDataSetup.this.campus);
+							faculty("Faculty of Engineering", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+					
+					new FacultyBuilder() {
+						{
+							campus(InitialDataSetup.this.campus);
+							faculty("Faculty of Sciences", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+				}
+				
+				//Department
+				{
+					InitialDataSetup.this.department = new DepartmentBuilder() {
+						{
+							faculty(InitialDataSetup.this.faculty);
+							department("Department of Electrical/Electronics Engineering", "3015", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+					
+					new DepartmentBuilder() {
+						{
+							faculty(InitialDataSetup.this.faculty);
+							department("Department of Petroleum Engineering", "3065", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+					
+					new DepartmentBuilder() {
+						{
+							faculty(InitialDataSetup.this.faculty);
+							department("Department of Mathematics and Statistics", "2025", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+				}
+				
+				//AcademicSemester
+				{
+					InitialDataSetup.this.academiSemester = new AcademicSemesterBuilder() {
+						{
+							semester("1st Semester", "2016/2017", new DateTime(DateTime.now()), new DateTime(DateTime.now()), new DateTime(DateTime.now()));
+						}
+					}.build();
+					
+					new AcademicSemesterBuilder() {
+						{
+							semester("2nd Semester", "2016/2017", new DateTime(DateTime.now()), new DateTime(DateTime.now()), new DateTime(DateTime.now()));
+						}
+					}.build();
+				}
+				
+				//CourseLength
+				{
+					InitialDataSetup.this.courseLength = new CourseLengthBuilder() {
+						{
+							courseLength(150, 2304);
+						}
+					}.build();
+					
+					new CourseLengthBuilder() {
+						{
+							courseLength(366, 2880);
+						}
+					}.build();
+				}
+				
+				//StudyProgrammeCategory
+				{
+					InitialDataSetup.this.studyProgrammeCategory = new StudyProgrammeCategoryBuilder() {
+						{
+							category("Taught Programme (Full-Time)", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+					
+					new StudyProgrammeCategoryBuilder() {
+						{
+							category("Taught Programme (Part-Time)",  new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+					
+					new StudyProgrammeCategoryBuilder() {
+						{
+							category("Research Programme",  new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+						}
+					}.build();
+				}
+				
+				//StudyProgramme
+				{
+					InitialDataSetup.this.studyProgramme = new StudyProgrammeBuilder() {
+						{
+							category(InitialDataSetup.this.studyProgrammeCategory);
+							courseLength(InitialDataSetup.this.courseLength);
+							department(InitialDataSetup.this.department);
+							user(InitialDataSetup.this.user, InitialDataSetup.this.user);
+							programme("Electrical/Electronics Engineering", ApplicationConstant.ACTIVE_STATUS, "EEE", "Programme on the Engineering discipline known for its application on Electricity and its related concepts", 
+									200, 200, new DateTime(DateTime.now()), new DateTime(DateTime.now()), 1825, new DateTime(DateTime.now()).plusDays(1825));
+						}
+					}.build();
+					
+					new StudyProgrammeBuilder() {
+						{
+							category(InitialDataSetup.this.studyProgrammeCategory);
+							courseLength(InitialDataSetup.this.courseLength);
+							department(InitialDataSetup.this.department);
+							user(InitialDataSetup.this.user, InitialDataSetup.this.user);
+							programme("Petroleum Engineering", ApplicationConstant.ACTIVE_STATUS, "PNG", "Programme on the Engineering discipline known for its application on Crude Oil and its related concepts", 
+									200, 200, new DateTime(DateTime.now()), new DateTime(DateTime.now()), 1825, new DateTime(DateTime.now()).plusDays(1825));
+						}
+					}.build();
+					
+					new StudyProgrammeBuilder() {
+						{
+							category(InitialDataSetup.this.studyProgrammeCategory);
+							courseLength(InitialDataSetup.this.courseLength);
+							department(InitialDataSetup.this.department);
+							user(InitialDataSetup.this.user, InitialDataSetup.this.user);
+							programme("Computer Science", ApplicationConstant.ACTIVE_STATUS, "CSC", "Programme on the Mathematics & Sience discipline known for its application on Processor-based architecture and its related concepts", 
+									200, 200, new DateTime(DateTime.now()), new DateTime(DateTime.now()), 1460, new DateTime(DateTime.now()).plusDays(1460));
+						}
+					}.build();
+				}
+				
+				//Staff
+				{
+					InitialDataSetup.this.staff = new StaffBuilder() {
+						{
+							user(InitialDataSetup.this.user);
+							department(InitialDataSetup.this.department);
+							staff("STF".concat("/").concat(org.joda.time.format.DateTimeFormat.forPattern("yyyy").print(new DateTime(DateTime.now()))).concat("/").concat(InitialDataSetup.this.department.getCode()).concat("/").concat(InitialDataSetup.this.user.getId().toString()), 
+									ApplicationConstant.ACTIVE_STATUS, Utils.getTitles().get("DR"), Utils.randomString(30), Boolean.FALSE, Boolean.TRUE);
+						}
+					}.build();
+				}
+				
+				//Student
+				{
+					InitialDataSetup.this.student = new StudentBuilder() {
+						{
+							user(InitialDataSetup.this.user);
+							programme(InitialDataSetup.this.studyProgramme);
+							department(InitialDataSetup.this.department);
+							student("STD".concat("/").concat(org.joda.time.format.DateTimeFormat.forPattern("yyyy").print(new DateTime(DateTime.now()))).concat("/").concat(InitialDataSetup.this.department.getCode()).concat("/").concat(InitialDataSetup.this.user.getId().toString()), 
+									Utils.getEndReasons().get("R1"), null, "in view", Boolean.TRUE, Utils.getPartTypes().get("OC"), Utils.getEnrolmentTypes().get("OF"), Utils.randomString(30), ApplicationConstant.PENDING_STATUS, 
+									new DateTime(DateTime.now()), new DateTime(DateTime.now()), InitialDataSetup.this.studyProgramme.getEndDate());
+						}
+					}.build();
+				}
+				
+				//Course
+				{
+					InitialDataSetup.this.course = new CourseBuilder() {
+						{
+							user(InitialDataSetup.this.user, InitialDataSetup.this.user);
+							staff(InitialDataSetup.this.staff);
+							programme(InitialDataSetup.this.studyProgramme);
+							semester(InitialDataSetup.this.academiSemester);
+							course("General Mathematics I", ApplicationConstant.ACTIVE_STATUS, "MTH 110.1", "General Mathematics", Utils.getOptionalities().get("MA"), 100, 3.0, 
+									new DateTime(DateTime.now()), new DateTime(DateTime.now()));
+						}
+					}.build();
+					
+					new CourseBuilder() {
+						{
+							user(InitialDataSetup.this.user, InitialDataSetup.this.user);
+							staff(InitialDataSetup.this.staff);
+							programme(InitialDataSetup.this.studyProgramme);
+							semester(InitialDataSetup.this.academiSemester);
+							course("Calculus I", ApplicationConstant.ACTIVE_STATUS, "MTH 120.1", "Calculus", Utils.getOptionalities().get("MA"), 100, 3.0, 
+									new DateTime(DateTime.now()), new DateTime(DateTime.now()));
+						}
+					}.build();
+					
+					new CourseBuilder() {
+						{
+							user(InitialDataSetup.this.user, InitialDataSetup.this.user);
+							staff(InitialDataSetup.this.staff);
+							programme(InitialDataSetup.this.studyProgramme);
+							semester(InitialDataSetup.this.academiSemester);
+							course("General Studies: English Language", ApplicationConstant.ACTIVE_STATUS, "GES 100.1", "English Language", Utils.getOptionalities().get("MA"), 100, 3.0, 
+									new DateTime(DateTime.now()), new DateTime(DateTime.now()));
 						}
 					}.build();
 				}

@@ -9,7 +9,7 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import com.bitwise.magnolia.model.common.State;
-import com.bitwise.magnolia.web.controller.common.StateController;
+import com.bitwise.magnolia.web.restful.controller.common.StateController;
 import com.bitwise.magnolia.web.restful.resource.common.StateResource;
 
 public class StateResourceAsm extends ResourceAssemblerSupport<State, StateResource> {

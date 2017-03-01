@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.bitwise.magnolia.util.DepartmentList;
-import com.bitwise.magnolia.web.controller.school.DepartmentController;
+import com.bitwise.magnolia.web.restful.controller.school.DepartmentController;
 import com.bitwise.magnolia.web.restful.resource.school.DepartmentListResource;
 import com.bitwise.magnolia.web.restful.resource.school.DepartmentResource;
 

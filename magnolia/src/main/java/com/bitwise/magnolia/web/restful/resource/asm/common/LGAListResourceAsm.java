@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import com.bitwise.magnolia.util.LGAList;
-import com.bitwise.magnolia.web.controller.common.LGAController;
+import com.bitwise.magnolia.web.restful.controller.common.LGAController;
 import com.bitwise.magnolia.web.restful.resource.common.LGAListResource;
 import com.bitwise.magnolia.web.restful.resource.common.LGAResource;
 

@@ -1,5 +1,10 @@
 package com.bitwise.magnolia.model.school;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 22/02/17
+ *
+ */
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +21,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.bitwise.magnolia.model.staff.Staff;
+import com.bitwise.magnolia.model.student.Student;
+
 @Entity
 @Table(name = "DEPARTMENTS")
 public class Department implements Serializable{
@@ -27,16 +35,19 @@ public class Department implements Serializable{
 	@Column(name = "DEPARTMENT_ID")
 	private Long departmentId;
 	
-	@Column(name = "NAME")
+	@Column(name = "NAME", nullable=false)
 	private String name;
 	
-	@Column(name = "CREATED_AT")
+	@Column(name = "CODE", nullable=false)
+	private String code;
+	
+	@Column(name = "CREATED_AT", nullable=false)
 	private String createdAt;
 	
-	@Column(name = "UPDATED_AT")
+	@Column(name = "UPDATED_AT", nullable=false)
 	private String updatedAt;
 	
-	@Column(name = "STATUS")
+	@Column(name = "STATUS", nullable=false)
 	private String status;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "studentDepartment")
@@ -71,6 +82,14 @@ public class Department implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getCreatedAt() {

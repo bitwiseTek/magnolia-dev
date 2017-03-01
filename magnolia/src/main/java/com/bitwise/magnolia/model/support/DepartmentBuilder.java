@@ -23,8 +23,9 @@ public class DepartmentBuilder extends EntityBuilder<Department> {
 		return this;
 	}
 	
-	public DepartmentBuilder department(String name, String createdAt, String updatedAt, String status) {
+	public DepartmentBuilder department(String name, String code, String createdAt, String updatedAt, String status) {
 		this.product.setName(name);
+		this.product.setCode(code);
 		this.product.setCreatedAt(createdAt);
 		this.product.setUpdatedAt(updatedAt);
 		this.product.setStatus(status);

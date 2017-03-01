@@ -1,0 +1,29 @@
+package com.bitwise.magnolia.service.student;
+
+import com.bitwise.magnolia.model.student.Student;
+import com.bitwise.magnolia.util.StudentList;
+
+/**
+ *  
+ * @author Sika Kay
+ * @date 24/02/17
+ */
+
+public interface StudentService {
+
+	public Student findById(Long id);
+	
+	//Get student's record by studentId
+	public Student findByStudentId(String studentId);
+
+	//Get student's record by studentApiKey
+	public Student findByStudentApiKey(String apiKey);
+	
+	public StudentList findStudentsByProgrammeId(Long programmeId);
+	
+	public StudentList findStudentsByDepartmentId(Long deptId);
+	
+	public StudentList findAllStudents();
+	
+	public Student save(Student student);
+}

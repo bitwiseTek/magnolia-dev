@@ -42,7 +42,9 @@ public class Utils {
 
     private static Map<String, String> titles = new TreeMap<String, String>();
     
-    private static Map<Integer, String> units = new TreeMap<Integer, String>();
+    private static Map<String, String> endReasons = new TreeMap<String, String>();
+    
+    private static Map<Double, String> units = new TreeMap<Double, String>();
 	
 	
 	/**
@@ -342,17 +344,37 @@ public class Utils {
 		return titles;
 	}
 	
-	public static Map<Integer, String> listOfUnits() {
-		units.put(1, "1");
-		units.put(2, "2");
-		units.put(3, "3");
-		units.put(4, "4");
-		units.put(5, "5");
-		units.put(6, "6");
+	public static Map<String, String> listOfEndReasons() {
+		endReasons.put("R1", "None");
+		endReasons.put("R2", "Finacial");
+		endReasons.put("R3", "Expulsion");
+		endReasons.put("R4", "Medical");
+		endReasons.put("R5", "Failure");
+		endReasons.put("R6", "Transfer");
+		return endReasons;
+	}
+	
+	public static Map<String, String> getEndReasons() {
+		for (String reason : listOfEndReasons().values()) {
+			System.out.println(reason);
+		}
+		return endReasons;
+	}
+	
+	public static Map<Double, String> listOfUnits() {
+		units.put(1.0, "1");
+		units.put(2.0, "2");
+		units.put(3.0, "3");
+		units.put(4.0, "4");
+		units.put(5.0, "5");
+		units.put(6.0, "6");
+		units.put(7.0, "6");
+		units.put(8.0, "6");
+		units.put(9.0, "6");
 		return units;
 	}
 	
-	public static Map<Integer, String> getUnits() {
+	public static Map<Double, String> getUnits() {
 		for (String unit : listOfUnits().values()) {
 			System.out.println(unit);
 		}
