@@ -14,12 +14,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="PERMISSIONS")
-@NamedQuery(name="Permission.findAll", query="SELECT p from Permission p")
+@Table(name="PERMISSIONS", uniqueConstraints = @UniqueConstraint(columnNames = {
+"permissions" }))
+@NamedQueries({
+	@NamedQuery(name="Permission.findById", query="select distinct p from Permission p where p.id=:id"),
+	@NamedQuery(name="Permission.findByName", query="select distinct p from Permission p where p.permissions=:permission"),
+	@NamedQuery(name="Permission.findAll", query="select p from Permission p")
+})
 public class Permission implements Serializable {
 
 	private static final long serialVersionUID = 1L;

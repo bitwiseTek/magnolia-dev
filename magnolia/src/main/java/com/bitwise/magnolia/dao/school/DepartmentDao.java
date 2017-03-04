@@ -24,5 +24,7 @@ public interface DepartmentDao extends BaseDao<Department> {
 	public Department findByDepartmentId(Long id);
 	
 	public Department findByName(String name);
+	
+	public Department save(Department dept);
 
 }

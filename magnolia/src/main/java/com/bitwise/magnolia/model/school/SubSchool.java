@@ -17,11 +17,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "SUB_SCHOOLS")
+@Table(name="SUB_SCHOOLS", uniqueConstraints = @UniqueConstraint(columnNames = {
+"name" }))
+@NamedQueries({
+	@NamedQuery(name="SubSchool.findById", query="select distinct s from SubSchool s where s.subSchoolId=:id"),
+	@NamedQuery(name="SubSchool.findBySchoolId", query="select s from SubSchool s where s.school.schoolId=:schoolId"),
+	@NamedQuery(name="SubSchool.findByName", query="select distinct s from SubSchool s where s.name=:name"),
+	@NamedQuery(name="SubSchool.findAll", query="select s from SubSchool s")
+})
 public class SubSchool implements Serializable{
 
 	private static final long serialVersionUID = 1L;

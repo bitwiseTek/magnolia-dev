@@ -21,12 +21,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="ROLES")
-@NamedQuery(name="Role.findAll", query="SELECT r from Role r")
+@Table(name="ROLES", uniqueConstraints = @UniqueConstraint(columnNames = {
+"roles" }))
+@NamedQueries({
+	@NamedQuery(name="Role.findById", query="select distinct r from Role r where r.id=:id"),
+	@NamedQuery(name="Role.findByName", query="select distinct r from Role r where r.roles=:role"),
+	@NamedQuery(name="Role.findAll", query="select r from Role r")
+})
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;

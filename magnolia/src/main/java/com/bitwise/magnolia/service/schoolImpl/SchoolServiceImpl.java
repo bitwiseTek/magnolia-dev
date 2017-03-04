@@ -5,11 +5,11 @@ package com.bitwise.magnolia.service.schoolImpl;
  * @date 24/02/17
  */
 //import java.io.File;
-
-import javax.transaction.Transactional;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 //import com.bitwise.magnolia.common.ApplicationConstant;
 //import com.bitwise.magnolia.common.Response;
@@ -18,10 +18,13 @@ import com.bitwise.magnolia.dao.school.SchoolDao;
 import com.bitwise.magnolia.model.school.School;
 import com.bitwise.magnolia.service.school.SchoolService;
 //import com.bitwise.magnolia.vo.school.SchoolVo;
+import com.bitwise.magnolia.util.SchoolList;
 
 @Transactional
 @Service("schoolService")
 public class SchoolServiceImpl implements SchoolService {
+	
+	final Logger logger = LoggerFactory.getLogger(SchoolServiceImpl.class);
 	
 	@Autowired
 	private SchoolDao schoolDao;
@@ -39,6 +42,7 @@ public class SchoolServiceImpl implements SchoolService {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public boolean isValidDays(String alias) {
 		boolean isValidDays = false;
 		try{
@@ -58,6 +62,7 @@ public class SchoolServiceImpl implements SchoolService {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public School retrieveSchoolDetails(String alias) {
 		//Response response = new Response();
 		return this.schoolDao.findSchoolByAlias(alias);
@@ -77,6 +82,31 @@ public class SchoolServiceImpl implements SchoolService {
 		//response.setSuccess(true);
 		
 		//return response;
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public School findById(Long id) {
+		return this.schoolDao.findById(id);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public School findByName(String name) {
+		return this.schoolDao.findByName(name);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public SchoolList findAllSchools() {
+		return new SchoolList(this.schoolDao.findAllSchools());
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public School save(School school) {
+		logger.info("Adding school with ID " + school.getSchoolId());
+		return this.schoolDao.save(school);
 	}
 
 }

@@ -18,11 +18,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "FACULTIES")
+@Table(name="FACULTIES", uniqueConstraints = @UniqueConstraint(columnNames = {
+"name" }))
+@NamedQueries({
+	@NamedQuery(name="Faculty.findById", query="select distinct f from Faculty f where f.facultyId=:id"),
+	@NamedQuery(name="Faculty.findByCampusId", query="select f from Faculty f where f.campus.campusId=:campusId"),
+	@NamedQuery(name="Faculty.findByName", query="select distinct f from Faculty f where f.name=:name"),
+	@NamedQuery(name="Faculty.findAll", query="select f from Faculty f")
+})
 public class Faculty implements Serializable{
 
 	private static final long serialVersionUID = 1L;

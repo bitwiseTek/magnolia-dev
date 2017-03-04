@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -68,5 +69,11 @@ public class DepartmentDaoImpl extends AbstractDao<Department> implements Depart
 		TypedQuery<Department> query = em.createQuery(sql, Department.class).setParameter("name", name);
 		List<Department> departments = query.getResultList();
 		return departments.size() == 1 ? departments.get(0) : null;
+	}
+
+	@Override
+	@Transactional
+	public Department save(Department dept) {
+		return this.em.merge(dept);
 	}
 }

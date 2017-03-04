@@ -1,0 +1,65 @@
+package com.bitwise.magnolia.service.staffImpl;
+/**
+ *  
+ * @author Sika Kay
+ * @date 27/02/17
+ *
+ */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.bitwise.magnolia.dao.staff.StaffDao;
+import com.bitwise.magnolia.model.staff.Staff;
+import com.bitwise.magnolia.service.staff.StaffService;
+import com.bitwise.magnolia.util.StaffList;
+
+@Transactional
+@Service("staffService")
+public class StaffServiceImpl implements StaffService {
+
+	final Logger logger = LoggerFactory.getLogger(StaffServiceImpl.class);
+	
+	@Autowired
+	private StaffDao staffDao;
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Staff findById(Long id) {
+		return this.staffDao.findById(id);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Staff findByStaffId(String staffId) {
+		return this.staffDao.findByStaffId(staffId);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Staff findByStaffApiKey(String apiKey) {
+		return this.staffDao.findByStaffApiKey(apiKey);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public StaffList findStaffByDepartmentId(Long deptId) {
+		return new StaffList(this.staffDao.findStaffByDepartmentId(deptId));
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public StaffList findAllStaff() {
+		return new StaffList(this.staffDao.findAllStaff());
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public Staff save(Staff staff) {
+		logger.info("Adding/Updating staff with ID " + staff.getId());
+		return this.staffDao.save(staff);
+	}
+
+}

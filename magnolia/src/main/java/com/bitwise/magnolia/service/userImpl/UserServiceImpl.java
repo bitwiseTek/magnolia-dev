@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bitwise.magnolia.dao.user.UserDao;
-import com.bitwise.magnolia.exception.UserDoesNotExistException;
-import com.bitwise.magnolia.exception.UserExistsException;
+import com.bitwise.magnolia.exception.EntityDoesNotExistException;
+import com.bitwise.magnolia.exception.EntityExistsException;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.user.UserService;
 import com.bitwise.magnolia.util.UserList;
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	public User save(User data) {
 		User user = userDao.findByUsername(data.getUsername());
 		if (user != null) {
-			throw new UserExistsException("Account already exists");
+			throw new EntityExistsException("Account already exists");
 		}
 		return this.userDao.save(data);
 	}
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 	public User update(User data) {
 		User user = userDao.findById(data.getId());
 		if (user == null) {
-			throw new UserDoesNotExistException("Account does not exist");
+			throw new EntityDoesNotExistException("Account does not exist");
 		}
 		return userDao.save(data);
 	}

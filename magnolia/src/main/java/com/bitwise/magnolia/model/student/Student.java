@@ -27,6 +27,7 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.common.StudyProgramme;
 import com.bitwise.magnolia.model.school.Department;
 import com.bitwise.magnolia.model.user.User;
@@ -38,7 +39,7 @@ import com.bitwise.magnolia.model.user.User;
 	@NamedQuery(name="Student.findById", query="select distinct s from Student s where s.id=:id"),
 	@NamedQuery(name="Student.findByStudentId", query="select distinct s from Student s where s.studentId=:studentId"),
 	@NamedQuery(name="Student.findByApiKey", query="select distinct s from Student s where s.apiKey=:apiKey"),
-	@NamedQuery(name="Student.findByDepartmentId", query="select s from Student s where s.studentDepartment.id=:deptId"),
+	@NamedQuery(name="Student.findByDepartmentId", query="select s from Student s where s.studentDepartment.departmentId=:deptId"),
 	@NamedQuery(name="Student.findByProgrammeId", query="select s from Student s where s.studyProgramme.id=:programmeId"),
 	@NamedQuery(name="Student.findAll", query="select s from Student s")
 })
@@ -196,9 +197,9 @@ public class Student implements Serializable {
 	@Column(name="STUDY_STATUS", nullable=false)
 	public String getStudyStatus() {
 		if (getHasStartedStudies()) {
-			return "in view";
+			return ApplicationConstant.INVIEW_STATUS;
 		} else if (getHasFinishedStudies()) {
-			return "completed";
+			return ApplicationConstant.COMPLETED_STATUS;
 		}
 		return studyStatus;
 	}

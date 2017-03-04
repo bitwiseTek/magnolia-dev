@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -57,5 +58,11 @@ public class FacultyDaoImpl extends AbstractDao<Faculty> implements FacultyDao{
 		TypedQuery<Faculty> query = em.createQuery(sql, Faculty.class).setParameter("name", name);
 		List<Faculty> faculties = query.getResultList();
 		return faculties.size() == 1 ? faculties.get(0) : null;
+	}
+
+	@Override
+	@Transactional
+	public Faculty save(Faculty faculty) {
+		return this.em.merge(faculty);
 	}
 }

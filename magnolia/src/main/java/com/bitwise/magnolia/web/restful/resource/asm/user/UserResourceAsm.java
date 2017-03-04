@@ -33,7 +33,7 @@ public class UserResourceAsm extends ResourceAssemblerSupport<User, UserResource
 		res.setStatus(user.getStatus());
 		res.setFirstName(user.getFirstName());
 		res.setLastName(user.getLastName());
-		res.setMiddleName(res.getMiddleName());
+		res.setMiddleName(user.getMiddleName());
 		res.setOneTimeToken(user.getOneTimeToken());
 		res.setSex(user.getSex());
 		res.setSecretQuestion(user.getSecretQuestion());

@@ -18,6 +18,7 @@ public class LGAResourceAsm extends ResourceAssemblerSupport<LGA, LGAResource> {
 	public LGAResourceAsm() {
 		super(LGAController.class, LGAResource.class);
 	}
+	
 	@Override
 	public LGAResource toResource(LGA lga) {
 		LGAResource res = new LGAResource();

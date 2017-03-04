@@ -21,4 +21,6 @@ public interface FacultyDao extends BaseDao<Faculty> {
 	
 	public Faculty findByName(String name);
 	
+	public Faculty save(Faculty faculty);
+	
 }

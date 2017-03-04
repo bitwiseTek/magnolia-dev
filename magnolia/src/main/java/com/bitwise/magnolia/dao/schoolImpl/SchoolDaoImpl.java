@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
@@ -58,6 +59,29 @@ public class SchoolDaoImpl extends AbstractDao<Object> implements SchoolDao {
 												.setParameter("status", ApplicationConstant.ACTIVE_STATUS)
 												.setParameter("apiKey", apiKey)
 												.getSingleResult()) == null ? false : true;
+	}
+
+	@Override
+	public School findById(Long id) {
+		return this.em.createNamedQuery("School.findById", School.class).setParameter("id", id).getSingleResult();
+	}
+
+	@Override
+	public School findByName(String name) {
+		TypedQuery<School> query = em.createNamedQuery("School.findByName", School.class).setParameter("name", name);
+		List<School> schools = query.getResultList();
+		return schools.size() == 1 ? schools.get(0) : null;
+	}
+
+	@Override
+	public List<School> findAllSchools() {
+		return this.em.createNamedQuery("School.findAll", School.class).getResultList();
+	}
+
+	@Override
+	@Transactional
+	public School save(School school) {
+		return this.em.merge(school);
 	}
 
 }

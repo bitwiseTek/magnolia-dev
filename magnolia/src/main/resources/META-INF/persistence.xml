@@ -14,8 +14,6 @@
 	<class>com.bitwise.magnolia.model.school.Department</class>
 	<class>com.bitwise.magnolia.model.school.Faculty</class>
 	<class>com.bitwise.magnolia.model.school.School</class>
-	<class>com.bitwise.magnolia.model.school.Student</class>
-	<class>com.bitwise.magnolia.model.school.Staff</class>
 	<class>com.bitwise.magnolia.model.school.SubSchool</class>
 	<class>com.bitwise.magnolia.model.staff.Staff</class>
 	<class>com.bitwise.magnolia.model.staff.StaffCourse</class>

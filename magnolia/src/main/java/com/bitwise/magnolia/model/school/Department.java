@@ -18,15 +18,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.bitwise.magnolia.model.staff.Staff;
 import com.bitwise.magnolia.model.student.Student;
 
 @Entity
-@Table(name = "DEPARTMENTS")
-public class Department implements Serializable{
+@Table(name="DEPARTMENTS", uniqueConstraints = @UniqueConstraint(columnNames = {
+"name" }))
+@NamedQueries({
+	@NamedQuery(name="Department.findById", query="select distinct d from Department d where d.departmentId=:id"),
+	@NamedQuery(name="Department.findByFacultyId", query="select d from Department d where d.faculty.facultyId=:facultyId"),
+	@NamedQuery(name="Department.findByName", query="select distinct d from Department d where d.name=:name"),
+	@NamedQuery(name="Department.findAll", query="select d from Department d")
+})
+public class Department implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

@@ -49,8 +49,10 @@ public class InitialDataSetup {
 	private Permission permissionEditProfile = new Permission("PERMISSION_EDIT_PROFILE");
 	private Permission permissionEditCourses = new Permission("PERMISSION_EDIT_COURSES");
 	private Permission permissionAddCourses = new Permission("PERMISSION_ADD_COURSES");
+	private Permission permissionAttachCourses = new Permission("PERMISSION_ATTACH_COURSES");
 	private Permission permissionEditUsers = new Permission("PERMISSION_EDIT_USERS");
 	private Permission permissionGenerateResult = new Permission("PERMISSION_GENERATE_RESULT");
+	private Permission permissionEditResult = new Permission("PERMISSION_EDIT_RESULT");
 	private Permission permissionEditAccommodation = new Permission("PERMISSION_EDIT_ACCOMMODATION");
 	private Permission permissionEditGrades = new Permission("PERMISSION_EDIT_GRADES");
 
@@ -540,6 +542,22 @@ public class InitialDataSetup {
 									InitialDataSetup.this.permissionGenerateResult);
 						}
 					}.build();
+					
+					new UserBuilder() {
+						{
+							name("Eteng", "Omah", "Nkanem");
+							state(InitialDataSetup.this.state);
+							lga(InitialDataSetup.this.lga);
+							userDetails(Utils.getCustomString(10, ""), Utils.getSexes().get("ML"), ApplicationConstant.PENDING_STATUS, "Bangladesh, India", "+918867873876", null, "eteng.omah@yahoo.com", null, "12/03/1976", "photo");
+							credentials("eteng.omah@magnoliacad.com", "$2a$10$aqNY.kMd1h2u1MbK2JUA8./3g2VM.BAB09kzHFpz6b6NQ57PBn/fy", "magnolia", Utils.getQuestions().get("Q1"), "Elizabeth", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), Utils.generateUUID());
+							roleWithPermissions(InitialDataSetup.this.roleStaff,
+									InitialDataSetup.this.permissionEditProfile,
+									InitialDataSetup.this.permissionEditCourses,
+									InitialDataSetup.this.permissionAttachCourses,
+									InitialDataSetup.this.permissionEditGrades,
+									InitialDataSetup.this.permissionEditResult);
+						}
+					}.build();
 				}
 				
 				//School
@@ -630,13 +648,13 @@ public class InitialDataSetup {
 				{
 					InitialDataSetup.this.academiSemester = new AcademicSemesterBuilder() {
 						{
-							semester("1st Semester", "2016/2017", new DateTime(DateTime.now()), new DateTime(DateTime.now()), new DateTime(DateTime.now()));
+							semester("1st Semester", "2016/2017", new DateTime(DateTime.now()), new DateTime(DateTime.now()).plusDays(90), new DateTime(DateTime.now()));
 						}
 					}.build();
 					
 					new AcademicSemesterBuilder() {
 						{
-							semester("2nd Semester", "2016/2017", new DateTime(DateTime.now()), new DateTime(DateTime.now()), new DateTime(DateTime.now()));
+							semester("2nd Semester", "2016/2017", new DateTime(DateTime.now().plusDays(90)), new DateTime(DateTime.now()).plusDays(180), new DateTime(DateTime.now()));
 						}
 					}.build();
 				}
@@ -645,13 +663,13 @@ public class InitialDataSetup {
 				{
 					InitialDataSetup.this.courseLength = new CourseLengthBuilder() {
 						{
-							courseLength(150, 2304);
+							courseLength("ENG-5", 366, 2880);
 						}
 					}.build();
 					
 					new CourseLengthBuilder() {
 						{
-							courseLength(366, 2880);
+							courseLength("SCI-4", 150, 2304);
 						}
 					}.build();
 				}
@@ -707,7 +725,7 @@ public class InitialDataSetup {
 							courseLength(InitialDataSetup.this.courseLength);
 							department(InitialDataSetup.this.department);
 							user(InitialDataSetup.this.user, InitialDataSetup.this.user);
-							programme("Computer Science", ApplicationConstant.ACTIVE_STATUS, "CSC", "Programme on the Mathematics & Sience discipline known for its application on Processor-based architecture and its related concepts", 
+							programme("Computer Science", ApplicationConstant.ACTIVE_STATUS, "CSC", "Programme on the Mathematics & Science discipline known for its application on Processor-based architecture and its related concepts", 
 									200, 200, new DateTime(DateTime.now()), new DateTime(DateTime.now()), 1460, new DateTime(DateTime.now()).plusDays(1460));
 						}
 					}.build();

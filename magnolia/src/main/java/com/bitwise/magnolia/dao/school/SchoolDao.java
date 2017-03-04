@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.dao.school;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -7,14 +9,27 @@ package com.bitwise.magnolia.dao.school;
  */
 import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.school.School;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 01/03/17
+ *
+ */
 public interface SchoolDao extends BaseDao<Object>{
 
 	//An abstract method to check if a school actually exist
-	boolean isSchoolExist(String alias);
+	public boolean isSchoolExist(String alias);
 	//An abstract method to retrieve school by alias
-	School findSchoolByAlias(String alias);
+	public School findSchoolByAlias(String alias);
 	//Checks if a requested apiKey exist for a specific school
-	boolean isApiKeyExist(String apiKey);
+	public boolean isApiKeyExist(String apiKey);
+	
+	public School findById(Long id);
+	
+	public School findByName(String name);
+	
+	public List<School> findAllSchools();
+	
+	public School save(School school);
 
 }

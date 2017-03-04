@@ -15,11 +15,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "SCHOOLS")
+@Table(name="SCHOOLS", uniqueConstraints = @UniqueConstraint(columnNames = {
+"school_name" }))
+@NamedQueries({
+	@NamedQuery(name="School.findById", query="select distinct s from School s where s.schoolId=:id"),
+	@NamedQuery(name="School.findByName", query="select distinct s from School s where s.schoolName=:name"),
+	@NamedQuery(name="School.findAll", query="select s from School s")
+})
 public class School implements Serializable{
 
 	private static final long serialVersionUID = 1L;

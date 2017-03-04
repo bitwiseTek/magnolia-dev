@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
-import com.bitwise.magnolia.exception.UserDoesNotExistException;
-import com.bitwise.magnolia.exception.UserExistsException;
+import com.bitwise.magnolia.exception.EntityDoesNotExistException;
+import com.bitwise.magnolia.exception.EntityExistsException;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.email.EmailService;
 import com.bitwise.magnolia.service.user.UserService;
@@ -128,23 +128,25 @@ public class UserController {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(URI.create(res.getLink("self").getHref()));
 			return new ResponseEntity<UserResource>(res, headers, HttpStatus.CREATED);
-		} catch(UserExistsException ex) {
+		} catch(EntityExistsException ex) {
 			throw new ConflictException("User already exists");
 		}
 	}
 	
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/{id}"}, 
 	method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserResource> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+	public ResponseEntity<UserResource> updateUser(@PathVariable Long id, @RequestBody UserResource user) {
+		logger.info("Updating user with ID " + user.getRid());
 		try {
-			updatedUser = userService.findById(id);
+			User updatedUser = userService.findById(id);
 			if (updatedUser != null) {
-				userService.update(updatedUser);
-				return new ResponseEntity<>(HttpStatus.OK);
+				updatedUser = userService.update(user.toUser());
+				UserResource res = new UserResourceAsm().toResource(updatedUser);
+				return new ResponseEntity<UserResource>(res, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<UserResource>(HttpStatus.NOT_FOUND);
 			}
-		} catch(UserDoesNotExistException e) {
+		} catch(EntityDoesNotExistException e) {
 			throw new ResourceNotFoundException("Account does not exist");
 		}
 	}

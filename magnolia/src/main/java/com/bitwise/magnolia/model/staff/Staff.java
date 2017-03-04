@@ -31,7 +31,7 @@ import com.bitwise.magnolia.model.user.User;
 	@NamedQuery(name="Staff.findById", query="select distinct s from Staff s where s.id=:id"),
 	@NamedQuery(name="Staff.findByStaffId", query="select distinct s from Staff s where s.staffId=:staffId"),
 	@NamedQuery(name="Staff.findByApiKey", query="select distinct s from Staff s where s.apiKey=:apiKey"),
-	@NamedQuery(name="Staff.findByDepartmentId", query="select s from Staff s where s.staffDepartment.id=:deptId"),
+	@NamedQuery(name="Staff.findByDepartmentId", query="select s from Staff s where s.staffDepartment.departmentId=:deptId"),
 	@NamedQuery(name="Staff.findAll", query="select s from Staff s")
 })
 public class Staff implements Serializable {
@@ -55,6 +55,14 @@ public class Staff implements Serializable {
 	private User user;
 	
 	private Department staffDepartment;
+	
+	public Staff() {
+		
+	}
+	
+	public Staff(Long id) {
+		this.id = id;
+	}
 
 	@Id
 	@Column(name="ID")
