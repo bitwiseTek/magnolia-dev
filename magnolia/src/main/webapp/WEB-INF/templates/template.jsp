@@ -57,11 +57,11 @@
 	    <script src="<c:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js" /> " type="text/javascript"></script>
 	    <script src="<c:url value="/resources/assets/plugins/bootstrap-select2/select2.min.js" /> " type="text/javascript"></script>
 	    <script src="<c:url value="/resources/assets/plugins/bootstrap-select2/select2.min.js" /> " type="text/javascript"></script>
-	    <script src="<c:url value="/resources/assets/js/magnolia/frontend/account/login.js" /> " type="text/javascript"></script>
-	    <script src="<c:url value="/resources/assets/js/magnolia/frontend/account/staffRegistration.js" /> " type="text/javascript"></script>
-	    <script src="<c:url value="/resources/assets/js/magnolia/frontend/account/studentRegistration.js" /> " type="text/javascript"></script>
-	    <script src="<c:url value="/resources/assets/js/magnolia/common/imagepreview.js" /> " type="text/javascript"></script>
-	    <script src="<c:url value="/resources/assets/js/magnolia/common/utils.js" /> " type="text/javascript"></script>
+	    <script src="<c:url value="/resources/src/js/frontend/account/login.js" /> " type="text/javascript"></script>
+	    <script src="<c:url value="/resources/src/js/frontend/account/staffRegistration.js" /> " type="text/javascript"></script>
+	    <script src="<c:url value="/resources/src/js/frontend/account/studentRegistration.js" /> " type="text/javascript"></script>
+	    <script src="<c:url value="/resources/src/js/common/imagepreview.js" /> " type="text/javascript"></script>
+	    <script src="<c:url value="/resources/src/js/common/utils.js" /> " type="text/javascript"></script>
 	    <!-- END CORE JS DEPENDECENCIES-->
 	    <!-- BEGIN CORE TEMPLATE JS -->
 	    <script src="<c:url value="/resources/webarch/js/webarch.js" /> " type="text/javascript"></script>

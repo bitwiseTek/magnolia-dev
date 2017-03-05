@@ -36,7 +36,7 @@
         <div class="col-md-7 col-md-offset-2 tiles white no-padding">
           <div class="p-t-30 p-l-40 p-b-20 xs-p-t-10 xs-p-l-10 xs-p-b-10">
             <h2 class="normal">
-          Sign in to ${school.schoolName }
+          Sign in to ${school.schoolName}
         </h2>
             <p>
               Use Facebook, Twitter or your email to sign in.
@@ -53,13 +53,9 @@
           </div>
           <div class="tiles grey p-t-20 p-b-20 no-margin text-black tab-content">
             <div role="tabpanel" class="tab-pane active" id="tab_login">
-              <form class="animated fadeIn validate" id="" name="login">
+            <spring:url value="/j_spring_security_check" var="logIn"></spring:url>
+              <form class="animated fadeIn validate" id="loginForm" name="login">
                 <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
-                	<div class="col-md-12">
-	                  	<div class="alert alert-error" style="display: none;">
-	                      <span class="loginErrorMsg"></span>
-	                    </div>
-                  	</div>
                   <div class="col-md-5 col-sm-5">
                     <input class="form-control" id="login_username" name="email" placeholder="Username" type="email">
                   </div>
@@ -71,7 +67,7 @@
                   	<div class="col-md-9">
 							<c:if test="${param.error != null}">
 								<div class="alert alert-danger">
-									<spring:message code="users.login.loginFailed" />
+									<span class="loginErrorMsg"></span>
 								</div>
 							</c:if>
 							<c:if test="${param.logout != null}">
@@ -81,6 +77,11 @@
 							</c:if>
 						</div>
                   </div>
+                  <div class="col-md-12">
+	                  	<div class="alert alert-error" style="display: none;">
+	                      <span class="loginErrorMsg"></span>
+	                    </div>
+                  	</div>
                 </div>
                 <div class="row p-t-10 m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
                   <div class="control-group col-md-10">
@@ -91,6 +92,7 @@
                     </div>
                   </div>
                 </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               </form>
             </div>
             

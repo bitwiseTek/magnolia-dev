@@ -23,8 +23,7 @@ var loginCtrl = {
 					errorMsg = 'All fields are required';
 					$('.alert').show();
 					$('.loginErrorMsg').text(errorMsg);
-				}
-				else{
+				} else {
 					if($.trim($(email).val()) == '' || !loginCtrl.validateEmail($.trim($(email).val()))){
 						$('form[name=login] input').css({'border' : '1px solid #FF6666'});
 						isError = true;
@@ -47,6 +46,15 @@ var loginCtrl = {
 						$('.alert').hide();
 						$('.loginErrorMsg').text('');
 					}
+					
+					$.ajax({
+						   type: 'post',
+						   url: '/j_spring_security_check',
+						   data: $('form').serialize(),
+						   success: function(response) {
+						      $('#DisplayDiv').html(response);
+						   }
+						});
 				}
 			});
 		},
