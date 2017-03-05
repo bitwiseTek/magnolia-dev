@@ -38,8 +38,8 @@ import com.bitwise.magnolia.web.security.CredentialValidation;
 import com.bitwise.magnolia.web.security.MagnoliaAuthenticationProvider;
 import com.bitwise.magnolia.web.security.MagnoliaUserContext;
 
-@EnableWebMvc	 
 @Configuration
+@EnableWebMvc	 
 @ComponentScan(basePackages = "com.bitwise.magnolia")
 public class WebMvcConfig extends WebMvcConfigurerAdapter{
      
