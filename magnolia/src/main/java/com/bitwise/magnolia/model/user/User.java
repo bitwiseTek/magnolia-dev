@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -268,7 +267,7 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="LINK_USERS_ROLES", joinColumns={@JoinColumn(name="USER_ID")}, inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
 	public List<Role> getRoles() {
 		return roles;

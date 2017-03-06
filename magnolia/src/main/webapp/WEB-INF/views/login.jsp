@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -7,6 +7,70 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page isELIgnored="false" %>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		loginCtrl.init();
+	});
+	
+	var loginCtrl = {
+			base64_photo: '',
+			init: function(){
+				this.validateLogin();
+			},
+			validateLogin: function(){
+				$('button[id=loginBtn]').on('click', function(){
+					var email = $('input[name="username"]');
+					var password = $('input[name="password"]');
+					
+					$('form[name=login] input').css({'border' : '1px solid #FFF'});
+					
+					var isError = false;
+					var errorMsg;
+					
+					if($.trim($(email).val()) == '' && $.trim($(password).val()) == ''){
+						$('form[name=login] input').css({'border' : '1px solid #FF6666'});
+						isError = true;
+						errorMsg = 'All fields are required';
+						$('.alert').show();
+						$('.loginErrorMsg').text(errorMsg);
+					} else {
+						if($.trim($(email).val()) == '' || !loginCtrl.validateEmail($.trim($(email).val()))){
+							$('form[name=login] input').css({'border' : '1px solid #FF6666'});
+							isError = true;
+							errorMsg = 'Warning. Incorrect login details! Pls try again';
+						}
+						
+						if($.trim($(password).val()) == ''){
+							$(password).css({'border' : '1px solid #FF6666'});
+							isError = true;
+							errorMsg = 'All fields are required';
+						}
+						
+						
+						if(isError){
+							$('.alert').show();
+							$('.loginErrorMsg').text(errorMsg);
+						}
+						
+						if(!isError){
+							$('.alert').hide();
+							$('.loginErrorMsg').text('');
+						}
+					}
+				});
+			},
+			validateEmail: function(email){
+				var emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				var valid = emailReg.test(email);
+	
+				if(!valid) {
+			        return false;
+			    } else {
+			    	return true;
+			    }
+			}
+	};
+</script>
 <div class="container">
 
 	<!-- BEGIN RADIO/TOGGLE CONTROLS-->
@@ -54,34 +118,32 @@
           <div class="tiles grey p-t-20 p-b-20 no-margin text-black tab-content">
             <div role="tabpanel" class="tab-pane active" id="tab_login">
             <spring:url value="/j_spring_security_check" var="logIn"></spring:url>
-              <form class="animated fadeIn validate" id="loginForm" name="login">
+              <form class="animated fadeIn validate" id="loginForm" name="login" method="POST" action="${logIn}">
                 <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
                   <div class="col-md-5 col-sm-5">
-                    <input class="form-control" id="login_username" name="email" placeholder="Username" type="email">
+                    <input class="form-control" id="username" name="username" placeholder="Username" type="text">
                   </div>
                   <div class="col-md-5 col-sm-5">
-                    <input class="form-control" id="login_pass" name="password" placeholder="Password" type="password">
+                    <input class="form-control" id="password" name="password" placeholder="Password" type="password">
                   </div>
                   <div class="col-md-1 col-sm-1">
-                  	<button type="button" class="btn btn-default btn-cons" id="loginBtn">Login</button>
-                  	<div class="col-md-9">
-							<c:if test="${param.error != null}">
-								<div class="alert alert-danger">
-									<span class="loginErrorMsg"></span>
-								</div>
-							</c:if>
-							<c:if test="${param.logout != null}">
-								<div class="alert alert-success">
-									<spring:message code="users.login.loggedOut" />
-								</div>
-							</c:if>
-						</div>
+                  	<button class="btn btn-default btn-cons" id="loginBtn">Login</button>
                   </div>
                   <div class="col-md-12">
-	                  	<div class="alert alert-error" style="display: none;">
-	                      <span class="loginErrorMsg"></span>
+                  		<div class="alert alert-error" style="display: none;">
+	                      	<span class="loginErrorMsg"></span>
 	                    </div>
-                  	</div>
+						<c:if test="${param.error != null}">
+							<div class="alert alert-danger">
+								<span class="loginErrorMsg"></span>
+							</div>
+						</c:if>
+						<c:if test="${param.logout != null}">
+							<div class="alert alert-success">
+								<span class="loginErrorMsg"></span>
+							</div>
+						</c:if>
+					</div>
                 </div>
                 <div class="row p-t-10 m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
                   <div class="control-group col-md-10">
@@ -97,9 +159,7 @@
             </div>
             
             
-            
-            
-            <div role="tabpanel" class="tab-pane" id="tab_register">
+	 <%-- <div role="tabpanel" class="tab-pane" id="tab_register">
               <form class="animated fadeIn validate" id="" name="student">
               
               	<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
@@ -185,7 +245,7 @@
                  </div>
                  
                  <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
-                	<%-- <div class="col-md-6 col-sm-6">
+                	<div class="col-md-6 col-sm-6">
 	                  	<select id="stdFaculty" style="width:100%; font-weight: 0; font-size:12px;">
 	                       <option value="0">Select Faculty</option>
 	                       <c:if test="${facultyList.success }">
@@ -197,7 +257,7 @@
 		                      	<option value="0">${facultyList.error }</option>
 		                      </c:if>
                         </select>
-                    </div> --%>
+                    </div>
                   	<div class="col-md-6 col-sm-6">
                   		<select id="stdDepartment" style="width:100%; font-weight: 0; font-size: 12px;">
 	                       <option value="0">Select Faculty</option>
@@ -232,8 +292,8 @@
               		</div>
               	</div>
               </form>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="tab_register_staff">
+            </div> --%>
+            <%-- <div role="tabpanel" class="tab-pane" id="tab_register_staff">
               <form class="animated fadeIn validate" id="" name="staff">
               
               	<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
@@ -362,7 +422,7 @@
               		</div>
               	</div>
               </form>
-            </div>
+            </div> --%>
           </div>
         </div>
       </div>

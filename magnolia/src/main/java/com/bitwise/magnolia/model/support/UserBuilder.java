@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.bitwise.magnolia.model.common.LGA;
 import com.bitwise.magnolia.model.common.State;
-import com.bitwise.magnolia.model.security.Permission;
+//import com.bitwise.magnolia.model.security.Permission;
 import com.bitwise.magnolia.model.security.Role;
 import com.bitwise.magnolia.model.user.User;
 
@@ -68,13 +68,13 @@ public class UserBuilder extends EntityBuilder<User> {
 		return this;
 	}
 	
-	public UserBuilder roleWithPermissions(Role role, Permission... permissions) {
+	public UserBuilder roleWithUsers(Role role, User... userRoles) {
 		this.product.getRoles().add(role);
-		for (Permission permission : permissions) {
-			role.getPermissions().add(permission);
+		for (User user : userRoles) {
+			user.getRoles().add(role);
+		}
+		return this;
 	}
-	return this;
-}
 
 	@Override
 	User assembleProduct() {

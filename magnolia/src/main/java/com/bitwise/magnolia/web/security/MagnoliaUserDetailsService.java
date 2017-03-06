@@ -17,7 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.security.Permission;
+//import com.bitwise.magnolia.model.security.Permission;
 import com.bitwise.magnolia.model.security.Role;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.user.UserService;
@@ -41,7 +43,7 @@ public class MagnoliaUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException(String.format("User with Username %s does not exist", username));
 		}
 		
-		if (systemUser.getStatus().equals("pedning")) {
+		if (systemUser.getStatus().equals(ApplicationConstant.PENDING_STATUS)) {
 			try {
 				throw new AccountLockedException("User Account is still under review, check email for updates", "validation.user.locked");
 			} catch (AccountLockedException e) {
@@ -49,7 +51,7 @@ public class MagnoliaUserDetailsService implements UserDetailsService {
 			}
 		}
 		
-		if (systemUser.getStatus().equals("inactive")) {
+		if (systemUser.getStatus().equals(ApplicationConstant.INACTIVE_STATUS)) {
 			try {
 				throw new AccountLockedException("User Account is has been deactivated", "validation.user.locked");
 			} catch (AccountLockedException e) {

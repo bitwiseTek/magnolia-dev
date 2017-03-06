@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Max-Age", "3600"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "x-requested-with")).and()
 				.sessionManagement().sessionFixation().newSession().and().authorizeRequests()
-				.antMatchers("/", "/index", "/users/login",  "/defaulterror", "/resourceNotFound",
+				.antMatchers("/", "/index", "/auth/login",  "/defaulterror", "/resourceNotFound",
 						"/dataAccessFailure")
 				.permitAll()
 				.antMatchers("/courses/**", "/projects/**", "/users/**", "/students/**")
@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/projects/searchprojects", "/staff/createstaff")
 				.access("hasRole('ADMINISTRATOR') or hasRole('SUPER_ADMIN')").and().formLogin().loginPage("/auth/login")
 				.loginProcessingUrl("/j_spring_security_check").usernameParameter("username")
-				.passwordParameter("password").defaultSuccessUrl("/index.htm").failureUrl("/auth/login?error").and()
+				.passwordParameter("password").defaultSuccessUrl("/").failureUrl("/auth/login?error").and()
 				.logout().logoutUrl("/auth/logout").logoutSuccessUrl("/auth/login?logout")
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID").and().httpBasic().realmName("Magnolia Web")
 				.and().csrf().and().exceptionHandling().accessDeniedPage("/accessdenied");

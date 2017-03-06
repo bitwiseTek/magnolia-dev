@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
@@ -26,14 +27,24 @@ public class RoleDaoImpl extends AbstractDao<Object> implements RoleDao {
 	
 	@Override
 	public Role findById(Long id) {
-		return this.em.createNamedQuery("Role.findById", Role.class).setParameter("id", id).getSingleResult();
+		TypedQuery<Role> query = em.createNamedQuery("Role.findById", Role.class).setParameter("id", id);
+		List<Role> roles = query.getResultList();
+		Role userRole = roles.size() == 1 ? roles.get(0) : null;
+		if (userRole != null) {
+			Hibernate.initialize(userRole.getPermissions());
+		}
+		return userRole;
 	}
 
 	@Override
 	public Role findByRoleName(String role) {
 		TypedQuery<Role> query = em.createNamedQuery("Role.findByName", Role.class).setParameter("role", role);
 		List<Role> roles = query.getResultList();
-		return roles.size() == 1 ? roles.get(0) : null;
+		Role userRole = roles.size() == 1 ? roles.get(0) : null;
+		if (userRole != null) {
+			Hibernate.initialize(userRole.getPermissions());
+		}
+		return userRole;
 	}
 
 	@Override

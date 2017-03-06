@@ -46,26 +46,6 @@ public class InitialDataSetup {
 	@PersistenceContext
 	private EntityManager em;
 	
-	private Permission permissionEditProfile = new Permission("PERMISSION_EDIT_PROFILE");
-	private Permission permissionEditCourses = new Permission("PERMISSION_EDIT_COURSES");
-	private Permission permissionAddCourses = new Permission("PERMISSION_ADD_COURSES");
-	private Permission permissionAttachCourses = new Permission("PERMISSION_ATTACH_COURSES");
-	private Permission permissionEditUsers = new Permission("PERMISSION_EDIT_USERS");
-	private Permission permissionGenerateResult = new Permission("PERMISSION_GENERATE_RESULT");
-	private Permission permissionEditResult = new Permission("PERMISSION_EDIT_RESULT");
-	private Permission permissionEditAccommodation = new Permission("PERMISSION_EDIT_ACCOMMODATION");
-	private Permission permissionEditGrades = new Permission("PERMISSION_EDIT_GRADES");
-
-	private Role roleSuperAdmin = new Role("ROLE_SUPER_ADMIN");
-	private Role roleAdmin = new Role("ROLE_ADMINISTRATOR");
-	private Role roleStudent = new Role("ROLE_STUDENT");
-	private Role roleStaff = new Role("ROLE_STAFF");
-	private Role roleLecturer = new Role("ROLE_LECTURER");
-	private Role roleHod = new Role("ROLE_HOD");
-	private Role roleDean = new Role("ROLE_DEAN");
-	private Role roleManager = new Role("ROLE_MANAGER");
-	private Role roleAccountant = new Role("ROLE_ACCOUNTANT");
-	
 	private AcademicSemester academiSemester;
 	
 	private Campus campus;
@@ -79,6 +59,12 @@ public class InitialDataSetup {
 	private Faculty faculty;
 	
 	private LGA lga;
+	
+	private Role role;
+	
+	private Role userPermissions = new Role();
+	
+	private Permission permission;
 	
 	private School school;
 	
@@ -95,6 +81,8 @@ public class InitialDataSetup {
 	private SubSchool subSchool;
 	
 	private User user;
+	
+	private User userRoles = new User();
 	
 	private TransactionTemplate transactionTemplate;
 	
@@ -497,6 +485,135 @@ public class InitialDataSetup {
 					}.build();
 				}
 				
+				//Permission
+				{
+					InitialDataSetup.this.permission = new PermissionBuilder() {
+						{
+							permission("PERMISSION_EDIT_PROFILE");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_EDIT_COURSES");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_ADD_COURSES");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_ATTACH_COURSES");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_EDIT_USERS");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_GENERATE_RESULT");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_EDIT_RESULT");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_EDIT_ACCOMMODATION");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_EDIT_STUDENT");
+						}
+					}.build();
+					
+					new PermissionBuilder() {
+						{
+							permission("PERMISSION_EDIT_STAFF");
+						}
+					}.build();
+				}
+				
+				//Role
+				{
+					InitialDataSetup.this.role = new RoleBuilder() {
+						{
+							role("ROLE_SUPER_ADMIN");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+					
+					new RoleBuilder() {
+						{
+							role("ROLE_ADMIN");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+					
+					new RoleBuilder() {
+						{
+							role("ROLE_STUDENT");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+					
+					new RoleBuilder() {
+						{
+							role("ROLE_LECTURER");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+					
+					new RoleBuilder() {
+						{
+							role("ROLE_STAFF");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+					
+					new RoleBuilder() {
+						{
+							role("ROLE_MANAGER");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+					
+					new RoleBuilder() {
+						{
+							role("ROLE_HOD");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+					
+					new RoleBuilder() {
+						{
+							role("ROLE_DEAN");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+					
+					new RoleBuilder() {
+						{
+							role("ROLE_ACCOUNTANT");
+							roleWithPermissions(InitialDataSetup.this.permission, InitialDataSetup.this.userPermissions);
+						}
+					}.build();
+				}
+				
 				//User
 				{
 					InitialDataSetup.this.user = new UserBuilder() {
@@ -506,11 +623,7 @@ public class InitialDataSetup {
 							lga(InitialDataSetup.this.lga);
 							userDetails(Utils.getCustomString(10, ""), Utils.getSexes().get("ML"), ApplicationConstant.ACTIVE_STATUS, "No 9D Nzimiro Street, Old GRA", "07083472155", "08035504051", "sika.kayy@gmail.com", null, "05/04/1989", "photo");
 							credentials("superadmin@magnoliacad.com", "$2a$10$aqNY.kMd1h2u1MbK2JUA8./3g2VM.BAB09kzHFpz6b6NQ57PBn/fy", "magnolia", Utils.getQuestions().get("Q1"), "Elizabeth", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), Utils.generateUUID());
-							roleWithPermissions(InitialDataSetup.this.roleSuperAdmin,
-									InitialDataSetup.this.permissionEditProfile,
-									InitialDataSetup.this.permissionEditUsers,
-									InitialDataSetup.this.permissionEditAccommodation,
-									InitialDataSetup.this.permissionEditGrades);
+							roleWithUsers(InitialDataSetup.this.role, InitialDataSetup.this.userRoles);
 						}
 					}.build();
 					
@@ -521,10 +634,7 @@ public class InitialDataSetup {
 							lga(InitialDataSetup.this.lga);
 							userDetails(Utils.getCustomString(10, ""), Utils.getSexes().get("ML"), ApplicationConstant.ACTIVE_STATUS, "Bangladesh, India", "+918867872801", null, "joseph.success@yahoo.com", null, "02/09/1992", "photo");
 							credentials("admin@magnoliacad.com", "$2a$10$aqNY.kMd1h2u1MbK2JUA8./3g2VM.BAB09kzHFpz6b6NQ57PBn/fy", "magnolia", Utils.getQuestions().get("Q1"), "Elizabeth", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), Utils.generateUUID());
-							roleWithPermissions(InitialDataSetup.this.roleAdmin,
-									InitialDataSetup.this.permissionEditProfile,
-									InitialDataSetup.this.permissionEditUsers,
-									InitialDataSetup.this.permissionEditAccommodation);
+							roleWithUsers(InitialDataSetup.this.role, InitialDataSetup.this.userRoles);
 						}
 					}.build();
 					
@@ -535,11 +645,7 @@ public class InitialDataSetup {
 							lga(InitialDataSetup.this.lga);
 							userDetails(Utils.getCustomString(10, ""), Utils.getSexes().get("ML"), ApplicationConstant.PENDING_STATUS, "Bangladesh, India", "+918867873212", null, "jeff.atkins@yahoo.com", null, "02/02/1994", "photo");
 							credentials("jeffery.atkins@magnoliacad.com", "$2a$10$aqNY.kMd1h2u1MbK2JUA8./3g2VM.BAB09kzHFpz6b6NQ57PBn/fy", "magnolia", Utils.getQuestions().get("Q1"), "Elizabeth", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), Utils.generateUUID());
-							roleWithPermissions(InitialDataSetup.this.roleStudent,
-									InitialDataSetup.this.permissionEditProfile,
-									InitialDataSetup.this.permissionEditCourses,
-									InitialDataSetup.this.permissionAddCourses,
-									InitialDataSetup.this.permissionGenerateResult);
+							roleWithUsers(InitialDataSetup.this.role, InitialDataSetup.this.userRoles);
 						}
 					}.build();
 					
@@ -550,12 +656,7 @@ public class InitialDataSetup {
 							lga(InitialDataSetup.this.lga);
 							userDetails(Utils.getCustomString(10, ""), Utils.getSexes().get("ML"), ApplicationConstant.PENDING_STATUS, "Bangladesh, India", "+918867873876", null, "eteng.omah@yahoo.com", null, "12/03/1976", "photo");
 							credentials("eteng.omah@magnoliacad.com", "$2a$10$aqNY.kMd1h2u1MbK2JUA8./3g2VM.BAB09kzHFpz6b6NQ57PBn/fy", "magnolia", Utils.getQuestions().get("Q1"), "Elizabeth", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), Utils.generateUUID());
-							roleWithPermissions(InitialDataSetup.this.roleStaff,
-									InitialDataSetup.this.permissionEditProfile,
-									InitialDataSetup.this.permissionEditCourses,
-									InitialDataSetup.this.permissionAttachCourses,
-									InitialDataSetup.this.permissionEditGrades,
-									InitialDataSetup.this.permissionEditResult);
+							roleWithUsers(InitialDataSetup.this.role, InitialDataSetup.this.userRoles);
 						}
 					}.build();
 				}

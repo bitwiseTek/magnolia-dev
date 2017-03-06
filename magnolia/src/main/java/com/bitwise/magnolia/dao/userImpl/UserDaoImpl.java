@@ -53,6 +53,9 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("id", id);
 		List<User> users = query.getResultList();
 		User user = users.size() == 1 ? users.get(0) : null;
+		if (user != null) {
+			Hibernate.initialize(user.getRoles());
+		}
 		return user;
 	}
 	
@@ -62,6 +65,9 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("systemId", systemId);
 		List<User> users = query.getResultList();
 		User user = users.size() == 1 ? users.get(0) : null;
+		if (user != null) {
+			Hibernate.initialize(user.getRoles());
+		}
 		return user;
 	}
 
