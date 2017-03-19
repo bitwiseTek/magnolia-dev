@@ -21,6 +21,7 @@
     	<meta name="author" content="Sika Kay">
 	    <title><spring:message code="generic.applicationTitle" /></title>
 	    <link rel="shortcut icon" href="<c:url value="/resources/assets/img/footer_icon.png" /> " />
+	    <link href="<c:url value="/resources/assets/css/messages.css" /> " rel="stylesheet" type="text/css" />
 	    <!-- BEGIN PLUGIN CSS -->
 	    <link href="<c:url value="/resources/assets/plugins/font-awesome/css/font-awesome.css" /> " rel="stylesheet" type="text/css" />
 	    <link href="<c:url value="/resources/assets/plugins/jquery-metrojs/MetroJs.min.css" /> " rel="stylesheet" type="text/css" />
