@@ -18,6 +18,8 @@ public interface UserDao extends BaseDao<User> {
 	
 	public User findBySystemId(String systemId);
 	
+	public User findByEmailAndToken(String email, String token);
+	
 	public User save(User user);
 	
 	public void delete(User user);

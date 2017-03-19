@@ -1,4 +1,5 @@
 package com.bitwise.magnolia.model.support;
+import org.joda.time.DateTime;
 /**
  *  
  * @author Sika Kay
@@ -39,7 +40,7 @@ public class UserBuilder extends EntityBuilder<User> {
 	}
 	
 	public UserBuilder credentials(String username, String password, String tempPassword, String secretQuestion, String secretAnswer, 
-			String lastLogin, String lastLogout, String createdAt, String ott) {
+			String lastLogin, String lastLogout, String createdAt, String ott, String recoveryToken, DateTime recoveryTime) {
 		this.product.setUsername(username);
 		this.product.setPassword(password);
 		this.product.setTempPassword(tempPassword);
@@ -49,6 +50,8 @@ public class UserBuilder extends EntityBuilder<User> {
 		this.product.setLastLogout(lastLogout);
 		this.product.setCreatedAt(createdAt);
 		this.product.setOneTimeToken(ott);
+		this.product.setRecoveryToken(recoveryToken);
+		this.product.setRecoveryTime(recoveryTime);
 		return this;
 	}
 	

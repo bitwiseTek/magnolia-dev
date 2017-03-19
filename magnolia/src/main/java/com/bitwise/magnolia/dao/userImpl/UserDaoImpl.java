@@ -108,4 +108,12 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 		logger.info("Deleting User with ID: " + user.getId());
 		this.em.remove(em.merge(user));
 	}
+
+	@Override
+	public User findByEmailAndToken(String email, String token) {
+		String sql = "select distinct u from User u where u.email = :email and u.recoveryToken = :token";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("email", email).setParameter("token", token);
+		List<User> users = query.getResultList();
+		return users.size() == 1 ? users.get(0) : null;
+	}
 }

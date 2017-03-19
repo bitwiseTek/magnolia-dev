@@ -20,8 +20,7 @@
     	<meta name="description" content="Magnolia Web App">
     	<meta name="author" content="Sika Kay">
 	    <title><spring:message code="generic.applicationTitle" /></title>
-	    <spring:url value="/resources/assets/img/footer_icon.png" var="shortcutIcon"></spring:url>
-	    <link rel="shortcut icon" href="${shortcutIcon}" />
+	    <link rel="shortcut icon" href="<c:url value="/resources/assets/img/footer_icon.png" /> " />
 	    <!-- BEGIN PLUGIN CSS -->
 	    <link href="<c:url value="/resources/assets/plugins/font-awesome/css/font-awesome.css" /> " rel="stylesheet" type="text/css" />
 	    <link href="<c:url value="/resources/assets/plugins/jquery-metrojs/MetroJs.min.css" /> " rel="stylesheet" type="text/css" />

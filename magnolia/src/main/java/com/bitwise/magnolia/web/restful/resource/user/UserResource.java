@@ -1,13 +1,14 @@
 package com.bitwise.magnolia.web.restful.resource.user;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *  
  * @author Sika Kay
  * @date 22/02/17
  *
  */
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -76,6 +77,10 @@ public class UserResource extends ResourceSupport {
 	private String lastLogin;
 	
 	private String lastLogout;
+	
+	private String recoveryTime;
+	
+	private String recoveryToken;
 
 	public Long getRid() {
 		return rid;
@@ -277,6 +282,22 @@ public class UserResource extends ResourceSupport {
 		this.lastLogout = lastLogout;
 	}
 
+	public String getRecoveryTime() {
+		return recoveryTime;
+	}
+
+	public void setRecoveryTime(String recoveryTime) {
+		this.recoveryTime = recoveryTime;
+	}
+
+	public String getRecoveryToken() {
+		return recoveryToken;
+	}
+
+	public void setRecoveryToken(String recoveryToken) {
+		this.recoveryToken = recoveryToken;
+	}
+
 	public User toUser() {
 		User user = new User();
 		user.setId(rid);
@@ -304,6 +325,8 @@ public class UserResource extends ResourceSupport {
 		user.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		user.setLastLogout(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		user.setRecoveryTime(new DateTime(DateTime.parse(recoveryTime)));
+		user.setRecoveryToken(recoveryToken);
 		return user;
 		
 	}

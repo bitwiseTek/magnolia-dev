@@ -90,4 +90,10 @@ public class UserServiceImpl implements UserService {
 	public User getAccount(String username) {
 		return this.userDao.findByUsername(username);
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public User findByEmailAndToken(String email, String token) {
+		return this.userDao.findByEmailAndToken(email, token);
+	}
 }

@@ -1,4 +1,7 @@
 package com.bitwise.magnolia.web.security;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *  
  * @author Sika Kay
@@ -35,6 +38,7 @@ public class CredentialValidation {
 			logger.info(env.getProperty("validation.signin.invalid"));
 			throw new BadCredentialsException(env.getProperty("validation.signin.invalid"));
 		}
+		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		return user;
 	}
 	

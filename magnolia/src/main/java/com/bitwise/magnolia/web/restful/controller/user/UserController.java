@@ -6,8 +6,10 @@ package com.bitwise.magnolia.web.restful.controller.user;
  *
  */
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.mail.MessagingException;
 
@@ -123,6 +125,7 @@ public class UserController {
 	public ResponseEntity<UserResource> createUser(@RequestBody UserResource sentUser) throws MessagingException {
 		try {
 			User createdUser = userService.save(sentUser.toUser());
+			createdUser.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 			this.emailService.sendEmailWithAttachment(sentUser.getPrimaryEmail(), sentUser);
 			UserResource res = new UserResourceAsm().toResource(createdUser);
 			HttpHeaders headers = new HttpHeaders();

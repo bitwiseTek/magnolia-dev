@@ -21,6 +21,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.web.restful.resource.user.UserResource;
 
 @Service("emailService")
@@ -60,6 +61,32 @@ public class EmailServiceImpl implements EmailService {
 		model.put("username", username);
 		model.put("password", password);
 		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "emailTemplate.vm", "UTF-8", model);
+		helper.setText(emailText, true);
+		mailSender.send(message);
+	}
+
+	@Override
+	public void sendEmailWithToken(String toEmail, User user) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		Resource image = new ClassPathResource("top_logo.png");
+		String firstName = user.getFirstName();
+		String lastName = user.getLastName();
+		String token = user.getRecoveryToken();
+		String email = user.getPrimaryEmail();
+		String requestMessage = "you requested to reset your password. Ignore this mail if you never did or click on the link below to reset your password";
+		helper.addInline("magnoliaImage", image);
+		helper.setFrom("support@ntradex.com");
+		helper.setTo(user.getPrimaryEmail());
+		helper.setSubject("Password Recovery Token");
+		helper.setSentDate(new Date());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("token", token);
+		model.put("email", email);
+		model.put("requestMessage", requestMessage);
+		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "passwordTemplate.vm", "UTF-8", model);
 		helper.setText(emailText, true);
 		mailSender.send(message);
 	}

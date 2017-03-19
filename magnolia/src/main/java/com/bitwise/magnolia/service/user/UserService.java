@@ -14,6 +14,8 @@ public interface UserService {
 	
 	public User findByUsername(String username);
 	
+	public User findByEmailAndToken(String email, String token);
+	
 	public UserList findAllUsers();
 	
 	public UserList findAllActiveUsers(String status);

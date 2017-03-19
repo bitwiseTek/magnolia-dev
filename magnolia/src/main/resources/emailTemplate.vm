@@ -6,7 +6,7 @@
 	</head>
 	<body style="margin:0px; font-family:Tahoma, Geneva, sans-serif;">
 		<div>
-				<a href="https://magnoliacad.com"><img src='cid:traffickonImage' alt="Traffickon"></a>
+				<a href="https://magnoliacad.com"><img src="http://portal.magnoliacad.com/magnolia/resources/assets/img/footer_icon.png" alt="Magnolia"></a>
 		</div>
 		<div style="padding:24px; font-size:13px;">
 			<span style="font-weight:bold">${thanksMessage}, &nbsp; ${firstName} ${lastName}</span>, 

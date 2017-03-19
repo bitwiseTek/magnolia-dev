@@ -24,7 +24,11 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import com.bitwise.magnolia.common.Utils;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.bitwise.magnolia.model.common.LGA;
 import com.bitwise.magnolia.model.common.State;
 import com.bitwise.magnolia.model.security.Role;
@@ -83,13 +87,17 @@ public class User implements Serializable {
 	
 	private String tempPassword;
 	
-	private String secretQuestion = Utils.getQuestions().get("Q1");
+	private String secretQuestion;
 	
-	private String secretAnswer = "Elizabeth";
+	private String secretAnswer;
 	
 	private String status;
 	
 	private String oneTimeToken;
+	
+	private String recoveryToken;
+	
+	private DateTime recoveryTime;
 	
 	private State state;
 	
@@ -364,6 +372,31 @@ public class User implements Serializable {
 
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	@Column(name="RECOVERY_TOKEN")
+	public String getRecoveryToken() {
+		return recoveryToken;
+	}
+
+	public void setRecoveryToken(String recoveryToken) {
+		this.recoveryToken = recoveryToken;
+	}
+
+	@Column(name="RECOVERY_TIME")
+	@DateTimeFormat(iso=ISO.DATE_TIME)
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	public DateTime getRecoveryTime() {
+		return recoveryTime;
+	}
+
+	public void setRecoveryTime(DateTime recoveryTime) {
+		this.recoveryTime = recoveryTime;
+	}
+	
+	@Transient
+	public String getRecoveryTimeString() {
+		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(recoveryTime);
 	}
 
 	@Override
