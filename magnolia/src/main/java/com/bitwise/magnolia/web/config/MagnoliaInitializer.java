@@ -29,7 +29,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 import com.bitwise.magnolia.config.InfrastructureContextConfig;
 import com.bitwise.magnolia.config.MailConfig;
 import com.bitwise.magnolia.config.TestDataContextConfiguration;
-import com.bitwise.magnolia.web.restful.config.SwaggerConfig;
 import com.bitwise.magnolia.web.security.config.SecurityConfig;
 	 
 public class MagnoliaInitializer implements WebApplicationInitializer {
@@ -37,7 +36,7 @@ public class MagnoliaInitializer implements WebApplicationInitializer {
 	private static final Class<?>[] basicConfigurationClasses = new Class<?>[] {
 		WebMvcConfig.class, InfrastructureContextConfig.class,
 		TestDataContextConfiguration.class, MailConfig.class, 
-		SecurityConfig.class, SwaggerConfig.class};
+		SecurityConfig.class};
 
 	private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
 		
