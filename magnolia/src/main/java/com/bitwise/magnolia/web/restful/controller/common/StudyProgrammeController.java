@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.common.StudyProgramme;
 import com.bitwise.magnolia.service.common.StudyProgrammeService;
 import com.bitwise.magnolia.util.ProgrammeList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.common.StudyProgrammeListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.common.StudyProgrammeResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.common.StudyProgrammeListResource;
 import com.bitwise.magnolia.web.restful.resource.common.StudyProgrammeResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="studyProgramme", description="Study Programmes API")
 public class StudyProgrammeController {
 
 final Logger logger = LoggerFactory.getLogger(StudyProgrammeController.class);
@@ -44,6 +50,7 @@ final Logger logger = LoggerFactory.getLogger(StudyProgrammeController.class);
 	@Autowired
 	private StudyProgrammeService programmeService;
 	
+	@ApiOperation(value="Retrieves all the study programmes", response=StudyProgramme.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/programmes/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudyProgrammeListResource> findAllProgrammes(@RequestParam(value="name", required=false) String name) {
@@ -61,6 +68,7 @@ final Logger logger = LoggerFactory.getLogger(StudyProgrammeController.class);
 		return new ResponseEntity<StudyProgrammeListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves the study programme associated with an ID", response=StudyProgramme.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/programmes/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudyProgrammeResource> findProgramme(@PathVariable Long id) {
@@ -73,11 +81,13 @@ final Logger logger = LoggerFactory.getLogger(StudyProgrammeController.class);
 		}
 	}
 	
+	@ApiOperation(value="Retrieves the study programme associated with a Code ID", response=StudyProgramme.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/programmes?code={code}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudyProgrammeResource> findProgrammeByCode(@RequestParam(value="name", required=true) String code) {
 		StudyProgramme programme = programmeService.findByCode(code);
 		if (programme != null) {
+			code = programme.getCode();
 			StudyProgrammeResource res = new StudyProgrammeResourceAsm().toResource(programme);
 			return new ResponseEntity<StudyProgrammeResource>(res, HttpStatus.OK);
 		} else {
@@ -85,6 +95,7 @@ final Logger logger = LoggerFactory.getLogger(StudyProgrammeController.class);
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the study programmes associated with a Department ID", response=StudyProgramme.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/programmes/departments/{deptId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudyProgrammeListResource> findProgrammesByDepartments(@PathVariable Long deptId) {
@@ -98,8 +109,10 @@ final Logger logger = LoggerFactory.getLogger(StudyProgrammeController.class);
 		}
 	}
 	
+	@ApiOperation(value="Creates a new study programme", notes="The newly created programme ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/programmes/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Programme created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating programme", response=ErrorDetail.class)})
 	public ResponseEntity<StudyProgrammeResource> createProgramme(@RequestBody StudyProgrammeResource sentProgramme) {
 		logger.info("Adding programme with ID " + sentProgramme.getRid());
 		try {
@@ -113,8 +126,10 @@ final Logger logger = LoggerFactory.getLogger(StudyProgrammeController.class);
 		}
 	}
 	
+	@ApiOperation(value="Updates study programme", response=StudyProgramme.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/programmes/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Programme updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find programme", response=ErrorDetail.class)})
 	public ResponseEntity<StudyProgrammeResource> updateProgramme(@PathVariable Long id, @RequestBody StudyProgrammeResource programme) {
 		logger.info("Updating programme with ID " + programme.getRid());
 		try {

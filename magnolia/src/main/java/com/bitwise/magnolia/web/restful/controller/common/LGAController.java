@@ -22,14 +22,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.common.LGA;
+import com.bitwise.magnolia.model.common.State;
 import com.bitwise.magnolia.service.common.LGAService;
 import com.bitwise.magnolia.util.LGAList;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.resource.asm.common.LGAListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.common.LGAResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.common.LGAListResource;
 import com.bitwise.magnolia.web.restful.resource.common.LGAResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="lgas", description="LGAs API")
 public class LGAController {
 
 	final Logger logger = LoggerFactory.getLogger(LGAController.class);
@@ -37,6 +44,7 @@ public class LGAController {
 	@Autowired
 	private LGAService lgaService;
 	
+	@ApiOperation(value="Retrieves all the lgas", response=State.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/lgas/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<LGAListResource> findAllLGAs(@RequestParam(value="name", required=false) String name) {
@@ -54,8 +62,10 @@ public class LGAController {
 		return new ResponseEntity<LGAListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves an lga associated with an ID", response=LGA.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/lgas/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="", response=Void.class), @ApiResponse(code=404, message="Unable to find lga", response=ErrorDetail.class)})
 	public ResponseEntity<LGAResource> findLga(@PathVariable Long id) {
 		LGA lga = lgaService.findById(id);
 		if (lga != null) {
@@ -66,6 +76,7 @@ public class LGAController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the lgas associated with a State ID", response=LGA.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/lgas/states/{stateId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<LGAListResource> findAllLGAsByStates(@PathVariable Long stateId) {

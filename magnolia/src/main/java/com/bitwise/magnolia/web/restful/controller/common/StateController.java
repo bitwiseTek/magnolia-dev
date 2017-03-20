@@ -21,15 +21,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
+import com.bitwise.magnolia.model.common.LGA;
 import com.bitwise.magnolia.model.common.State;
 import com.bitwise.magnolia.service.common.StateService;
 import com.bitwise.magnolia.util.StateList;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.resource.asm.common.StateListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.common.StateResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.common.StateListResource;
 import com.bitwise.magnolia.web.restful.resource.common.StateResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="states", description="States API")
 public class StateController {
 
 	final Logger logger = LoggerFactory.getLogger(StateController.class);
@@ -37,6 +44,7 @@ public class StateController {
 	@Autowired
 	private StateService stateService;
 	
+	@ApiOperation(value="Retrieves all the states", response=State.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/states/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StateListResource> findAllStates(@RequestParam(value="name", required=false) String name) {
@@ -54,8 +62,10 @@ public class StateController {
 		return new ResponseEntity<StateListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a state associated with an ID", response=LGA.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/states/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="", response=Void.class), @ApiResponse(code=404, message="Unable to find state", response=ErrorDetail.class)})
 	public ResponseEntity<StateResource> findState(@PathVariable Long id) {
 		State state = stateService.findById(id);
 		if (state != null) {

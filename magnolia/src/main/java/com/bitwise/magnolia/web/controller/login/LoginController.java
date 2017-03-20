@@ -149,13 +149,14 @@ public class LoginController {
 	
 	@RequestMapping(value = "/auth/password/recover/check?token={token}&email={email}", method = RequestMethod.GET)
 	public String verifyPasswordToken(@RequestParam("token") String token, @RequestParam("email") String email, 
-			@ModelAttribute User user, BindingResult result, HttpServletRequest request) {
+			@ModelAttribute User user, BindingResult result, HttpServletRequest request, RedirectAttributes redirectAttr, 
+			Locale locale, ModelMap model) {
 		user = this.userService.findByEmailAndToken(email, token);
 		token = user.getUsername();
 		email = user.getPrimaryEmail();
 		if (!token.isEmpty() && !email.isEmpty()) {
 			if (user.getRecoveryTime().isAfter(new DateTime(DateTime.now().plusMinutes(30)))) {
-				//Session Context Attr
+				model.addAttribute("message", new Message("error", messageSource.getMessage("password.recovery.token.expired", new Object[]{}, locale)));
 				return "redirect:/auth/password/recover/token/bad";
 			}
 		} else {

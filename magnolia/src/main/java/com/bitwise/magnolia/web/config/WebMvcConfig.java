@@ -37,9 +37,10 @@ import com.bitwise.magnolia.interceptors.SchoolInterceptor;
 import com.bitwise.magnolia.web.security.CredentialValidation;
 import com.bitwise.magnolia.web.security.MagnoliaAuthenticationProvider;
 import com.bitwise.magnolia.web.security.MagnoliaUserContext;
+import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 
 @Configuration
-@EnableWebMvc	 
+@EnableWebMvc
 @ComponentScan(basePackages = "com.bitwise.magnolia")
 public class WebMvcConfig extends WebMvcConfigurerAdapter{
      
@@ -153,6 +154,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     @Bean
     public MagnoliaUserContext userContext() {
     	return new MagnoliaUserContext();
+    }
+    
+    @Bean
+    public SpringSwaggerConfig swaggerConfig() {
+    	return new SpringSwaggerConfig();
     }
 	     
 }
