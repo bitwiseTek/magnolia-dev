@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.commonImpl;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -15,7 +17,12 @@ import com.bitwise.magnolia.dao.common.StudyProgrammeCategoryDao;
 import com.bitwise.magnolia.model.common.StudyProgrammeCategory;
 import com.bitwise.magnolia.service.common.StudyProgrammeCategoryService;
 import com.bitwise.magnolia.util.ProgrammeCategoryList;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 27/02/17
+ *
+ */
 @Transactional
 @Service("programmeCategoryService")
 public class StudyProgrammeCategoryServiceImpl implements StudyProgrammeCategoryService {
@@ -48,6 +55,12 @@ public class StudyProgrammeCategoryServiceImpl implements StudyProgrammeCategory
 	public StudyProgrammeCategory save(StudyProgrammeCategory category) {
 		logger.info("Adding category with ID " + category.getId());
 		return this.categoryDao.save(category);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<StudyProgrammeCategory> findAllCategories() {
+		return this.categoryDao.findAll();
 	}
 
 }
