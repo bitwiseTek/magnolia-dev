@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.security.Role;
 import com.bitwise.magnolia.service.security.RoleService;
 import com.bitwise.magnolia.util.RoleList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.security.RoleListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.security.RoleResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.security.RoleListResource;
 import com.bitwise.magnolia.web.restful.resource.security.RoleResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="roles", description="Role API")
 public class RoleController {
 
 	final Logger logger = LoggerFactory.getLogger(RoleController.class);
@@ -44,6 +50,7 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 	
+	@ApiOperation(value="Retrieves all the roles", response=Role.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/roles/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RoleListResource> findAllRoles(@RequestParam(value="name", required=false) String role) {
@@ -61,6 +68,7 @@ public class RoleController {
 		return new ResponseEntity<RoleListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a role associated with an ID", response=Role.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/roles/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RoleResource> findRole(@PathVariable Long id) {
@@ -73,8 +81,10 @@ public class RoleController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new role", notes="The newly created role ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/roles/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Role created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating role", response=ErrorDetail.class)})
 	public ResponseEntity<RoleResource> createRole(@RequestBody RoleResource sentRole) {
 		logger.info("Adding role with ID " + sentRole.getRid());
 		try {
@@ -88,8 +98,10 @@ public class RoleController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a role", response=Role.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/roles/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Role updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find role", response=ErrorDetail.class)})
 	public ResponseEntity<RoleResource> updateRole(@PathVariable Long id, @RequestBody RoleResource role) {
 		logger.info("Updating role with ID " + role.getRid());
 		try {

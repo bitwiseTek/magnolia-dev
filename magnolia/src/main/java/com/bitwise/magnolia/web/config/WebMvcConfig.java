@@ -10,7 +10,6 @@ package com.bitwise.magnolia.web.config;
 import java.util.List;
 import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -38,21 +37,14 @@ import com.bitwise.magnolia.interceptors.SchoolInterceptor;
 import com.bitwise.magnolia.web.security.CredentialValidation;
 import com.bitwise.magnolia.web.security.MagnoliaAuthenticationProvider;
 import com.bitwise.magnolia.web.security.MagnoliaUserContext;
-import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.models.dto.ApiInfo;
-import com.mangofactory.swagger.models.dto.builder.ApiInfoBuilder;
-import com.mangofactory.swagger.plugin.EnableSwagger;
-import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 
 @EnableWebMvc
 @Configuration
-@EnableSwagger
 @ComponentScan(basePackages = "com.bitwise.magnolia")
 public class WebMvcConfig extends WebMvcConfigurerAdapter{
      
 	private static final long MAX_FILE_UPLOAD_SIZE = 1024 * 1024 * 15;
     private static final int FILE_SIZE_THRESHOLD = 1024 * 1024;
-    private SpringSwaggerConfig springSwaggerConfig;
 	
     @Bean
     public ViewResolver tilesViewResolver() {
@@ -162,33 +154,4 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     public MagnoliaUserContext userContext() {
     	return new MagnoliaUserContext();
     }
-    
-    @Bean
-    public SpringSwaggerConfig swaggerConfig() {
-    	return new SpringSwaggerConfig();
-    }
-	
-    @Autowired
-    public void setSpringSwaggerConfig(SpringSwaggerConfig springSwaggerConfig) {
-        this.springSwaggerConfig = springSwaggerConfig;
-    }
-    
-    @Bean
-    public SwaggerSpringMvcPlugin customImplementation(){
-
-        return new SwaggerSpringMvcPlugin(this.springSwaggerConfig)
-                .apiInfo(apiInfo())
-                .includePatterns(".*api.*"); // assuming the API lives at something like http://myapp/api
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-            .title("TITLE")
-            .description("DESCRIPTION")
-            .termsOfServiceUrl("http://terms-of-services.url")
-            .license("LICENSE")
-            .licenseUrl("http://url-to-license.com")
-            .build();
-    }
-	     
 }

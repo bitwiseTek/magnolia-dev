@@ -28,8 +28,11 @@ import com.bitwise.magnolia.web.restful.resource.asm.school.DepartmentListResour
 import com.bitwise.magnolia.web.restful.resource.asm.school.DepartmentResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.school.DepartmentListResource;
 import com.bitwise.magnolia.web.restful.resource.school.DepartmentResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 @RestController
+@Api(value="departments", description="Department API")
 public class DepartmentController {
 
 	final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
@@ -37,6 +40,7 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService deptService;
 	
+	@ApiOperation(value="Retrieves all the departments", response=Department.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/departments/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DepartmentListResource> findAllDepartments(@RequestParam(value="name", required=false) String name) {
@@ -54,6 +58,7 @@ public class DepartmentController {
 		return new ResponseEntity<DepartmentListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a department associated with an ID", response=Department.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/departments/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DepartmentResource> findDept(@PathVariable Long id) {
@@ -66,6 +71,7 @@ public class DepartmentController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the departments associated with a Faculty ID", response=Department.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/departments/faculties/{facultyId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DepartmentListResource> findAllDepartmentsByFaculties(@PathVariable Long facultyId) {

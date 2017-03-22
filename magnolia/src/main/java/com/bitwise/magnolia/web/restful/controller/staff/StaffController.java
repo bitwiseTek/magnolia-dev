@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.staff.Staff;
 import com.bitwise.magnolia.service.staff.StaffService;
 import com.bitwise.magnolia.util.StaffList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.staff.StaffListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.staff.StaffResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.staff.StaffListResource;
 import com.bitwise.magnolia.web.restful.resource.staff.StaffResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="staff", description="Staff API")
 public class StaffController {
 
 	final Logger logger = LoggerFactory.getLogger(StaffController.class);
@@ -44,6 +50,7 @@ public class StaffController {
 	@Autowired
 	private StaffService staffService;
 	
+	@ApiOperation(value="Retrieves all the staff", response=Staff.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffListResource> findAllStaff(@RequestParam(value="staffId", required=false) String staffId) {
@@ -61,6 +68,7 @@ public class StaffController {
 		return new ResponseEntity<StaffListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves staff associated with an ID", response=Staff.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffResource> findStaff(@PathVariable Long id) {
@@ -73,6 +81,7 @@ public class StaffController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the staff associated with a Department ID", response=Staff.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/departments/{deptId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffListResource> findAllStaffByDepartments(@PathVariable Long deptId) {
@@ -86,8 +95,10 @@ public class StaffController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new staff", notes="The newly created staff ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Staff created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating staff", response=ErrorDetail.class)})
 	public ResponseEntity<StaffResource> createStaff(@RequestBody StaffResource sentStaff) {
 		logger.info("Adding staff with ID " + sentStaff.getRid());
 		try {
@@ -101,8 +112,10 @@ public class StaffController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a Department", response=Staff.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Staff updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find staff", response=ErrorDetail.class)})
 	public ResponseEntity<StaffResource> updateStaff(@PathVariable Long id, @RequestBody StaffResource staff) {
 		logger.info("Updating staff with ID " + staff.getRid());
 		try {

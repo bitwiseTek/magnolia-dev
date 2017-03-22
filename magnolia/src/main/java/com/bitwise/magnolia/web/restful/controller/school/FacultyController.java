@@ -28,8 +28,11 @@ import com.bitwise.magnolia.web.restful.resource.asm.school.FacultyListResourceA
 import com.bitwise.magnolia.web.restful.resource.asm.school.FacultyResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.school.FacultyListResource;
 import com.bitwise.magnolia.web.restful.resource.school.FacultyResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 @RestController
+@Api(value="faculties", description="Faculty API")
 public class FacultyController {
 
 	final Logger logger = LoggerFactory.getLogger(FacultyController.class);
@@ -37,6 +40,7 @@ public class FacultyController {
 	@Autowired
 	private FacultyService facultyService;
 	
+	@ApiOperation(value="Retrieves all the faculties", response=Faculty.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/faculties/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FacultyListResource> findAllFaculties(@RequestParam(value="name", required=false) String name) {
@@ -54,6 +58,7 @@ public class FacultyController {
 		return new ResponseEntity<FacultyListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a faculty associated with an ID", response=Faculty.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/faculties/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FacultyResource> findFaculty(@PathVariable Long id) {

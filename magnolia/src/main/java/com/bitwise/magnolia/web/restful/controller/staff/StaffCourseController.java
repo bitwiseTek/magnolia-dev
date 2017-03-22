@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.staff.StaffCourse;
 import com.bitwise.magnolia.service.staff.StaffCourseService;
 import com.bitwise.magnolia.util.StaffCourseList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.staff.StaffCourseListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.staff.StaffCourseResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.staff.StaffCourseListResource;
 import com.bitwise.magnolia.web.restful.resource.staff.StaffCourseResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="staffCourses", description="Staff Course API")
 public class StaffCourseController {
 
 	final Logger logger = LoggerFactory.getLogger(StaffCourseController.class);
@@ -44,6 +50,7 @@ public class StaffCourseController {
 	@Autowired
 	private StaffCourseService staffCourseService;
 	
+	@ApiOperation(value="Retrieves all the staff courses", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCourses(@RequestParam(value="id", required=false) Long id) {
@@ -61,6 +68,7 @@ public class StaffCourseController {
 		return new ResponseEntity<StaffCourseListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves all the staff courses associated with Semester One", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/semesters/one/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCoursesBySemestersOne(@PathVariable Long semesterId) {
@@ -74,6 +82,7 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the staff courses associated with Semester Two", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/semesters/two/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCoursesBySemestersTwo(@PathVariable Long semesterId) {
@@ -87,6 +96,7 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the staff courses associated with a staff in Semester One", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/attached/one/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCoursesAttachedBySemestersOne(@PathVariable Long semesterId) {
@@ -100,6 +110,7 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the staff courses associated with a staff in Semester Two", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/attached/two/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCoursesAttachedBySemestersTwo(@PathVariable Long semesterId) {
@@ -113,6 +124,8 @@ public class StaffCourseController {
 		}
 	}
 	
+	
+	@ApiOperation(value="Retrieves all the staff courses completed by a staff in Semester One", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/completed/one/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCoursesCompletedBySemestersOne(@PathVariable Long semesterId) {
@@ -126,6 +139,7 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the staff courses completed by a staff in Semester Two", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/completed/two/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCoursesCompletedBySemestersTwo(@PathVariable Long semesterId) {
@@ -139,6 +153,7 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the staff courses pending for a staff in Semester One", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/pending/one/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCoursesPendingBySemestersOne(@PathVariable Long semesterId) {
@@ -152,6 +167,7 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the staff courses pending for a staff in Semester One", response=StaffCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/pending/two/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseListResource> findAllStaffCoursesPendingBySemestersTwo(@PathVariable Long semesterId) {
@@ -165,6 +181,7 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves staff course associated with an ID", response=StaffCourse.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StaffCourseResource> findStaffCourse(@PathVariable Long id) {
@@ -177,8 +194,10 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new staff course", notes="The newly created staff course ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Staff course created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating staff course", response=ErrorDetail.class)})
 	public ResponseEntity<StaffCourseResource> createStaffCourse(@RequestBody StaffCourseResource sentStaffCourse) {
 		logger.info("Adding staff course with ID " + sentStaffCourse.getRid());
 		try {
@@ -192,8 +211,10 @@ public class StaffCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Updates staff course", response=StaffCourse.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/staff/courses/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Staff course updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find staff course", response=ErrorDetail.class)})
 	public ResponseEntity<StaffCourseResource> updateStaff(@PathVariable Long id, @RequestBody StaffCourseResource staffCourse) {
 		logger.info("Updating staff course with ID " + staffCourse.getRid());
 		try {

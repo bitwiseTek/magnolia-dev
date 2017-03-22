@@ -38,7 +38,7 @@ import com.wordnik.swagger.annotations.ApiResponses;
 import com.wordnik.swagger.annotations.ApiResponse;
 
 @RestController
-@Api(value="semesters", description="Semesters API")
+@Api(value="semesters", description="Semester API")
 public class AcademicSemesterController {
 
 	final Logger logger = LoggerFactory.getLogger(AcademicSemesterController.class);

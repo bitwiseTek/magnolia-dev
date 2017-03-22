@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.student.Student;
 import com.bitwise.magnolia.service.student.StudentService;
 import com.bitwise.magnolia.util.StudentList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.student.StudentListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.student.StudentResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.student.StudentListResource;
 import com.bitwise.magnolia.web.restful.resource.student.StudentResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="students", description="Student API")
 public class StudentController {
 	
 	final Logger logger = LoggerFactory.getLogger(StudentController.class);
@@ -44,6 +50,7 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
+	@ApiOperation(value="Retrieves all the students", response=Student.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentListResource> findAllStudents(@RequestParam(value="studentId", required=false) String studentId) {
@@ -61,6 +68,7 @@ public class StudentController {
 		return new ResponseEntity<StudentListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a student associated with an ID", response=Student.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentResource> findStudent(@PathVariable Long id) {
@@ -73,6 +81,7 @@ public class StudentController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the students associated with a Department ID", response=Student.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/departments/{deptId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentListResource> findAllStudentsByDepartments(@PathVariable Long deptId) {
@@ -86,6 +95,7 @@ public class StudentController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the students associated with a Programme ID", response=Student.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/programmes/{programmeId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentListResource> findAllStudentsByProgrammess(@PathVariable Long programmeId) {
@@ -99,8 +109,10 @@ public class StudentController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new student", notes="The newly created student ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Student created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating student", response=ErrorDetail.class)})
 	public ResponseEntity<StudentResource> createStudent(@RequestBody StudentResource sentStudent) {
 		logger.info("Adding student with ID " + sentStudent.getRid());
 		try {
@@ -114,8 +126,10 @@ public class StudentController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a student", response=Student.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Student updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find student", response=ErrorDetail.class)})
 	public ResponseEntity<StudentResource> updateStudent(@PathVariable Long id, @RequestBody StudentResource student) {
 		logger.info("Updating student with ID " + student.getRid());
 		try {

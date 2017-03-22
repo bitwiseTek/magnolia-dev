@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.school.SubSchool;
 import com.bitwise.magnolia.service.school.SubSchoolService;
 import com.bitwise.magnolia.util.SubSchoolList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.school.SubSchoolListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.school.SubSchoolResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.school.SubSchoolListResource;
 import com.bitwise.magnolia.web.restful.resource.school.SubSchoolResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="subschools", description="Sub-School API")
 public class SubSchoolController {
 
 	final Logger logger = LoggerFactory.getLogger(SubSchoolController.class);
@@ -44,6 +50,7 @@ public class SubSchoolController {
 	@Autowired
 	private SubSchoolService subSchoolService;
 	
+	@ApiOperation(value="Retrieves all the sub-schools", response=SubSchool.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/subschools/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SubSchoolListResource> findAllSubSchools(@RequestParam(value="name", required=false) String name) {
@@ -61,6 +68,7 @@ public class SubSchoolController {
 		return new ResponseEntity<SubSchoolListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves sub-school associated with an ID", response=SubSchool.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/subschools/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SubSchoolResource> findSubSchool(@PathVariable Long id) {
@@ -73,6 +81,7 @@ public class SubSchoolController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the sub-schools associated with a School ID", response=SubSchool.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/subschools/schools/{schoolId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SubSchoolListResource> findAllSubSchoolsBySchools(@PathVariable Long schoolId) {
@@ -86,8 +95,10 @@ public class SubSchoolController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new sub-school", notes="The newly created sub-school ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/subschools/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Sub-School created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating sub-school", response=ErrorDetail.class)})
 	public ResponseEntity<SubSchoolResource> createSubSchool(@RequestBody SubSchoolResource sentSubSchool) {
 		logger.info("Adding sub-school with ID " + sentSubSchool.getRid());
 		try {
@@ -101,8 +112,10 @@ public class SubSchoolController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a sub-school", response=SubSchool.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/subschools/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Sub-School updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find sub-school", response=ErrorDetail.class)})
 	public ResponseEntity<SubSchoolResource> updateSubSchool(@PathVariable Long id, @RequestBody SubSchoolResource subSchool) {
 		logger.info("Updating sub-school with ID " + subSchool.getRid());
 		try {

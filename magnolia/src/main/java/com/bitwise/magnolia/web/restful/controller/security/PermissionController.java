@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.security.Permission;
 import com.bitwise.magnolia.service.security.PermissionService;
 import com.bitwise.magnolia.util.PermissionList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.security.PermissionListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.security.PermissionResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.security.PermissionListResource;
 import com.bitwise.magnolia.web.restful.resource.security.PermissionResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="permissions", description="Permission API")
 public class PermissionController {
 
 	final Logger logger = LoggerFactory.getLogger(PermissionController.class);
@@ -44,6 +50,7 @@ public class PermissionController {
 	@Autowired
 	private PermissionService permissionService;
 	
+	@ApiOperation(value="Retrieves all the permissions", response=Permission.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/permissions/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PermissionListResource> findAllPermissions(@RequestParam(value="name", required=false) String permission) {
@@ -61,6 +68,7 @@ public class PermissionController {
 		return new ResponseEntity<PermissionListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves permission associated with an ID", response=Permission.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/permissions/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PermissionResource> findPermission(@PathVariable Long id) {
@@ -73,8 +81,10 @@ public class PermissionController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new permission", notes="The newly created permission ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/permissions/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Permission created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating permission", response=ErrorDetail.class)})
 	public ResponseEntity<PermissionResource> createPermission(@RequestBody PermissionResource sentPerm) {
 		logger.info("Adding permission with ID " + sentPerm.getRid());
 		try {
@@ -88,8 +98,10 @@ public class PermissionController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a permission", response=Permission.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/permissions/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Permission updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find permission", response=ErrorDetail.class)})
 	public ResponseEntity<PermissionResource> updatePermission(@PathVariable Long id, @RequestBody PermissionResource perm) {
 		logger.info("Updating permission with ID " + perm.getRid());
 		try {

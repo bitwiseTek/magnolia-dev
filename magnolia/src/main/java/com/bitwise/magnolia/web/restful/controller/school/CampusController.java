@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.school.Campus;
 import com.bitwise.magnolia.service.school.CampusService;
 import com.bitwise.magnolia.util.CampusList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.school.CampusListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.school.CampusResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.school.CampusListResource;
 import com.bitwise.magnolia.web.restful.resource.school.CampusResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="campuses", description="Campus API")
 public class CampusController {
 
 	final Logger logger = LoggerFactory.getLogger(CampusController.class);
@@ -44,6 +50,7 @@ public class CampusController {
 	@Autowired
 	private CampusService campusService;
 	
+	@ApiOperation(value="Retrieves all the campuses", response=Campus.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/campuses/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CampusListResource> findAllCampuses(@RequestParam(value="name", required=false) String name) {
@@ -61,6 +68,7 @@ public class CampusController {
 		return new ResponseEntity<CampusListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a campus associated with an ID", response=Campus.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/campuses/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CampusResource> findCampus(@PathVariable Long id) {
@@ -73,6 +81,7 @@ public class CampusController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves a campus associated with a SubSchool ID", response=Campus.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/campuses/subschools/{subSchoolId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CampusListResource> findAllCampusesBySubSchools(@PathVariable Long subSchoolId) {
@@ -86,8 +95,10 @@ public class CampusController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new campus", notes="The newly created campus ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/campuses/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Campus created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating campus", response=ErrorDetail.class)})
 	public ResponseEntity<CampusResource> createCampus(@RequestBody CampusResource sentCampus) {
 		logger.info("Adding campus with ID " + sentCampus.getRid());
 		try {
@@ -101,8 +112,10 @@ public class CampusController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a campus", response=Campus.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/campuses/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Campus updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find campus", response=ErrorDetail.class)})
 	public ResponseEntity<CampusResource> updateCampus(@PathVariable Long id, @RequestBody CampusResource course) {
 		logger.info("Updating campus with ID " + course.getRid());
 		try {

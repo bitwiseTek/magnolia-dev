@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
-import com.bitwise.magnolia.model.common.LGA;
 import com.bitwise.magnolia.model.common.State;
 import com.bitwise.magnolia.service.common.StateService;
 import com.bitwise.magnolia.util.StateList;
@@ -36,7 +35,7 @@ import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
-@Api(value="states", description="States API")
+@Api(value="states", description="State API")
 public class StateController {
 
 	final Logger logger = LoggerFactory.getLogger(StateController.class);
@@ -62,7 +61,7 @@ public class StateController {
 		return new ResponseEntity<StateListResource>(res, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value="Retrieves a state associated with an ID", response=LGA.class)
+	@ApiOperation(value="Retrieves a state associated with an ID", response=State.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/states/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value={@ApiResponse(code=200, message="", response=Void.class), @ApiResponse(code=404, message="Unable to find state", response=ErrorDetail.class)})

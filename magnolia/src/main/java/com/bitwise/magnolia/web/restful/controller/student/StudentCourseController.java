@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.student.StudentCourse;
 import com.bitwise.magnolia.service.student.StudentCourseService;
 import com.bitwise.magnolia.util.StudentCourseList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.student.StudentCourseListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.student.StudentCourseResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.student.StudentCourseListResource;
 import com.bitwise.magnolia.web.restful.resource.student.StudentCourseResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="studentCourses", description="Student Course API")
 public class StudentCourseController {
 
 	final Logger logger = LoggerFactory.getLogger(StudentCourseController.class);
@@ -44,6 +50,7 @@ public class StudentCourseController {
 	@Autowired
 	private StudentCourseService studentCourseService;
 	
+	@ApiOperation(value="Retrieves all the student courses", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentCourses(@RequestParam(value="id", required=false) Long id) {
@@ -61,6 +68,7 @@ public class StudentCourseController {
 		return new ResponseEntity<StudentCourseListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses associated with Semester One", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/semesters/one/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentsCoursesBySemestersOne(@PathVariable Long semesterId) {
@@ -74,6 +82,7 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses associated with Semester Two", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/semesters/two/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentsCoursesBySemestersTwo(@PathVariable Long semesterId) {
@@ -87,6 +96,7 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses registered in Semester One", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/registered/one/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentsCoursesRegisteredBySemestersOne(@PathVariable Long semesterId) {
@@ -100,6 +110,7 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses registered in Semester Two", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/registered/two/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentsCoursesRegisteredBySemestersTwo(@PathVariable Long semesterId) {
@@ -113,6 +124,7 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses completed in Semester One", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/completed/one/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentsCoursesCompletedBySemestersOne(@PathVariable Long semesterId) {
@@ -126,6 +138,7 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses completed in Semester Two", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/completed/two/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentsCoursesCompletedBySemestersTwo(@PathVariable Long semesterId) {
@@ -139,6 +152,7 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses pending in Semester One", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/pending/one/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentsCoursesPendingBySemestersOne(@PathVariable Long semesterId) {
@@ -152,6 +166,7 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses pending in Semester Two", response=StudentCourse.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/pending/two/{semesterId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseListResource> findAllStudentsCoursesPendingBySemestersTwo(@PathVariable Long semesterId) {
@@ -165,6 +180,7 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the student courses associated an ID", response=StudentCourse.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StudentCourseResource> findStudentCourse(@PathVariable Long id) {
@@ -177,8 +193,10 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new student course", notes="The newly created student course ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Student course created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating student course", response=ErrorDetail.class)})
 	public ResponseEntity<StudentCourseResource> createStudentCourse(@RequestBody StudentCourseResource sentStudentCourse) {
 		logger.info("Adding student course with ID " + sentStudentCourse.getRid());
 		try {
@@ -192,8 +210,10 @@ public class StudentCourseController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a student course", response=StudentCourse.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/courses/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Student course updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find student course", response=ErrorDetail.class)})
 	public ResponseEntity<StudentCourseResource> updateStudent(@PathVariable Long id, @RequestBody StudentCourseResource studentCourse) {
 		logger.info("Updating student course with ID " + studentCourse.getRid());
 		try {

@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.school.School;
 import com.bitwise.magnolia.service.school.SchoolService;
 import com.bitwise.magnolia.util.SchoolList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.school.SchoolListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.school.SchoolResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.school.SchoolListResource;
 import com.bitwise.magnolia.web.restful.resource.school.SchoolResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="schools", description="School API")
 public class SchoolController {
 
 	final Logger logger = LoggerFactory.getLogger(SchoolController.class);
@@ -44,6 +50,7 @@ public class SchoolController {
 	@Autowired
 	private SchoolService schoolService;
 	
+	@ApiOperation(value="Retrieves all the schools", response=School.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/schools/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SchoolListResource> findAllSchools(@RequestParam(value="name", required=false) String name) {
@@ -61,6 +68,7 @@ public class SchoolController {
 		return new ResponseEntity<SchoolListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a school with an associated ID", response=School.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/schools/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SchoolResource> findSchool(@PathVariable Long id) {
@@ -73,8 +81,10 @@ public class SchoolController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new school", notes="The newly created school ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/schools/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="School created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating school", response=ErrorDetail.class)})
 	public ResponseEntity<SchoolResource> createSchool(@RequestBody SchoolResource sentSchool) {
 		logger.info("Adding school with ID " + sentSchool.getRid());
 		try {
@@ -88,8 +98,10 @@ public class SchoolController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a school", response=School.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/schools/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="School updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find school", response=ErrorDetail.class)})
 	public ResponseEntity<SchoolResource> updateSchool(@PathVariable Long id, @RequestBody SchoolResource school) {
 		logger.info("Updating school with ID " + school.getRid());
 		try {

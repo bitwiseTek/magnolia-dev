@@ -42,7 +42,7 @@ import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
-@Api(value="studyProgramme", description="Study Programmes API")
+@Api(value="studyProgrammes", description="Study Programme API")
 public class StudyProgrammeController {
 
 final Logger logger = LoggerFactory.getLogger(StudyProgrammeController.class);

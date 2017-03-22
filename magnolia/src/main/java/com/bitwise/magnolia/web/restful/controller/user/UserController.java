@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,13 +34,19 @@ import com.bitwise.magnolia.service.email.EmailService;
 import com.bitwise.magnolia.service.user.UserService;
 import com.bitwise.magnolia.util.UserList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.user.UserListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.user.UserResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.user.UserListResource;
 import com.bitwise.magnolia.web.restful.resource.user.UserResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="users", description="User API")
 public class UserController {
 
 	final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -50,6 +57,8 @@ public class UserController {
 	@Autowired
 	private EmailService emailService;
 	
+	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	@ApiOperation(value="Retrieves all the users", response=User.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/"}, 
 	method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserListResource> findAllUsers(@RequestParam(value="username", required=false) String username) {
@@ -67,6 +76,7 @@ public class UserController {
 		return new ResponseEntity<UserListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a user associated with an ID", response=User.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/{id}"}, 
 	method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResource> findUser(@PathVariable Long id) {
@@ -79,6 +89,8 @@ public class UserController {
 		}
 	}
 	
+	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	@ApiOperation(value="Retrieves all the users that are active", response=User.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/status/{status}"}, 
 	method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserListResource> findAllActiveUsers(@PathVariable("status") String status) {
@@ -92,6 +104,8 @@ public class UserController {
 		}
 	}
 	
+	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	@ApiOperation(value="Retrieves all the users associated with a State ID", response=User.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/states/{stateId}"}, 
 	method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserListResource> findAllUsersByStates(@PathVariable("stateId") Long stateId) {
@@ -105,6 +119,8 @@ public class UserController {
 		}
 	}
 	
+	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	@ApiOperation(value="Retrieves all the users associated with an LGA ID", response=User.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/lgas/{lgaId}"}, 
 	method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserListResource> findAllUsersByLGAs(@PathVariable("lgaId") Long lgaId) {
@@ -118,8 +134,10 @@ public class UserController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new user", notes="The newly created user ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/user/register"}, 
 	method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="User created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating user", response=ErrorDetail.class)})
 	public ResponseEntity<UserResource> createUser(@RequestBody UserResource sentUser) throws MessagingException {
 		try {
 			User createdUser = userService.save(sentUser.toUser());
@@ -133,8 +151,10 @@ public class UserController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a user", response=User.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/{id}"}, 
 	method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="User updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find user", response=ErrorDetail.class)})
 	public ResponseEntity<UserResource> updateUser(@PathVariable Long id, @RequestBody UserResource user) {
 		logger.info("Updating user with ID " + user.getRid());
 		try {
@@ -151,8 +171,11 @@ public class UserController {
 		}
 	}
 	
+	@PreAuthorize("hasRole('SUPER_ADMIN')")
+	@ApiOperation(value="Deletes a user", response=User.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/{id}"}, 
 	method = RequestMethod.DELETE)
+	@ApiResponses(value={@ApiResponse(code=200, message="User deleted successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find user", response=ErrorDetail.class)})
 	public ResponseEntity<UserResource> deleteUser(@PathVariable("id") Long id) {
         logger.info("Fetching & Deleting User with id " + id);
         User user = userService.findById(id);

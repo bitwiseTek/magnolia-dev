@@ -30,13 +30,19 @@ import com.bitwise.magnolia.model.course.Course;
 import com.bitwise.magnolia.service.course.CourseService;
 import com.bitwise.magnolia.util.CourseList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
+import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
 import com.bitwise.magnolia.web.restful.exception.ResourceNotFoundException;
 import com.bitwise.magnolia.web.restful.resource.asm.course.CourseListResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.asm.course.CourseResourceAsm;
 import com.bitwise.magnolia.web.restful.resource.course.CourseListResource;
 import com.bitwise.magnolia.web.restful.resource.course.CourseResource;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value="courses", description="Course API")
 public class CourseController {
 
 	final Logger logger = LoggerFactory.getLogger(CourseController.class);
@@ -44,6 +50,7 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 	
+	@ApiOperation(value="Retrieves all the courses", response=Course.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/courses/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CourseListResource> findAllCourses(@RequestParam(value="name", required=false) String name) {
@@ -61,8 +68,10 @@ public class CourseController {
 		return new ResponseEntity<CourseListResource>(res, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="Retrieves a course associated with an ID", response=Course.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/courses/{id}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="", response=Void.class), @ApiResponse(code=404, message="Unable to find course", response=ErrorDetail.class)})
 	public ResponseEntity<CourseResource> findCourse(@PathVariable Long id) {
 		Course course = courseService.findById(id);
 		if (course != null) {
@@ -73,6 +82,7 @@ public class CourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the courses associated with a code", response=Course.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/courses?code={code}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CourseResource> findCourseByCode(@RequestParam(value="name", required=true) String code) {
@@ -85,6 +95,7 @@ public class CourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the courses associated with a Programme ID", response=Course.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/courses/programmes/{programmeId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CourseListResource> findAllCoursesByProgrammes(@PathVariable Long programmeId) {
@@ -98,6 +109,7 @@ public class CourseController {
 		}
 	}
 	
+	@ApiOperation(value="Retrieves all the courses associated with a Staff ID", response=Course.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/courses/staff/{staffId}"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CourseListResource> findAllCoursesByStaff(@PathVariable Long staffId) {
@@ -111,8 +123,10 @@ public class CourseController {
 		}
 	}
 	
+	@ApiOperation(value="Creates a new course", notes="The newly created course ID will be sent in the location response header")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/courses/add"}, 
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=201, message="Course created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating course", response=ErrorDetail.class)})
 	public ResponseEntity<CourseResource> createCourse(@RequestBody CourseResource sentCourse) {
 		logger.info("Adding course with ID " + sentCourse.getRid());
 		try {
@@ -126,8 +140,10 @@ public class CourseController {
 		}
 	}
 	
+	@ApiOperation(value="Updates a course", response=Course.class)
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/courses/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiResponses(value={@ApiResponse(code=200, message="Course updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find course", response=ErrorDetail.class)})
 	public ResponseEntity<CourseResource> updateCourse(@PathVariable Long id, @RequestBody CourseResource course) {
 		logger.info("Updating course with ID " + course.getRid());
 		try {

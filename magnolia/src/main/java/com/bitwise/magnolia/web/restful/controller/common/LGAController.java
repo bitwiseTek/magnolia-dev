@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.common.LGA;
-import com.bitwise.magnolia.model.common.State;
 import com.bitwise.magnolia.service.common.LGAService;
 import com.bitwise.magnolia.util.LGAList;
 import com.bitwise.magnolia.web.restful.exception.ErrorDetail;
@@ -36,7 +35,7 @@ import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
-@Api(value="lgas", description="LGAs API")
+@Api(value="lgas", description="LGA API")
 public class LGAController {
 
 	final Logger logger = LoggerFactory.getLogger(LGAController.class);
@@ -44,7 +43,7 @@ public class LGAController {
 	@Autowired
 	private LGAService lgaService;
 	
-	@ApiOperation(value="Retrieves all the lgas", response=State.class, responseContainer="List")
+	@ApiOperation(value="Retrieves all the lgas", response=LGA.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/lgas/"}, 
 			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<LGAListResource> findAllLGAs(@RequestParam(value="name", required=false) String name) {
