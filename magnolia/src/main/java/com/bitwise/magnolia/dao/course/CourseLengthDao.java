@@ -7,16 +7,9 @@ package com.bitwise.magnolia.dao.course;
  */
 import java.util.List;
 
-/**
- *  
- * @author Sika Kay
- * @date 01/03/17
- *
- */
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.course.CourseLength;
 
-public interface CourseLengthDao extends BaseDao<Object> {
+public interface CourseLengthDao {
 
 	public CourseLength findById(Long id);
 	

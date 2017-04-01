@@ -17,7 +17,7 @@ import com.bitwise.magnolia.dao.common.LGADao;
 import com.bitwise.magnolia.model.common.LGA;
 
 @Repository("lgaDao")
-public class LGADaoImpl extends AbstractDao<Object> implements LGADao {
+public class LGADaoImpl extends AbstractDao<Long, LGA> implements LGADao {
 
 	@PersistenceContext
 	private EntityManager em;

@@ -27,11 +27,11 @@ public class PermissionResource extends ResourceSupport {
 		this.rid = rid;
 	}
 
-	public String getPermission() {
+	public String getPermissions() {
 		return permissions;
 	}
 
-	public void setPermission(String permissions) {
+	public void setPermissions(String permissions) {
 		this.permissions = permissions;
 	}
 	

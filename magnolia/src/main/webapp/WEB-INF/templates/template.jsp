@@ -12,11 +12,13 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
     <title><spring:message code="generic.applicationTitle" /></title>
-    <spring:url value="/resources/assets/img/footer_icon.png" var="shortcutIcon"></spring:url>
-    <link rel="shortcut icon" href="${shortcutIcon}" />
+    <link rel="shortcut icon" href="<c:url value="/resources/assets/img/footer_icon.png" /> " />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <meta name="description" content="Magnolia Web App">
+    <meta name="author" content="Sika Kay">
+    <!-- BEGIN APP CSS -->
+    <link href="<c:url value="/resources/assets/css/app/messages.css" /> " rel="stylesheet" type="text/css" />
+    <link href="<c:url value="/resources/assets/css/ligature/ligature.css" /> " rel="stylesheet" type="text/css" />
     <!-- BEGIN PLUGIN CSS -->
     <link href="<c:url value="/resources/assets/plugins/font-awesome/css/font-awesome.css" /> " rel="stylesheet" type="text/css" />
     <link href="<c:url value="/resources/assets/plugins/jquery-metrojs/MetroJs.min.css" /> " rel="stylesheet" type="text/css" />
@@ -40,29 +42,6 @@
     <!-- BEGIN CORE CSS FRAMEWORK -->
     <link href="<c:url value="/resources/webarch/css/webarch.css" /> " rel="stylesheet" type="text/css" />
     <!-- END CORE CSS FRAMEWORK -->
-  </head>
-  <!-- END HEAD -->
-  <!-- BEGIN BODY -->
-  <body class="">
-    <tiles:insertAttribute name="header" />
-    
-    
-    <!-- BEGIN CONTAINER -->
-    <div class="page-container row-fluid">
-      <tiles:insertAttribute name="header" />
-      <tiles:insertAttribute name="lsidebar" />
-      
-      <!-- BEGIN PAGE CONTAINER-->
-      <div class="page-content">
-        <tiles:insertAttribute name="content" />
-      </div>
-      <tiles:insertAttribute name="rsidebar" />
-    </div>
-    <!-- END CONTAINER -->
-    
-    
-    
-    
     <!-- BEGIN CORE JS FRAMEWORK-->
     <script src="<c:url value="/resources/assets/plugins/pace/pace.min.js" /> " type="text/javascript"></script>
     <!-- BEGIN JS DEPENDECENCIES-->
@@ -75,8 +54,12 @@
     <script src="<c:url value="/resources/assets/plugins/jquery-validation/js/jquery.validate.min.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/assets/plugins/bootstrap-select2/select2.min.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/assets/plugins/bootstrap-select2/select2.min.js" /> " type="text/javascript"></script>
-    <script src="<c:url value="/resources/src/js/frontend/account/staffRegistration.js" /> " type="text/javascript"></script>
-    <script src="<c:url value="/resources/src/js/frontend/account/studentRegistration.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/users/register.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/users/list.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/security/addRole.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/security/addPermission.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/security/listRoles.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/security/listPermissions.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/src/js/common/imagepreview.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/src/js/common/utils.js" /> " type="text/javascript"></script>
     <!-- END CORE JS DEPENDECENCIES-->
@@ -92,8 +75,8 @@
     <script src="<c:url value="/resources/assets/plugins/jquery-sparkline/jquery-sparkline.js" /> "></script>
     <script src="<c:url value="/resources/assets/plugins/skycons/skycons.js" /> "></script>
     <script src="<c:url value="/resources/assets/plugins/owl-carousel/owl.carousel.min.js" /> " type="text/javascript"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <script src="<c:url value="/resources/assets/plugins/jquery-gmap/gmaps.js" /> " type="text/javascript"></script>
+    <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
+    <%-- <script src="<c:url value="/resources/assets/plugins/jquery-gmap/gmaps.js" /> " type="text/javascript"></script> --%>
     <script src="<c:url value="/resources/assets/plugins/Mapplic/js/jquery.easing.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/assets/plugins/Mapplic/js/jquery.mousewheel.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/assets/plugins/Mapplic/js/hammer.js" /> " type="text/javascript"></script>
@@ -103,5 +86,22 @@
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="<c:url value="/resources/assets/js/dashboard_v2.js" /> " type="text/javascript"></script>
+  </head>
+  <!-- END HEAD -->
+  <!-- BEGIN BODY -->
+  <body class="">
+    
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container row-fluid">
+      <tiles:insertAttribute name="header" />
+      <tiles:insertAttribute name="lsidebar" />
+      
+      <!-- BEGIN PAGE CONTAINER-->
+      <div class="page-content">
+        <tiles:insertAttribute name="content" />
+      </div>
+    </div>
+    <!-- END CONTAINER -->
+    <tiles:insertAttribute name="footer" />
   </body>
 </html>

@@ -19,7 +19,7 @@ import com.bitwise.magnolia.dao.common.AcademicSemesterDao;
 import com.bitwise.magnolia.model.common.AcademicSemester;
 
 @Repository("semesterDao")
-public class AcademicSemesterDaoImpl extends AbstractDao<Object> implements AcademicSemesterDao {
+public class AcademicSemesterDaoImpl extends AbstractDao<Long, AcademicSemester> implements AcademicSemesterDao {
 
 	@PersistenceContext
 	private EntityManager em;

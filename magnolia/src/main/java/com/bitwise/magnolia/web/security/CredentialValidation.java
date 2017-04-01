@@ -15,6 +15,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.user.UserService;
 
@@ -37,6 +38,14 @@ public class CredentialValidation {
 		if (!credentialsMatch(password, user)) {
 			logger.info(env.getProperty("validation.signin.invalid"));
 			throw new BadCredentialsException(env.getProperty("validation.signin.invalid"));
+		}
+		if (user.getStatus().equals(ApplicationConstant.PENDING_STATUS)) {
+			logger.info(env.getProperty("users.login.locked"));
+			throw new BadCredentialsException(env.getProperty("users.login.locked"));
+		}
+		if (user.getStatus().equals(ApplicationConstant.INACTIVE_STATUS)) {
+			logger.info(env.getProperty("users.login.deactivated"));
+			throw new BadCredentialsException(env.getProperty("users.login.deactivated"));
 		}
 		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		return user;

@@ -7,15 +7,9 @@ import java.util.List;
  * @date 24/02/17
  *
  */
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.school.School;
-/**
- *  
- * @author Sika Kay
- * @date 01/03/17
- *
- */
-public interface SchoolDao extends BaseDao<Object>{
+
+public interface SchoolDao {
 
 	//An abstract method to check if a school actually exist
 	public boolean isSchoolExist(String alias);

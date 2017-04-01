@@ -7,10 +7,9 @@ package com.bitwise.magnolia.dao.course;
  */
 import java.util.List;
 
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.course.Course;
 
-public interface CourseDao extends BaseDao<Object> {
+public interface CourseDao {
 
 	public Course findById(Long id);
 	

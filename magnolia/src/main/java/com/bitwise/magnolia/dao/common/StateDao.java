@@ -6,10 +6,9 @@ package com.bitwise.magnolia.dao.common;
  */
 import java.util.List;
 
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.common.State;
 
-public interface StateDao extends BaseDao<Object> {
+public interface StateDao {
 
 	public State findById(Long id);
 	

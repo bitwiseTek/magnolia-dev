@@ -7,15 +7,9 @@ import java.util.List;
  * @date 24/02/17
  *
  */
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.student.Student;
-/**
- *  
- * @author Sika Kay
- * @date 27/02/17
- *
- */
-public interface StudentDao extends BaseDao<Object> {
+
+public interface StudentDao {
 
 	public Student findById(Long id);
 	

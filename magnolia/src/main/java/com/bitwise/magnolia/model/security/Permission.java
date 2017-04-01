@@ -35,10 +35,6 @@ public class Permission implements Serializable {
 		
 	}
 	
-	public Permission(String permission) {
-		this.permissions = permission;
-	}
-	
 	private Long id;
 	
 	private String permissions;
@@ -54,7 +50,7 @@ public class Permission implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name="PERMISSIONS")
+	@Column(name="PERMISSIONS", nullable=false, unique=true)
 	public String getPermissions() {
 		return permissions;
 	}

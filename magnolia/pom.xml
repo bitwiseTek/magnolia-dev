@@ -5,7 +5,7 @@
   <artifactId>magnolia</artifactId>
   <packaging>war</packaging>
   <name>Magnolia Webapp</name>
-  <url>http://maven.apache.org</url>
+  <url>https://portal.magnoliacad.com/magnolia</url>
   <properties>
         <springVersion>4.2.0.RELEASE</springVersion>
     	<springSecurityVersion>4.0.3.RELEASE</springSecurityVersion>
@@ -111,7 +111,37 @@
             <scope>test</scope>
         </dependency>
         
-        <!-- Aspects -->
+        <!-- AspectJ -->
+	     <dependency>
+		    <groupId>asm</groupId>
+		    <artifactId>asm</artifactId>
+		    <version>3.3.1</version>
+		</dependency>
+		
+	     <dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>1.7.3</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.7.3</version>
+		</dependency>
+		
+	     <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>2.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>asm</groupId>
+	      			<artifactId>asm</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
         <dependency>
 		    <groupId>aopalliance</groupId>
 		    <artifactId>aopalliance</artifactId>
@@ -747,6 +777,26 @@
             </exclusions>
         </dependency>
         
+        <dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-ehcache</artifactId>
+		    <version>${hibernateVersion}</version>
+		    <exclusions>
+		    	<exclusion>
+                    <groupId>org.jboss.logging</groupId>
+		    		<artifactId>jboss-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+		    		<artifactId>jboss-logging-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+            		<artifactId>hibernate-core</artifactId>
+                </exclusion>
+		    </exclusions>
+		</dependency>
+		
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>

@@ -12,6 +12,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
@@ -19,7 +21,9 @@ import com.bitwise.magnolia.dao.security.PermissionDao;
 import com.bitwise.magnolia.model.security.Permission;
 
 @Repository("permissionDao")
-public class PermissionDaoImpl extends AbstractDao<Object> implements PermissionDao {
+public class PermissionDaoImpl extends AbstractDao<Long, Permission> implements PermissionDao {
+	
+	final Logger logger = LoggerFactory.getLogger(PermissionDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager em;
@@ -44,7 +48,11 @@ public class PermissionDaoImpl extends AbstractDao<Object> implements Permission
 	@Override
 	@Transactional
 	public Permission save(Permission permission) {
-		return this.em.merge(permission);
+		logger.info("Adding/Updating permission with ID " + permission.getId());
+		System.err.println(permission.getPermissions());
+		persist(permission);
+		System.err.println(permission.getPermissions());
+		return permission;
 	}
 
 }

@@ -24,6 +24,8 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,6 +37,7 @@ import com.bitwise.magnolia.model.security.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.TRANSACTIONAL)
 @Table(name="USERS", uniqueConstraints = @UniqueConstraint(columnNames = {
 "username" }))
 public class User implements Serializable {

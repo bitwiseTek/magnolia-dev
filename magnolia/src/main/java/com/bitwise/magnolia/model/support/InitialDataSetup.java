@@ -549,7 +549,7 @@ public class InitialDataSetup {
 				}
 				
 				//Role
-				{
+				{	
 					InitialDataSetup.this.role = new RoleBuilder() {
 						{
 							role("ROLE_SUPER_ADMIN");
@@ -634,7 +634,7 @@ public class InitialDataSetup {
 							lga(InitialDataSetup.this.lga);
 							userDetails(Utils.getCustomString(10, ""), Utils.getSexes().get("ML"), ApplicationConstant.ACTIVE_STATUS, "Bangladesh, India", "+918867872801", null, "joseph.success@yahoo.com", null, "02/09/1992", "photo");
 							credentials("admin@magnoliacad.com", "$2a$10$aqNY.kMd1h2u1MbK2JUA8./3g2VM.BAB09kzHFpz6b6NQ57PBn/fy", "magnolia", Utils.getQuestions().get("Q1"), "Elizabeth", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), Utils.generateUUID(), null, null);
-							roleWithUsers(InitialDataSetup.this.role, InitialDataSetup.this.userRoles);
+							
 						}
 					}.build();
 					
@@ -645,7 +645,6 @@ public class InitialDataSetup {
 							lga(InitialDataSetup.this.lga);
 							userDetails(Utils.getCustomString(10, ""), Utils.getSexes().get("ML"), ApplicationConstant.PENDING_STATUS, "Bangladesh, India", "+918867873212", null, "jeff.atkins@yahoo.com", null, "02/02/1994", "photo");
 							credentials("jeffery.atkins@magnoliacad.com", "$2a$10$aqNY.kMd1h2u1MbK2JUA8./3g2VM.BAB09kzHFpz6b6NQ57PBn/fy", "magnolia", Utils.getQuestions().get("Q1"), "Elizabeth", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), Utils.generateUUID(), null, null);
-							roleWithUsers(InitialDataSetup.this.role, InitialDataSetup.this.userRoles);
 						}
 					}.build();
 					
@@ -656,7 +655,6 @@ public class InitialDataSetup {
 							lga(InitialDataSetup.this.lga);
 							userDetails(Utils.getCustomString(10, ""), Utils.getSexes().get("ML"), ApplicationConstant.PENDING_STATUS, "Bangladesh, India", "+918867873876", null, "eteng.omah@yahoo.com", null, "12/03/1976", "photo");
 							credentials("eteng.omah@magnoliacad.com", "$2a$10$aqNY.kMd1h2u1MbK2JUA8./3g2VM.BAB09kzHFpz6b6NQ57PBn/fy", "magnolia", Utils.getQuestions().get("Q1"), "Elizabeth", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), Utils.generateUUID(), null, null);
-							roleWithUsers(InitialDataSetup.this.role, InitialDataSetup.this.userRoles);
 						}
 					}.build();
 				}

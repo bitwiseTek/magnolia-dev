@@ -35,9 +35,9 @@ public class MailConfig {
 		{
 			setProperty("mail.smtp.auth", "true");
 			setProperty("mail.debug", "true");
-			setProperty("mail.smtp.port", "587");
+			setProperty("mail.smtp.port", "465");
 			setProperty("mail.smtp.starttls.enable", "true");
-			setProperty("mail.smtp.socketFactory.port", "587");
+			setProperty("mail.smtp.socketFactory.port", "465");
 			setProperty("mail.smtp.quitwait", "false");
 			setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		}});

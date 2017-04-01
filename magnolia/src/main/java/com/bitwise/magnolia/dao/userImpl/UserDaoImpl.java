@@ -22,7 +22,7 @@ import com.bitwise.magnolia.dao.user.UserDao;
 import com.bitwise.magnolia.model.user.User;
 
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao<User> implements UserDao {
+public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 
 	final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	
@@ -49,10 +49,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
 	@Override
 	public User findById(Long id) {
-		String sql = "select distinct u from User u where u.id = :id";
-		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("id", id);
-		List<User> users = query.getResultList();
-		User user = users.size() == 1 ? users.get(0) : null;
+		User user = getByKey(id);
 		if (user != null) {
 			Hibernate.initialize(user.getRoles());
 		}
@@ -94,12 +91,30 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 		List<User> users = query.getResultList();
 		return users;
 	}
+	
+	@Override
+	public User findByEmailAndToken(String email, String token) {
+		String sql = "select distinct u from User u where u.email = :email and u.recoveryToken = :token";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("email", email).setParameter("token", token);
+		List<User> users = query.getResultList();
+		return users.size() == 1 ? users.get(0) : null;
+	}
+
+	@Override
+	public User findByUsernameAndEmail(String username, String email) {
+		String sql = "select distinct u from User u where u.username = :username and u.primaryEmail = :email";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("username", username).setParameter("email", email);
+		List<User> users = query.getResultList();
+		return users.size() == 1 ? users.get(0) : null;
+	}
 
 	@Override
 	@Transactional
 	public User save(User user) {
 		logger.info("Adding/Updating user with ID " + user.getId());
-		return this.em.merge(user);
+		persist(user);
+		return user;
+		
 	}
 
 	@Override
@@ -110,10 +125,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 	}
 
 	@Override
-	public User findByEmailAndToken(String email, String token) {
-		String sql = "select distinct u from User u where u.email = :email and u.recoveryToken = :token";
-		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("email", email).setParameter("token", token);
+	public void deleteByUsername(String username) {
+		String sql = "select distinct u from User u where u.username = :username";
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("username", username);
 		List<User> users = query.getResultList();
-		return users.size() == 1 ? users.get(0) : null;
+		User user = users.size() == 1 ? users.get(0) : null;
+		delete(user);
 	}
 }

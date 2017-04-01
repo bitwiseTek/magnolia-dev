@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.security;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -7,7 +9,12 @@ package com.bitwise.magnolia.service.security;
  */
 import com.bitwise.magnolia.model.security.Role;
 import com.bitwise.magnolia.util.RoleList;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 02/03/17
+ *
+ */
 public interface RoleService {
 
 	public Role findById(Long id);
@@ -16,5 +23,9 @@ public interface RoleService {
 	
 	public RoleList findAllRoles();
 	
-	public Role save(Role role);
+	public List<Role> findAll();
+	
+	public Role save(Role data);
+	
+	public Role update(Role data);
 }

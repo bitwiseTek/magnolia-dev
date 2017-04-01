@@ -22,6 +22,66 @@
         <put-attribute name="current" value="auth/login" cascade="true" />
     </definition>
     
+    <definition name="users/register" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/users/register.jsp" />
+        <put-attribute name="current" value="users/register" cascade="true" />
+    </definition>
+    
+    <definition name="users/edit" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/users/edit.jsp" />
+        <put-attribute name="current" value="users/edit" cascade="true" />
+    </definition>
+    
+    <definition name="users/profile/edit" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/users/profile.jsp" />
+        <put-attribute name="current" value="users/profile/edit" cascade="true" />
+    </definition>
+    
+    <definition name="users/edit/user" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/users/edituser.jsp" />
+        <put-attribute name="current" value="users/edit/user" cascade="true" />
+    </definition>
+    
+    <definition name="users/profile/edit/user" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/users/editprofile.jsp" />
+        <put-attribute name="current" value="users/profile/edit/user" cascade="true" />
+    </definition>
+    
+    <definition name="users/password/update" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/users/passwordUpdate.jsp" />
+        <put-attribute name="current" value="users/password/update" cascade="true" />
+    </definition>
+    
+    <definition name="roles/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/security/addRole.jsp" />
+        <put-attribute name="current" value="roles/add" cascade="true" />
+    </definition>
+    
+    <definition name="permissions/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/security/addPermission.jsp" />
+        <put-attribute name="current" value="permissions/add" cascade="true" />
+    </definition>
+    
+    <definition name="roles/edit" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/security/edit.jsp" />
+        <put-attribute name="current" value="roles/edit" cascade="true" />
+    </definition>
+    
+    <definition name="permissions/edit/permission" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/security/editPermission.jsp" />
+        <put-attribute name="current" value="permissions/edit/permission" cascade="true" />
+    </definition>
+    
+    <definition name="roles/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/security/listRoles.jsp" />
+        <put-attribute name="current" value="roles/list" cascade="true" />
+    </definition>
+    
+    <definition name="permissions/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/security/listP.jsp" />
+        <put-attribute name="current" value="permissions/list" cascade="true" />
+    </definition>
+    
     <definition name="resourceNotFound" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/page-not-found.jsp" />
         <put-attribute name="current" value="resourceNotFound" cascade="true" />

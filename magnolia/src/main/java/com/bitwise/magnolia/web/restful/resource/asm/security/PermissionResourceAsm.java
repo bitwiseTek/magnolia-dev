@@ -24,7 +24,7 @@ public class PermissionResourceAsm extends ResourceAssemblerSupport<Permission, 
 	public PermissionResource toResource(Permission permission) {
 		PermissionResource res = new PermissionResource();
 		res.setRid(permission.getId());
-		res.setPermission(permission.getPermissions());
+		res.setPermissions(permission.getPermissions());
 		res.add(linkTo(methodOn(PermissionController.class).findPermission(permission.getId())).withSelfRel());
 		return res;
 	}

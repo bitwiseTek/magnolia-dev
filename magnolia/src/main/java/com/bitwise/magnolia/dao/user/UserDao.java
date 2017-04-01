@@ -7,10 +7,9 @@ package com.bitwise.magnolia.dao.user;
  */
 import java.util.List;
 
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.user.User;
 
-public interface UserDao extends BaseDao<User> {
+public interface UserDao {
 
 	public User findById(Long id);
 	
@@ -18,9 +17,13 @@ public interface UserDao extends BaseDao<User> {
 	
 	public User findBySystemId(String systemId);
 	
+	public User findByUsernameAndEmail(String username, String email);
+	
 	public User findByEmailAndToken(String email, String token);
 	
 	public User save(User user);
+	
+	public void deleteByUsername(String username);
 	
 	public void delete(User user);
 	

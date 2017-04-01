@@ -30,6 +30,8 @@ public class Utils {
 
     private static Map<String, String> courseTypes = new TreeMap<String, String>();
     
+    private static Map<String, String> statuses = new TreeMap<String, String>();
+    
     private static Map<String, String> optionalityTypes = new TreeMap<String, String>();
     
     private static Map<String, String> partTypes = new TreeMap<String, String>();
@@ -250,6 +252,22 @@ public class Utils {
 		return courseTypes;
 	}
 	
+	public static Map<String, String> listOfStatuses() {
+		statuses.put("active", "ACTIVE");
+		statuses.put("inactive", "INACTIVE");
+		statuses.put("pending", "PENDING");
+		statuses.put("completed", "COMPLETED");
+		
+		return statuses;
+	}
+	
+	public static Map<String, String> getStatuses() {
+		for (String option : listOfStatuses().values()) {
+			System.out.println(option);
+		}
+		return statuses;
+	}
+	
 	public static Map<String, String> listOfOptionalities() {
 		optionalityTypes.put("MA", "MANDATORY");
 		optionalityTypes.put("OP", "OPTIONAL");
@@ -314,8 +332,8 @@ public class Utils {
 	}
 	
 	public static Map<String, String> listOfSexes() {
-		sexes.put("ML", "MALE");
-		sexes.put("FL", "FEMALE");
+		sexes.put("MALE", "Male");
+		sexes.put("FEMALE", "Female");
 		return sexes;
 	}
 	

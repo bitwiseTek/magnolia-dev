@@ -41,10 +41,6 @@ public class Role implements Serializable {
 		
 	}
 	
-	public Role(String role) {
-		this.roles = role;
-	}
-	
 	private Long id;
 	
 	private String roles;
@@ -62,7 +58,7 @@ public class Role implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name="ROLES")
+	@Column(name="ROLES", nullable=false, unique=true)
 	public String getRoles() {
 		return roles;
 	}

@@ -1,17 +1,14 @@
 package com.bitwise.magnolia.web.restful.resource.user;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  *  
  * @author Sika Kay
  * @date 22/02/17
  *
  */
-import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.hateoas.ResourceSupport;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.common.Utils;
@@ -20,9 +17,6 @@ import com.bitwise.magnolia.model.common.State;
 import com.bitwise.magnolia.model.user.User;
 
 public class UserResource extends ResourceSupport {
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
 
 	public UserResource() {
 		
@@ -56,7 +50,7 @@ public class UserResource extends ResourceSupport {
 	
 	private String password;
 	
-	private String tempPassword;
+	private String tempPassword = Utils.generateRandomPassword();
 	
 	private String secretQuestion;
 	
@@ -81,7 +75,7 @@ public class UserResource extends ResourceSupport {
 	private String recoveryTime;
 	
 	private String recoveryToken;
-
+	
 	public Long getRid() {
 		return rid;
 	}
@@ -179,6 +173,7 @@ public class UserResource extends ResourceSupport {
 	}
 
 	public String getUsername() {
+		username = firstName.toLowerCase().concat(".").concat(lastName.toLowerCase()).concat("@magnoliacad.com");
 		return username;
 	}
 
@@ -305,7 +300,8 @@ public class UserResource extends ResourceSupport {
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setMiddleName(middleName);
-		user.setPassword(this.passwordEncoder.encode(tempPassword));
+		user.setTempPassword(tempPassword);
+		user.setPassword(tempPassword);
 		user.setUsername(firstName.toLowerCase().concat(".").concat(lastName.toLowerCase()).concat("@magnoliacad.com"));
 		user.setPrimaryEmail(primaryEmail);
 		user.setPrimaryNumber(primaryNumber);
@@ -314,18 +310,17 @@ public class UserResource extends ResourceSupport {
 		user.setStreetAddress(streetAddress);
 		user.setSystemId(Utils.getCustomString(10, ""));
 		user.setSex(sex);
-		user.setSecretQuestion(Utils.getQuestions().get("Q1"));
+		user.setSecretQuestion(secretQuestion);
 		user.setSecretAnswer(secretAnswer);
 		user.setOneTimeToken(Utils.generateUUID());
 		user.setState(new State(Long.parseLong(state)));
 		user.setLga(new LGA(Long.parseLong(lga)));
-		user.setPhotoBase64(Utils.saveBase64ToPath(photoBase64, ApplicationConstant.SCHOOL_ALIAS, systemId + "_photo"));
-		user.setTempPassword(tempPassword);
-		user.setStatus(ApplicationConstant.PENDING_STATUS);
+		user.setPhotoBase64(Utils.saveBase64ToPath(photoBase64, ApplicationConstant.SCHOOL_ALIAS, firstName.toLowerCase().concat(".").concat(lastName.toLowerCase()).concat("@magnoliacad.com") + ".png"));
+		user.setStatus(status);
 		user.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		user.setLastLogout(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
-		user.setRecoveryTime(new DateTime(DateTime.parse(recoveryTime)));
+		user.setRecoveryTime(null);
 		user.setRecoveryToken(recoveryToken);
 		return user;
 		

@@ -24,6 +24,7 @@ import com.bitwise.magnolia.model.security.Role;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.user.UserService;
 import com.bitwise.magnolia.web.exception.AccountLockedException;
+import com.bitwise.magnolia.web.exception.AccountPendingException;
 
 @Service("magnoliaUserDetailsService")
 public class MagnoliaUserDetailsService implements UserDetailsService {
@@ -45,15 +46,15 @@ public class MagnoliaUserDetailsService implements UserDetailsService {
 		
 		if (systemUser.getStatus().equals(ApplicationConstant.PENDING_STATUS)) {
 			try {
-				throw new AccountLockedException("User Account is still under review, check email for updates", "validation.user.locked");
-			} catch (AccountLockedException e) {
+				throw new AccountPendingException("User Account is still under review, check email for updates", "validation.user.locked");
+			} catch (AccountPendingException e) {
 				e.printStackTrace();
 			}
 		}
 		
 		if (systemUser.getStatus().equals(ApplicationConstant.INACTIVE_STATUS)) {
 			try {
-				throw new AccountLockedException("User Account is has been deactivated", "validation.user.locked");
+				throw new AccountLockedException("User Account has been deactivated", "validation.user.deactivated");
 			} catch (AccountLockedException e) {
 				e.printStackTrace();
 			}

@@ -51,7 +51,7 @@ public class EmailServiceImpl implements EmailService {
 		helper.addInline("magnoliaImage", image);
 		helper.setFrom("support@ntradex.com");
 		helper.setTo(account.getPrimaryEmail());
-		helper.setSubject("Welcome to Magnolia Academy " + firstName + " " + lastName);
+		helper.setSubject("Welcome to Magnolia Academy");
 		helper.setSentDate(new Date());
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("firstName", firstName);
@@ -87,6 +87,32 @@ public class EmailServiceImpl implements EmailService {
 		model.put("email", email);
 		model.put("requestMessage", requestMessage);
 		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "passwordTemplate.vm", "UTF-8", model);
+		helper.setText(emailText, true);
+		mailSender.send(message);
+	}
+
+	@Override
+	public void sendUpdateEmail(String toEmail, UserResource account) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		Resource image = new ClassPathResource("top_logo.png");
+		String firstName = account.getFirstName();
+		String lastName = account.getLastName();
+		String password = account.getTempPassword();
+		String updateMessage = "Your user profile has been updated";
+		String passwordDetails = "New password;";
+		helper.addInline("magnoliaImage", image);
+		helper.setFrom("support@ntradex.com");
+		helper.setTo(account.getPrimaryEmail());
+		helper.setSubject("Magnolia User Update");
+		helper.setSentDate(new Date());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("updateMessage", updateMessage);
+		model.put("passwordDetails", passwordDetails);
+		model.put("password", password);
+		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "updateTemplate.vm", "UTF-8", model);
 		helper.setText(emailText, true);
 		mailSender.send(message);
 	}

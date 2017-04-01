@@ -17,7 +17,7 @@ import com.bitwise.magnolia.dao.common.StateDao;
 import com.bitwise.magnolia.model.common.State;
 
 @Repository("stateDao")
-public class StateDaoImpl extends AbstractDao<Object> implements StateDao {
+public class StateDaoImpl extends AbstractDao<Long, State> implements StateDao {
 
 	@PersistenceContext
 	private EntityManager em;

@@ -21,6 +21,7 @@ public class UserValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "username", "required", new Object[] {"Username"});
 		ValidationUtils.rejectIfEmpty(errors, "password", "required", new Object[] {"Password"});
 		ValidationUtils.rejectIfEmpty(errors, "secretAnswer", "required", new Object[] {"Secret Answer"});
+		ValidationUtils.rejectIfEmpty(errors, "primaryEmail", "required", new Object[] {"Primary Email"});
 	}
 
 }

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -31,6 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.bitwise.magnolia" })
+@EnableAspectJAutoProxy(proxyTargetClass=true)
 @PropertySource(value = { "classpath:application.properties" })
 public class InfrastructureContextConfig {
  
@@ -53,6 +55,8 @@ public class InfrastructureContextConfig {
 		props.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
 		props.put("hibernate.hbm2dll.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
 		props.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+		props.put("hibernate.cache.use_second_level_cache", true);
+		props.put("hibernate.cache.region.factory_class", org.hibernate.cache.ehcache.EhCacheRegionFactory.class.getName());
 		
 		//c3p0 Settings
 		props.put("hibernate.c3p0.min_size", environment.getRequiredProperty("hibernate.c3p0.min_size"));

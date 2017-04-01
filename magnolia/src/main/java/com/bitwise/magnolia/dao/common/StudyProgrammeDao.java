@@ -7,16 +7,9 @@ package com.bitwise.magnolia.dao.common;
  */
 import java.util.List;
 
-/**
- *  
- * @author Sika Kay
- * @date 26/02/17
- *
- */
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.common.StudyProgramme;
 
-public interface StudyProgrammeDao extends BaseDao<Object> {
+public interface StudyProgrammeDao {
 
 	public StudyProgramme findById(Long id);
 	

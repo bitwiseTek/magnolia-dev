@@ -13,6 +13,8 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
@@ -20,20 +22,20 @@ import com.bitwise.magnolia.dao.security.RoleDao;
 import com.bitwise.magnolia.model.security.Role;
 
 @Repository("roleDao")
-public class RoleDaoImpl extends AbstractDao<Object> implements RoleDao {
+public class RoleDaoImpl extends AbstractDao<Long, Role> implements RoleDao {
 
+	final Logger logger = LoggerFactory.getLogger(RoleDaoImpl.class);
+	
 	@PersistenceContext
 	private EntityManager em;
 	
 	@Override
 	public Role findById(Long id) {
-		TypedQuery<Role> query = em.createNamedQuery("Role.findById", Role.class).setParameter("id", id);
-		List<Role> roles = query.getResultList();
-		Role userRole = roles.size() == 1 ? roles.get(0) : null;
-		if (userRole != null) {
-			Hibernate.initialize(userRole.getPermissions());
+		Role role = getByKey(id);
+		if (role != null) {
+			Hibernate.initialize(role.getPermissions());
 		}
-		return userRole;
+		return role;
 	}
 
 	@Override
@@ -55,7 +57,8 @@ public class RoleDaoImpl extends AbstractDao<Object> implements RoleDao {
 	@Override
 	@Transactional
 	public Role save(Role role) {
-		return this.em.merge(role);
+		logger.info("Adding/Updating role with ID " + role.getId());
+		persist(role);
+		return role;
 	}
-
 }

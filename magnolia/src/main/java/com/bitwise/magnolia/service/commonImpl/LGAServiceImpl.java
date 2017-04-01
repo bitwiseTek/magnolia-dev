@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.commonImpl;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -39,8 +41,15 @@ public class LGAServiceImpl implements LGAService {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public LGA findByName(String name) {
 		return this.lgaDao.findByName(name);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<LGA> findAll() {
+		return this.lgaDao.findAll();
 	}
 
 }

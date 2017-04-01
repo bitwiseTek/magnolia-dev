@@ -14,5 +14,7 @@ public interface EmailService {
 	
 	public void sendEmailWithAttachment(String toEmail, UserResource account) throws MessagingException;
 	
+	public void sendUpdateEmail(String toEmail, UserResource account) throws MessagingException;
+	
 	public void sendEmailWithToken(String toEmail, User user) throws MessagingException;
 }

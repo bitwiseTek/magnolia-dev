@@ -7,10 +7,9 @@ package com.bitwise.magnolia.dao.school;
  */
 import java.util.List;
 
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.school.Department;
 
-public interface DepartmentDao extends BaseDao<Department> {
+public interface DepartmentDao {
 
 	//Gets a list of active Departments pointing to a specific facultyId
 	//apiKey is used to enforce security on api calls

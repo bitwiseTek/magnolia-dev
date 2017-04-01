@@ -57,7 +57,7 @@ public class UserController {
 	@Autowired
 	private EmailService emailService;
 	
-	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
 	@ApiOperation(value="Retrieves all the users", response=User.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/"}, 
 	method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -89,7 +89,7 @@ public class UserController {
 		}
 	}
 	
-	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
 	@ApiOperation(value="Retrieves all the users that are active", response=User.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/status/{status}"}, 
 	method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -135,7 +135,7 @@ public class UserController {
 	}
 	
 	@ApiOperation(value="Creates a new user", notes="The newly created user ID will be sent in the location response header")
-	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/user/register"}, 
+	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/register"}, 
 	method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value={@ApiResponse(code=201, message="User created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating user", response=ErrorDetail.class)})
 	public ResponseEntity<UserResource> createUser(@RequestBody UserResource sentUser) throws MessagingException {
@@ -155,16 +155,17 @@ public class UserController {
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/users/{id}"}, 
 	method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value={@ApiResponse(code=200, message="User updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find user", response=ErrorDetail.class)})
-	public ResponseEntity<UserResource> updateUser(@PathVariable Long id, @RequestBody UserResource user) {
-		logger.info("Updating user with ID " + user.getRid());
+	public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) /*throws MessagingException*/ {
+		logger.info("Updating user with ID " + updatedUser.getId());
+		System.err.println(updatedUser.getId());
 		try {
-			User updatedUser = userService.findById(id);
+			updatedUser = userService.findById(id);
 			if (updatedUser != null) {
-				updatedUser = userService.update(user.toUser());
-				UserResource res = new UserResourceAsm().toResource(updatedUser);
-				return new ResponseEntity<UserResource>(res, HttpStatus.OK);
+				userService.update(updatedUser);
+				//this.emailService.sendUpdateEmail(updatedUser.getPrimaryEmail(), updatedUser);
+				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
-				return new ResponseEntity<UserResource>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 		} catch(EntityDoesNotExistException e) {
 			throw new ResourceNotFoundException("Account does not exist");

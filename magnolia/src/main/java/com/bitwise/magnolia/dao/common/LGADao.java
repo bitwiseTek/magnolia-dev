@@ -6,10 +6,9 @@ package com.bitwise.magnolia.dao.common;
  */
 import java.util.List;
 
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.common.LGA;
 
-public interface LGADao extends BaseDao<Object> {
+public interface LGADao {
 
 	public LGA findById(Long id);
 	

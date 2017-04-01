@@ -13,10 +13,9 @@ import java.util.List;
  * @date 01/03/17
  *
  */
-import com.bitwise.magnolia.common.BaseDao;
 import com.bitwise.magnolia.model.school.SubSchool;
 
-public interface SubSchoolDao extends BaseDao<Object> {
+public interface SubSchoolDao {
 
 	public SubSchool findById(Long id);
 	

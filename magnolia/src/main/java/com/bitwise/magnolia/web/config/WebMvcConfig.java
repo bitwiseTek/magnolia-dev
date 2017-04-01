@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.js.ajax.AjaxUrlBasedViewResolver;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.multipart.MultipartResolver;
@@ -34,6 +35,10 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
 import com.bitwise.magnolia.interceptors.SchoolInterceptor;
+import com.bitwise.magnolia.util.converter.PermissionConverter;
+import com.bitwise.magnolia.util.converter.RoleConverter;
+import com.bitwise.magnolia.util.converter.StaffToSubjectConverter;
+import com.bitwise.magnolia.util.converter.StudentToSubjectConverter;
 import com.bitwise.magnolia.web.security.CredentialValidation;
 import com.bitwise.magnolia.web.security.MagnoliaAuthenticationProvider;
 import com.bitwise.magnolia.web.security.MagnoliaUserContext;
@@ -136,6 +141,26 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     }
     
     @Bean
+    public RoleConverter roleToUserConverter() {
+    	return new RoleConverter();
+    }
+    
+    @Bean
+    public PermissionConverter permissionToRoleConverter() {
+    	return new PermissionConverter();
+    }
+    
+    @Bean
+    public StudentToSubjectConverter studentToSubjectConverter() {
+    	return new StudentToSubjectConverter();
+    }
+    
+    @Bean
+    public StaffToSubjectConverter staffToSubjectConverter() {
+    	return new StaffToSubjectConverter();
+    }
+    
+    @Bean
     public MagnoliaAuthenticationProvider authenticationProvider() {
     	return new MagnoliaAuthenticationProvider();
     }
@@ -153,5 +178,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     @Bean
     public MagnoliaUserContext userContext() {
     	return new MagnoliaUserContext();
+    }
+    
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(roleToUserConverter());
+        registry.addConverter(permissionToRoleConverter());
+        registry.addConverter(studentToSubjectConverter());
+        registry.addConverter(staffToSubjectConverter());
     }
 }

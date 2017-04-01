@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.security;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -7,7 +9,12 @@ package com.bitwise.magnolia.service.security;
  */
 import com.bitwise.magnolia.model.security.Permission;
 import com.bitwise.magnolia.util.PermissionList;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 02/03/17
+ *
+ */
 public interface PermissionService {
 
 	public Permission findById(Long id);
@@ -16,5 +23,9 @@ public interface PermissionService {
 	
 	public PermissionList findAllPermissions();
 	
-	public Permission save(Permission permission);
+	public List<Permission> findAll();
+	
+	public Permission save(Permission data);
+	
+	public Permission update(Permission data);
 }

@@ -5,6 +5,8 @@ package com.bitwise.magnolia.service.user;
  * @date 18/02/17
  *
  */
+import java.util.List;
+
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.util.UserList;
 
@@ -14,7 +16,11 @@ public interface UserService {
 	
 	public User findByUsername(String username);
 	
+	public User findByUsernameAndEmail(String username, String email);
+	
 	public User findByEmailAndToken(String email, String token);
+	
+	public List<User> findAll();
 	
 	public UserList findAllUsers();
 	
@@ -26,9 +32,11 @@ public interface UserService {
 	
 	public User getAccount(String username);
 	
-	public User save(User user);
+	public User save(User data);
 	
 	public void delete(User user);
 	
-	public User update(User user);
+	public void deleteByUsername(String username);
+	
+	public User update(User data);
 }

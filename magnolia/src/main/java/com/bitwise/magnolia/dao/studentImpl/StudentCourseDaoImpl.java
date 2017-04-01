@@ -20,7 +20,7 @@ import com.bitwise.magnolia.dao.student.StudentCourseDao;
 import com.bitwise.magnolia.model.student.StudentCourse;
 
 @Repository("studentCourseDao")
-public class StudentCourseDaoImpl extends AbstractDao<Object> implements StudentCourseDao {
+public class StudentCourseDaoImpl extends AbstractDao<Long, StudentCourse> implements StudentCourseDao {
 	
 	@PersistenceContext
 	private EntityManager em;

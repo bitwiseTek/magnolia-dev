@@ -19,7 +19,7 @@ import com.bitwise.magnolia.dao.course.CourseLengthDao;
 import com.bitwise.magnolia.model.course.CourseLength;
 
 @Repository("courseLengthDao")
-public class CourseLengthDaoImpl extends AbstractDao<Object> implements CourseLengthDao {
+public class CourseLengthDaoImpl extends AbstractDao<Long, CourseLength> implements CourseLengthDao {
 
 	@PersistenceContext
 	private EntityManager em;

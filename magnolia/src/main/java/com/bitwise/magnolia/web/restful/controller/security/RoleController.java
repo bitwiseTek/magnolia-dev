@@ -94,7 +94,7 @@ public class RoleController {
 			headers.setLocation(URI.create(res.getLink("self").getHref()));
 			return new ResponseEntity<RoleResource>(res, headers, HttpStatus.CREATED);
 		} catch(EntityExistsException e) {
-			throw new ConflictException("Role already exxists");
+			throw new ConflictException("Role already exists");
 		}
 	}
 	

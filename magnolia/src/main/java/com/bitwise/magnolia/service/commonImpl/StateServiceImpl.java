@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.commonImpl;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -12,7 +14,11 @@ import com.bitwise.magnolia.dao.common.StateDao;
 import com.bitwise.magnolia.model.common.State;
 import com.bitwise.magnolia.service.common.StateService;
 import com.bitwise.magnolia.util.StateList;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 22/02/17
+ */
 @Transactional
 @Service("stateService")
 public class StateServiceImpl implements StateService {
@@ -35,6 +41,11 @@ public class StateServiceImpl implements StateService {
 	@Override
 	public State findByName(String name) {
 		return this.stateDao.findByName(name);
+	}
+
+	@Override
+	public List<State> findAll() {
+		return this.stateDao.findAllStates();
 	}
 
 }

@@ -62,20 +62,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Max-Age", "3600"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "x-requested-with")).and()
 				.sessionManagement().sessionFixation().newSession().and().authorizeRequests()
-				.antMatchers("/", "/index", "/auth/login",  "/defaulterror", "/resourceNotFound",
+				.antMatchers("/", "/index", "/auth/login",  "/users/register", "/defaulterror", "/resourceNotFound",
 						"/dataAccessFailure")
 				.permitAll()
-				.antMatchers("/courses/**", "/projects/**", "/users/**", "/students/**")
-				.authenticated().antMatchers("/admin/**", "/users/searchusers", "/users/searchusersdialog", 
+				.antMatchers("/users/**", "/course/**", "/programme/**", "/programme/category/**", "/school/**")
+				.authenticated().antMatchers("/admin/**", "/users/edit/users", "/users/searchusersdialog", 
 						"/users/createuser", "/students/createstudent", "/students/searchstudents", 
 						"/users/edituser", "/users/searchuserdialog", "/courses/searchcourses", 
 						"/projects/searchprojects", "/staff/createstaff")
 				.access("hasRole('ADMINISTRATOR') or hasRole('SUPER_ADMIN')").and().formLogin().loginPage("/auth/login")
 				.loginProcessingUrl("/j_spring_security_check").usernameParameter("username")
-				.passwordParameter("password").defaultSuccessUrl("/").failureUrl("/auth/login?error").and()
+				.passwordParameter("password").defaultSuccessUrl("/").failureUrl("/auth/login?error")
+				.failureUrl("/auth/login?locked").and()
 				.logout().logoutUrl("/auth/logout").logoutSuccessUrl("/auth/login?logout")
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID").and().httpBasic().realmName("Magnolia Web")
-				.and().csrf().and().exceptionHandling().accessDeniedPage("/accessdenied");
+				.and().csrf().disable().exceptionHandling().accessDeniedPage("/accessdenied");
 	}
 	
 	protected void configureRestful(HttpSecurity http) throws Exception {
@@ -88,9 +89,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.addHeaderWriter(new StaticHeadersWriter("Access-Control-Max-Age", "3600"))
 			.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "x-requested-with")).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-			.antMatchers("/api/v1/mg/restful/auth/login", "/api/v1/mg/restful/states/", "/api/v1/mg/restful/lga/")
+			.antMatchers("/api/v1/mg/restful/auth/login", "/api/v1/mg/restful/states/", "/api/v1/mg/restful/lgas/", 
+					"/api/v1/mg/restful/users/register")
 			.permitAll()
-			.antMatchers("/api/v1/mg/restful/users/**", "/api/v1/mg/restful/students/**", "/api/v1/mg/restful/staff/**")
+			.antMatchers("/api/v1/mg/restful/users/profile", "/api/v1/mg/restful/students/**", "/api/v1/mg/restful/staff/**")
 			.authenticated().antMatchers("/api/v1/mg/restful/users/", "/api/v1/mg/restful/students/", "/api/v1/mg/restful/staff/")
 			.access("hasRole('SUPER_ADMIN')")
 			.antMatchers("/api/v1/mg/restful/users/", "/api/v1/mg/restful/students/", "/api/v1/mg/restful/staff/")

@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="container">
 			<spring:url value="/http://www.twitter.com/manageme" var="manageMeUrl"></spring:url>
-			 <p class="foottext"><img src="<c:url value="/resources/assets/img/footer_icon.png" /> "  height="30"  alt="" /><spring:message code="generic.applicationTitle" /> &reg;&nbsp;2016. Powered by <a href="${manageMeUrl}" target="_blank"  class="foottext2"><spring:message code="footer.companyName" /></a></p>
+			 <p class="foottext"><img src="<c:url value="/resources/assets/img/footer_icon.png" /> "  height="30"  alt="" /><spring:message code="generic.applicationTitle" /> &reg;&nbsp;2017. Powered by <a href="${manageMeUrl}" target="_blank"  class="foottext2"><spring:message code="footer.companyName" /></a></p>
 		</div>
 	</div>
 </div>

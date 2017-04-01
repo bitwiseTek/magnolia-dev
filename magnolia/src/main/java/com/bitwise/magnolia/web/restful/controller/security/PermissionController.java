@@ -94,7 +94,7 @@ public class PermissionController {
 			headers.setLocation(URI.create(res.getLink("self").getHref()));
 			return new ResponseEntity<PermissionResource>(res, headers, HttpStatus.CREATED);
 		} catch(EntityExistsException e) {
-			throw new ConflictException("Permission already exxists");
+			throw new ConflictException("Permission already exists");
 		}
 	}
 	
