@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AccountExpiredException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,12 +21,9 @@ import org.springframework.stereotype.Service;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.security.Permission;
-//import com.bitwise.magnolia.model.security.Permission;
 import com.bitwise.magnolia.model.security.Role;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.user.UserService;
-import com.bitwise.magnolia.web.exception.AccountLockedException;
-import com.bitwise.magnolia.web.exception.AccountPendingException;
 
 @Service("magnoliaUserDetailsService")
 public class MagnoliaUserDetailsService implements UserDetailsService {
@@ -46,16 +45,16 @@ public class MagnoliaUserDetailsService implements UserDetailsService {
 		
 		if (systemUser.getStatus().equals(ApplicationConstant.PENDING_STATUS)) {
 			try {
-				throw new AccountPendingException("User Account is still under review, check email for updates", "validation.user.locked");
-			} catch (AccountPendingException e) {
+				throw new BadCredentialsException("User Account is still under review, check email for updates");
+			} catch (BadCredentialsException e) {
 				e.printStackTrace();
 			}
 		}
 		
 		if (systemUser.getStatus().equals(ApplicationConstant.INACTIVE_STATUS)) {
 			try {
-				throw new AccountLockedException("User Account has been deactivated", "validation.user.deactivated");
-			} catch (AccountLockedException e) {
+				throw new AccountExpiredException("User Account has been deactivated");
+			} catch (AccountExpiredException e) {
 				e.printStackTrace();
 			}
 		}

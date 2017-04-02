@@ -5,11 +5,9 @@ package com.bitwise.magnolia.web.exception;
  * @date 19/02/17
  *
  */
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.security.core.AuthenticationException;
 
-@ResponseStatus(value = HttpStatus.FORBIDDEN)
-public class AccountLockedException extends Exception {
+public class AccountLockedException extends AuthenticationException {
 
 	private static final long serialVersionUID = 1L;
 	

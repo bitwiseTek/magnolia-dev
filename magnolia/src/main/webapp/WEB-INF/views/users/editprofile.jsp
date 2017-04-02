@@ -64,7 +64,8 @@
 	                <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
 	                  <div class="col-md-6 col-sm-6">
 	                  	<label for="priEmail" class="control-label">Primary Email:</label>
-		              	<form:input class="form-control" id="priEmail" name="priEmail" placeholder="Primary Email" path="primaryEmail" />
+	                  	<label for="priEmail" class="form-control">${user.primaryEmail}</label>
+		              	<form:hidden class="form-control" id="priEmail" name="priEmail" placeholder="Primary Email" path="primaryEmail" />
 		              	<form:errors class="error" path="primaryEmail" />
 		              </div>
 		              
@@ -161,23 +162,6 @@
 	               	
 	               	<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
 	               		<div class="col-md-6 col-sm-6">
-	               			<label for="status" class="control-label">Status:</label>
-		                	<form:select id="status" path="status" style="width:100%">
-								<form:option value="${currentStatus}">${currentStatus}</form:option>
-								<form:options items="${statuses}"></form:options>
-							</form:select>
-							<form:errors class="error" path="status" />
-						</div>
-	                    
-	                  	<div class="col-md-6 col-sm-6">
-	                  		<label for="createdAt" class="control-label">Created At:</label>
-	                  		<label for="createdAt" class="form-control">${user.createdAt}</label>
-	                  		<form:hidden class="form-control" id="createdAt" name="createdAt" placeholder="Created At" path="createdAt" />
-	                    </div>
-	               	</div>
-	               	
-	               	<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
-	               		<div class="col-md-6 col-sm-6">
 	               			<label for="lastLogin" class="control-label">Last Login:</label>
 	                  		<label for="lastLogin" class="form-control">${user.lastLogin}</label>
 	                  		<form:hidden class="form-control" id="lastLogin" name="lastLogin" placeholder="Last Login" path="lastLogin" />
@@ -209,6 +193,8 @@
              </div>
              <form:hidden id="password" name="password" path="password" />
              <form:hidden id="tempPassword" name="tempPassword" path="tempPassword" />
+             <form:hidden id="status" name="status" path="status" />
+             <form:hidden id="createdAt" name="createdAt" path="createdAt" />
         </form:form>
 	</div>
 </div>

@@ -5,10 +5,19 @@ package com.bitwise.magnolia.web.security.config;
  * @date 19/02/17
  *
  */
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+//import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,8 +25,14 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 import com.bitwise.magnolia.web.security.MagnoliaAuthenticationProvider;
@@ -33,10 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private MagnoliaUserDetailsService userDetailsService;
-
-	/*
-	 * @Autowired private Environment env;
-	 */
+	
+	/*@Autowired 
+	private Environment env;*/
+	
 
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authenticationProvider);
@@ -65,16 +80,43 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/index", "/auth/login",  "/users/register", "/defaulterror", "/resourceNotFound",
 						"/dataAccessFailure")
 				.permitAll()
-				.antMatchers("/users/**", "/course/**", "/programme/**", "/programme/category/**", "/school/**")
+				.antMatchers("/users/**", "/courses/**", "/programmes/**", "/programme/categories/**", "/schools/**")
 				.authenticated().antMatchers("/admin/**", "/users/edit/users", "/users/searchusersdialog", 
 						"/users/createuser", "/students/createstudent", "/students/searchstudents", 
 						"/users/edituser", "/users/searchuserdialog", "/courses/searchcourses", 
 						"/projects/searchprojects", "/staff/createstaff")
 				.access("hasRole('ADMINISTRATOR') or hasRole('SUPER_ADMIN')").and().formLogin().loginPage("/auth/login")
 				.loginProcessingUrl("/j_spring_security_check").usernameParameter("username")
-				.passwordParameter("password").defaultSuccessUrl("/").failureUrl("/auth/login?error")
-				.failureUrl("/auth/login?locked").and()
-				.logout().logoutUrl("/auth/logout").logoutSuccessUrl("/auth/login?logout")
+				.passwordParameter("password")
+				.failureHandler(new AuthenticationFailureHandler() {
+					
+					@Override
+					public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
+							throws IOException, ServletException {
+						if (exception instanceof BadCredentialsException) {
+							response.sendRedirect("/magnolia/auth/login?error");
+						} else if (exception.getClass().isAssignableFrom(DisabledException.class)) {
+							response.sendRedirect("/magnolia/auth/login?deactivated");
+						} else {
+							response.sendRedirect("/magnolia/auth/login?locked");
+						}
+					}
+				})
+				.defaultSuccessUrl("/")
+				.and()
+				.logout().logoutUrl("/auth/logout")
+				.logoutSuccessHandler(new LogoutSuccessHandler() {
+					
+					@Override
+					public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
+							throws IOException, ServletException {
+						auth = SecurityContextHolder.getContext().getAuthentication();
+						if (auth != null) {
+							new SecurityContextLogoutHandler().logout(request, response, auth);
+						}
+						response.sendRedirect("/magnolia/auth/login?logout");
+					}
+				})
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID").and().httpBasic().realmName("Magnolia Web")
 				.and().csrf().disable().exceptionHandling().accessDeniedPage("/accessdenied");
 	}

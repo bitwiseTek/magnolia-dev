@@ -41,9 +41,9 @@ public class MagnoliaAuthenticationProvider implements AuthenticationProvider {
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		for (com.bitwise.magnolia.model.security.Role role : systemUser.getRoles()) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoles()));
-			/*for (com.bitwise.magnolia.model.security.Permission permission : role.getPermissions()) {
+			for (com.bitwise.magnolia.model.security.Permission permission : role.getPermissions()) {
 				grantedAuthorities.add(new SimpleGrantedAuthority(permission.getPermissions()));
-			}*/
+			}
 		}
 		userContext.setCurrentUser(systemUser);
 		return new UsernamePasswordAuthenticationToken(systemUser.getUsername(), systemUser.getPassword(), grantedAuthorities);

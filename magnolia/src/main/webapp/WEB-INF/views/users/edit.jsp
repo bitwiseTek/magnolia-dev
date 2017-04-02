@@ -21,7 +21,7 @@
         	<c:if test="${not empty users}">
 		 					<table width="50%" border="0" cellspacing="10" cellpadding="10">
 			 					<c:forEach items="${users}" var="user">
-			 						<spring:url value="/users/profile/edit/user/${user.id}/" var="editSystemUser" />
+			 						<spring:url value="/users/edit/user/${user.id}/" var="editSystemUser" />
 									<spring:url value="/users/show/user/${user.id}/" var="showSystemUser" />
 										<tr>
 											<td><label for="username" class="form-control">${user.username}</label></td>

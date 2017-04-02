@@ -152,7 +152,7 @@ public class MVCUserController {
 			this.userService.update(user);
 			return "redirect:/users/edit/user/" + UrlUtil.encodeUrlPathSegment(user.getId().toString(), request);
 		} else {
-			return "redirect:/users/edit/user" + UrlUtil.encodeUrlPathSegment(user.getId().toString(), request);
+			return "redirect:/users/edit/user/" + UrlUtil.encodeUrlPathSegment(user.getId().toString(), request);
 		}
 	}
 	

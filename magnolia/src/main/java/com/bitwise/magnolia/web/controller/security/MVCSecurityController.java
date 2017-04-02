@@ -66,7 +66,7 @@ public class MVCSecurityController {
 		return "permissions/list";
 	}
 	
-	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('SUPER_ADMIN')")
 	@RequestMapping(value="/roles/edit/{id}", method={RequestMethod.GET})
 	public String requestEditRole(@PathVariable Long id, @ModelAttribute Role role, ModelMap model, HttpServletRequest request) {
 		role = roleService.findById(id);
@@ -76,7 +76,7 @@ public class MVCSecurityController {
 		return "roles/edit";
 	}
 	
-	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('SUPER_ADMIN')")
 	@RequestMapping(value="/roles/edit/{id}", method={RequestMethod.PUT})
 	public String editRole(@ModelAttribute Role role, BindingResult result, HttpServletRequest request) {
 		if (!result.hasErrors()) {
