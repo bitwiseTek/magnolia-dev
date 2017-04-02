@@ -51,7 +51,7 @@ public class CredentialValidation {
 			throw new DisabledException(env.getProperty("users.login.deactivated"));
 		}
 		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
-		user.setLastLogout(org.joda.time.format.DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss").print(DateTime.now().plusMinutes(10)));
+		user.setLastLogout(org.joda.time.format.DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss").print(DateTime.now().minusMinutes(19)));
 		this.userService.update(user);
 		return user;
 	}
