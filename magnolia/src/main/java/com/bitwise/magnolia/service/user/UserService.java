@@ -38,5 +38,7 @@ public interface UserService {
 	
 	public void deleteByUsername(String username);
 	
-	public User update(User data);
+	public User updateUser(User data);
+	
+	public User updateProfile(User data);
 }

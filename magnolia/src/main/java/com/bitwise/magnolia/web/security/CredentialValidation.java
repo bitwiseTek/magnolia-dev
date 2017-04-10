@@ -52,7 +52,7 @@ public class CredentialValidation {
 		}
 		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		user.setLastLogout(org.joda.time.format.DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss").print(DateTime.now().minusMinutes(19)));
-		this.userService.update(user);
+		this.userService.updateUser(user);
 		return user;
 	}
 	

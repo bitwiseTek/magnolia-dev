@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -73,6 +74,8 @@ public class MVCUserController {
 	public String requestProfileUsersPage(ModelMap model) {
 		List<User> users = userService.findAll();
 		model.addAttribute("users", users);
+		String currentTime = org.joda.time.format.DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss").print(DateTime.now());
+		model.addAttribute("currentTime", currentTime);
 		return "users/profile/edit";
 	}
 	
@@ -149,7 +152,7 @@ public class MVCUserController {
 	@RequestMapping(value="/users/edit/user/{id}", method={RequestMethod.PUT})
 	public String editSystemUser(@Valid @ModelAttribute User user, BindingResult result, HttpServletRequest request) {
 		if (!result.hasErrors()) {
-			this.userService.update(user);
+			this.userService.updateUser(user);
 			return "redirect:/users/edit/user/" + UrlUtil.encodeUrlPathSegment(user.getId().toString(), request);
 		} else {
 			return "redirect:/users/edit/user/" + UrlUtil.encodeUrlPathSegment(user.getId().toString(), request);
@@ -159,7 +162,7 @@ public class MVCUserController {
 	@RequestMapping(value="/users/profile/edit/user/{id}", method={RequestMethod.PUT})
 	public String editProfileUser(@Valid @ModelAttribute User user, BindingResult result, HttpServletRequest request) {
 		if (!result.hasErrors()) {
-			this.userService.update(user);
+			this.userService.updateProfile(user);
 			return "redirect:/users/profile/edit/user/" + UrlUtil.encodeUrlPathSegment(user.getId().toString(), request);
 		} else {
 			return "redirect:/users/profile/edit/user/" + UrlUtil.encodeUrlPathSegment(user.getId().toString(), request);
@@ -170,7 +173,7 @@ public class MVCUserController {
 	public String updatePassword(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttr, 
 			Locale locale, ModelMap model, HttpServletRequest request) {
 		if (!result.hasErrors()) {
-			this.userService.update(user);
+			this.userService.updateProfile(user);
 			model.addAttribute("message", new Message("success", messageSource.getMessage("users.editSystemUser.password.updated", new Object[]{}, locale)));
 			return "redirect:/users/password/update/" + UrlUtil.encodeUrlPathSegment(user.getId().toString(), request);
 		} else {

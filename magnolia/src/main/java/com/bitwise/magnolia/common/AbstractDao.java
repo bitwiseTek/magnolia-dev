@@ -38,7 +38,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 		return entity;
 	}
 	
-	protected T update(T entity) {
+	protected T merge(T entity) {
 		em.merge(entity);
 		return entity;
 	}

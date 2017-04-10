@@ -45,7 +45,8 @@ public class UserResourceAsm extends ResourceAssemblerSupport<User, UserResource
 		res.setLga(user.getLga().getName());
 		res.setLastLogin(user.getLastLogin());
 		res.setLastLogout(user.getLastLogout());
-		res.setCreatedAt(user.getCreatedAt());
+		res.setCreatedAt(user.getCreatedAtString());
+		res.setDaysActive(user.getDaysActive());
 		res.add(linkTo(methodOn(UserController.class).findUser(user.getId())).withSelfRel());
 		return res;
 	}

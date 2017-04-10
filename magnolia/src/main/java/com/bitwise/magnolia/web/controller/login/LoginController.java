@@ -121,7 +121,7 @@ public class LoginController {
 		} else {
 			user.setRecoveryToken(Utils.generateUUID());
 			user.setRecoveryTime(new DateTime(DateTime.now().plusMinutes(20)));
-			this.userService.update(user);
+			this.userService.updateProfile(user);
 			this.emailService.sendEmailWithToken(user.getPrimaryEmail(), user);
 			model.addAttribute("message", new Message("success", messageSource.getMessage("password.recovery.token.sent", new Object[]{}, locale)));
 			return "redirect:/auth/password/recover/token";
@@ -150,7 +150,7 @@ public class LoginController {
 	public String recoverPassword(@Valid @ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttr, 
 			Locale locale, ModelMap model) {
 		if (!result.hasErrors()) {
-			this.userService.update(user);
+			this.userService.updateProfile(user);
 			model.addAttribute("message", new Message("success", messageSource.getMessage("recovery.password.success", new Object[]{}, locale)));
 			return "redirect:/auth/password/recover/{id}";
 		} else {

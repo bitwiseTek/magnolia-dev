@@ -117,12 +117,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(readOnly=false)
-	public User update(User data) {
+	public User updateProfile(User data) {
 		User user = userDao.findById(data.getId());
 		try {
 			if (user != null) {
-				user.setUsername(data.getUsername());
 				user.setTempPassword(data.getTempPassword());
+				user.setPassword(this.passwordEncoder.encode(data.getTempPassword()));
 				user.setPassword(this.passwordEncoder.encode(data.getTempPassword()));
 				user.setBirthday(data.getBirthday());
 				user.setCreatedAt(data.getCreatedAt());
@@ -138,7 +138,6 @@ public class UserServiceImpl implements UserService {
 				user.setPrimaryNumber(data.getPrimaryNumber());
 				user.setRecoveryTime(data.getRecoveryTime());
 				user.setRecoveryToken(data.getRecoveryToken());
-				user.setRoles(data.getRoles());
 				user.setSystemId(data.getSystemId());
 				user.setSecondaryEmail(data.getSecondaryEmail());
 				user.setSecondaryNumber(data.getSecondaryNumber());
@@ -154,6 +153,48 @@ public class UserServiceImpl implements UserService {
 		} catch(Exception e) {
 			throw new EntityDoesNotExistException("Account does not exist");
 		}
-		return user;
+		return this.userDao.update(user);
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public User updateUser(User data) {
+		User user = userDao.findById(data.getId());
+		try {
+			if (user != null) {
+				user.setTempPassword(data.getTempPassword());
+				user.setPassword(this.passwordEncoder.encode(data.getTempPassword()));
+				user.setPassword(this.passwordEncoder.encode(data.getTempPassword()));
+				user.setBirthday(data.getBirthday());
+				user.setCreatedAt(data.getCreatedAt());
+				user.setFirstName(data.getFirstName());
+				user.setLastName(data.getLastName());
+				user.setLastLogin(data.getLastLogin());
+				user.setLastLogout(data.getLastLogout());
+				user.setLga(data.getLga());
+				user.setMiddleName(data.getMiddleName());
+				user.setOneTimeToken(Utils.generateUUID());
+				user.setPhotoBase64(data.getPhotoBase64());
+				user.setPrimaryEmail(data.getPrimaryEmail());
+				user.setPrimaryNumber(data.getPrimaryNumber());
+				user.setRecoveryTime(data.getRecoveryTime());
+				user.setRecoveryToken(data.getRecoveryToken());
+				user.setSystemId(data.getSystemId());
+				user.setSecondaryEmail(data.getSecondaryEmail());
+				user.setRoles(data.getRoles());
+				user.setSecondaryNumber(data.getSecondaryNumber());
+				user.setSecretQuestion(data.getSecretQuestion());
+				user.setSecretAnswer(data.getSecretAnswer());
+				user.setSex(data.getSex());
+				user.setState(data.getState());
+				user.setStatus(data.getStatus());
+				user.setStreetAddress(data.getStreetAddress());
+			} else {
+				throw new EntityDoesNotExistException("Account does not exist");
+			}
+		} catch(Exception e) {
+			throw new EntityDoesNotExistException("Account does not exist");
+		}
+		return this.userDao.update(user);
 	}
 }

@@ -161,7 +161,7 @@ public class UserController {
 		try {
 			updatedUser = userService.findById(id);
 			if (updatedUser != null) {
-				userService.update(updatedUser);
+				userService.updateProfile(updatedUser);
 				//this.emailService.sendUpdateEmail(updatedUser.getPrimaryEmail(), updatedUser);
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {

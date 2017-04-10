@@ -20,7 +20,7 @@
 		<form:form class="animated fadeIn validate" method="PUT" modelAttribute="user">
 			<input type="hidden" name="_method" value="PUT" />
         		<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
-        			<h3 align="left" class="appTitle"><span class="lsf-icon" title="user"><spring:message code="users.editSystemUser.password.update" arguments="${user.username}" /></span></h3>
+        			<h3 align="left" class="appTitle"><span class="lsf-icon" title="lock"><spring:message code="users.editSystemUser.password.update" arguments="${user.username}" /></span></h3>
         			<div>&nbsp;</div>
         			<div class="col-md-10 col-sm-10">
         				<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">

@@ -23,6 +23,8 @@ public interface UserDao {
 	
 	public User save(User user);
 	
+	public User update(User user);
+	
 	public void deleteByUsername(String username);
 	
 	public void delete(User user);

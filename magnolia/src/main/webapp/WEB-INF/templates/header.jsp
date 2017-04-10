@@ -71,7 +71,7 @@
 	                </a>
 	                <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
 	                  <li>
-	                    <a href="<c:url value="/users/edit" /> "> My Account</a>
+	                    <a href="<c:url value="/users/profile/edit" /> "> My Account</a>
 	                  </li>
 	                  <sec:authorize access="hasRole('ROLE_STUDENT')">
 		                  <li>

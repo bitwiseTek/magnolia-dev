@@ -10,6 +10,8 @@ package com.bitwise.magnolia.web.config;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -103,25 +105,22 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     }
     
     public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
-    	SimpleMappingExceptionResolver simpleResolver = new SimpleMappingExceptionResolver();
+    	SimpleMappingExceptionResolver exceptionResolver;
+    	exceptionResolver = new SimpleMappingExceptionResolver();
     	Properties mappings = new Properties();
-    	
-    	//When a ResourceNotFoundException is thrown any where in the application
-    	//This mapping specifies the page to display
-    	mappings.setProperty("ResourceNotFoundException", "page-not-found");
-    	//mappings.setProperty("AuthenticationException", "redirect:/");
-    	
-    	//When a NoValidDaysException is thrown any where in the application
-    	//This mapping specifies the page to display
-    	mappings.setProperty("NoValidDaysException", "/school-deactivated");
-    	//mappings.setProperty("LimitedPrivilegeException", "home");
-
+    	mappings.setProperty("DataAccessException", "dataAccessError");
+    	mappings.setProperty("AccessDeniedException", "accessdenied");
+    	mappings.setProperty("NoSuchRequestHandlingException", "resourceNotFound");
+    	mappings.setProperty("TypeMismatchException", "resourceNotFound");
+    	mappings.setProperty("MissingServletRequestParameterException", "resourceNotFound");
+    	mappings.setProperty("PageNotFound", "resourceNotFound");
+    	mappings.setProperty("NoValidDaysException", "schooldeactivated");
     	Properties statusCodes = new Properties();
-    	//mappings.setProperty("{school_name}/login", String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
-    	
-    	simpleResolver.setExceptionMappings(mappings);
-    	simpleResolver.setStatusCodes(statusCodes);
-    	return simpleResolver;
+    	mappings.setProperty("auth/login", String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
+    	exceptionResolver.setDefaultErrorView("defaulterror");
+    	exceptionResolver.setExceptionMappings(mappings);
+    	exceptionResolver.setStatusCodes(statusCodes);
+    	return exceptionResolver;
     }
     
     @Bean

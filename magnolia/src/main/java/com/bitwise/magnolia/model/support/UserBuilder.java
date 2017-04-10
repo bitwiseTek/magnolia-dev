@@ -40,7 +40,7 @@ public class UserBuilder extends EntityBuilder<User> {
 	}
 	
 	public UserBuilder credentials(String username, String password, String tempPassword, String secretQuestion, String secretAnswer, 
-			String lastLogin, String lastLogout, String createdAt, String ott, String recoveryToken, DateTime recoveryTime) {
+			String lastLogin, String lastLogout, DateTime createdAt, String ott, String recoveryToken, DateTime recoveryTime) {
 		this.product.setUsername(username);
 		this.product.setPassword(password);
 		this.product.setTempPassword(tempPassword);

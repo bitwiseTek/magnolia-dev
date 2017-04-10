@@ -28,6 +28,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -108,11 +109,13 @@ public class User implements Serializable {
 	
 	private String photoBase64;
 	
-	private String createdAt;
+	private DateTime createdAt;
 	
 	private String lastLogin;
 	
 	private String lastLogout;
+	
+	private int daysActive;
 
 	@Id
 	@Column(name="USER_ID")
@@ -368,13 +371,20 @@ public class User implements Serializable {
 		this.lastLogout = lastLogout;
 	}
 	
+	@DateTimeFormat(iso=ISO.DATE_TIME)
 	@Column(name="CREATED_AT", nullable=false)
-	public String getCreatedAt() {
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	public DateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(DateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	@Transient
+	public String getCreatedAtString() {
+		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(createdAt);
 	}
 
 	@Column(name="RECOVERY_TOKEN")
@@ -397,6 +407,19 @@ public class User implements Serializable {
 		this.recoveryTime = recoveryTime;
 	}
 	
+	@Column(name="DAYS_ACTIVE", nullable=false)
+	public int getDaysActive() {
+		if (createdAt != null) {
+			daysActive = Days.daysBetween(createdAt.withTimeAtStartOfDay(), new DateTime(DateTime.now()).withTimeAtStartOfDay()).getDays();
+		}
+		System.err.println(daysActive);
+		return daysActive;
+	}
+
+	public void setDaysActive(int daysActive) {
+		this.daysActive = daysActive;
+	}
+
 	@Transient
 	public String getRecoveryTimeString() {
 		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(recoveryTime);

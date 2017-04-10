@@ -92,9 +92,19 @@
         <put-attribute name="current" value="schoolDeactivated" cascade="true" />
     </definition>
     
-    <definition name="accessDenied" extends="fullTemplate">
+    <definition name="accessdenied" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/access-denied.jsp" />
-        <put-attribute name="current" value="accessDenied" cascade="true" />
+        <put-attribute name="current" value="accessdenied" cascade="true" />
+    </definition>
+    
+    <definition name="dataAccessError" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/dataAccessFailure.jsp" />
+        <put-attribute name="current" value="dataAccessError" cascade="true" />
+    </definition>
+    
+    <definition name="defaulterror" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/defaultError.jsp" />
+        <put-attribute name="current" value="defaulterror" cascade="true" />
     </definition>
     
 </tiles-definitions>

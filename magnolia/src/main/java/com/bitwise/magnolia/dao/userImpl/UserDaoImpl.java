@@ -116,6 +116,15 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 		return user;
 		
 	}
+	
+	@Override
+	@Transactional
+	public User update(User user) {
+		logger.info("Adding/Updating user with ID " + user.getId());
+		merge(user);
+		return user;
+		
+	}
 
 	@Override
 	@Transactional

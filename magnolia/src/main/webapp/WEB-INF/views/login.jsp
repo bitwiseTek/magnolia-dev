@@ -12,109 +12,70 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page isELIgnored="false" %>
 
-<script type="text/javascript">
-	function validateRegEx(regex, input, helpText, helpMessage) {
-		if (!regex.test(input)) {
-			if (helpText != null) {
-				helpText.innerHTML = helpMessage;
-				return false;
-			}
-		} else {
-			if (helpText != null) {
-				helpText.innerHTML = "";
-				return true;
-			}
-		}
-	}
-	
-	function validateNonEmptyUsername(inputField, helpText) {
-		return validateRegEx(/.+/, inputField.value, helpText, "Please enter a username");
-	}
-	
-	function validateNonEmptyPassword(inputField, helpText) {
-		return validateRegEx(/.+/, inputField.value, helpText, "Please enter a password");
-	}
-	
-	function submitPage(form) {
-		if (validateNonEmptyUsername(form['username'], form['username_help']) &&
-		validateNonEmptyPassword(form['password'], form['password_help'])) {
-			form.submit();
-		} else {
-			alert("Sorry but the information provided in your form is insufficient");
-		}
-	}
-</script>
-<div align="center" class="container">
-	<div align="center" class="row">
-			<div align="center" class="login-container animated fadeInUp">
-			<div style="margin-top: -45px;" align="center">
-		  	    <a href="<c:url value="/" /> "><img src="<c:url value="/resources/assets/img/mid_logo.png" /> " class="img-responsive"></a>
-		   	</div>
-		   	<div class="col-md-5 hidden-sm hidden-xs"></div>
-		   	<div align="center" class="col-md-5" style="margin-top: 10px;">
-				<h3 align="left"><span class="lsf-icon" title="user"><spring:message code="users.login.pageTitle" /></span></h3>
-		 			<br />
-		 			<spring:url value="/j_spring_security_check" var="logIn"></spring:url>
-		 			<form class="animated fadeIn validate" name="logInForm" method="POST" action="${logIn}">
-		 				<div align="left" class="form-group">
-		 					<label for="username" class="control-label"><spring:message code="users.login.usernameTitle" /></label>
-							<input type="text" id="username" name="username" class="form-control input-lg" placeholder="Username" 
-							onblur="validateNonEmptyUsername(this, document.getElementById('username_help'))" />
-							<div class="help-block with-errors">
-								<span id="username_help" class="error"></span>
-							</div>
-		 				</div>
-		 				
-		 				<div align="left" class="form-group">
-		 					<label for="password" class="control-label"><spring:message code="users.login.passwordTitle" /></label>
-							<input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password"
-							onblur="validateNonEmptyPassword(this, document.getElementById('password_help'))" />
-							<div class="help-block with-errors">
-								<span id="password_help" class="error"></span>
-							</div>
-		 				</div>
-						
-						<div class="row">
-							<div align="left" class="col-md-5">
-								<button class="btn btn-success" id="loginBtn">
-								    <div class="lsf-icon" title="key"><spring:message code="users.login.loginButton" /></div>
-								</button>
-							</div>
-							
-							<div class="col-md-4">
-			                    <div style="margin-top: 7px;" class="checkbox check-success">
-			                      <input id="checkbox1" type="checkbox" value="1">
-			                      <label for="checkbox1">Remember Me</label>
-			                    </div>
-			                </div>
-			                
-							<div class="col-md-9">
-								<c:if test="${param.error != null}">
-									<div class="alert alert-danger">
-										<spring:message code="users.login.loginFailed" />
-									</div>
-								</c:if>
-								<c:if test="${param.locked != null}">
-									<div class="alert alert-info">
-										<spring:message code="users.login.locked" />
-									</div>
-								</c:if>
-								<c:if test="${param.deactivated != null}">
-									<div class="alert alert-info">
-										<spring:message code="users.login.deactivated" />
-									</div>
-								</c:if>
-								<c:if test="${param.logout != null}">
-									<div class="alert alert-success">
-										<spring:message code="users.login.loggedOut" />
-									</div>
-								</c:if>
-							</div>
+<div class="container">
+      <div class="row login-container column-seperation">
+        <div align="center" class="col-md-5 col-md-offset-1">
+          <a href="<c:url value="/" /> "><img src="<c:url value="/resources/assets/img/mid_logo.png" /> " class="img-responsive"></a>
+        </div>
+        <div class="col-md-5">
+          <br>
+          <spring:url value="/j_spring_security_check" var="logIn"></spring:url>
+          <form class="login-form validate" id="login-form" name="login-form" method="POST" action="${logIn}">
+            <div class="row">
+              <div class="form-group col-md-10">
+              	<h3 align="left"><span class="lsf-icon" title="user"><spring:message code="users.login.pageTitle" /></span></h3>
+              	<div>&nbsp;</div>
+                <label class="form-label"><spring:message code="users.login.usernameTitle" /></label>
+                <input class="form-control" id="username" name="username" type="text" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-10">
+                <label class="form-label"><spring:message code="users.login.passwordTitle" /></label> <span class="help"></span>
+                <input class="form-control" id="password" name="password" type="password" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="control-group col-md-10">
+                <div class="checkbox checkbox check-success">
+                  <a href="<c:url value="/auth/password/recover/token" /> ">Forgot Password?</a>&nbsp;&nbsp;
+                  <input id="checkbox1" type="checkbox" value="1">
+                  <label for="checkbox1">Remember Me</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+             	<div class="col-md-10">
+                	<button class="btn btn-primary btn-cons pull-right" type="submit"><i class="fa fa-sign-in"></i>&nbsp;Login</button>
+              	</div>
+            </div>
+            <div class="row">
+            	<div class="col-md-9">
+					<c:if test="${param.error != null}">				
+						<div class="alert alert-danger">
+							<spring:message code="users.login.loginFailed" />
+						</div>					
+					</c:if>
+					<c:if test="${param.locked != null}">									
+						<div class="alert alert-info">
+							<spring:message code="users.login.locked" />
+						</div>						
+					</c:if>
+					<c:if test="${param.deactivated != null}">									
+						<div class="alert alert-info">
+							<spring:message code="users.login.deactivated" />								
 						</div>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		 			</form>
-	 			</div>
-	 		<div class="col-md-5 hidden-sm hidden-xs"></div>
-		</div>
-	</div>      
-</div>
+					</c:if>							
+					<c:if test="${param.logout != null}">
+						<div class="alert alert-success">										
+							<spring:message code="users.login.loggedOut" />
+						</div>						
+					</c:if>
+				</div>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- END CONTAINER -->

@@ -8,6 +8,7 @@ package com.bitwise.magnolia.web.restful.resource.user;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.springframework.hateoas.ResourceSupport;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
@@ -75,6 +76,8 @@ public class UserResource extends ResourceSupport {
 	private String recoveryTime;
 	
 	private String recoveryToken;
+	
+	private int daysActive;
 	
 	public Long getRid() {
 		return rid;
@@ -292,6 +295,14 @@ public class UserResource extends ResourceSupport {
 	public void setRecoveryToken(String recoveryToken) {
 		this.recoveryToken = recoveryToken;
 	}
+	
+	public int getDaysActive() {
+		return daysActive;
+	}
+
+	public void setDaysActive(int daysActive) {
+		this.daysActive = daysActive;
+	}
 
 	public User toUser() {
 		User user = new User();
@@ -317,7 +328,7 @@ public class UserResource extends ResourceSupport {
 		user.setLga(new LGA(Long.parseLong(lga)));
 		user.setPhotoBase64(Utils.saveBase64ToPath(photoBase64, ApplicationConstant.SCHOOL_ALIAS, firstName.toLowerCase().concat(".").concat(lastName.toLowerCase()).concat("@magnoliacad.com") + ".png"));
 		user.setStatus(status);
-		user.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		user.setCreatedAt(new DateTime(DateTime.now()));
 		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		user.setLastLogout(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
 		user.setRecoveryTime(null);
