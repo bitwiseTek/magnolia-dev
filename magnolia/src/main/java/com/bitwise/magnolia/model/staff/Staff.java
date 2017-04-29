@@ -30,6 +30,7 @@ import com.bitwise.magnolia.model.user.User;
 @NamedQueries({
 	@NamedQuery(name="Staff.findById", query="select distinct s from Staff s where s.id=:id"),
 	@NamedQuery(name="Staff.findByStaffId", query="select distinct s from Staff s where s.staffId=:staffId"),
+	@NamedQuery(name="Staff.findByUserId", query="select distinct s from Staff s where s.user.id=:userId"),
 	@NamedQuery(name="Staff.findByApiKey", query="select distinct s from Staff s where s.apiKey=:apiKey"),
 	@NamedQuery(name="Staff.findByDepartmentId", query="select s from Staff s where s.staffDepartment.departmentId=:deptId"),
 	@NamedQuery(name="Staff.findAll", query="select s from Staff s")

@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.common;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -13,6 +15,8 @@ public interface AcademicSemesterService {
 	public AcademicSemester findById(Long id);
 	
 	public AcademicSemester findByName(String name);
+	
+	public List<AcademicSemester> findAllSemesters();
 	
 	public SemesterList findAll();
 	

@@ -8,6 +8,7 @@ package com.bitwise.magnolia.web.restful.resource.staff;
 import org.joda.time.DateTime;
 import org.springframework.hateoas.ResourceSupport;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.common.Utils;
 import com.bitwise.magnolia.model.school.Department;
 import com.bitwise.magnolia.model.staff.Staff;
@@ -115,9 +116,11 @@ public class StaffResource extends ResourceSupport {
 		staff.setApiKey(Utils.randomString(30));
 		staff.setIsAcademic(Boolean.TRUE);
 		staff.setIsTemporary(Boolean.FALSE);
-		staff.setStaffId("STF".concat("/").concat(org.joda.time.format.DateTimeFormat.forPattern("yyyy").print(new DateTime(DateTime.now()))).concat("/").concat(new Department().getCode()).concat("/").concat(new User().getId().toString()));
+		staff.setStaffId("STF".concat("/").concat(org.joda.time.format.DateTimeFormat.forPattern("yyyy").print(new DateTime(DateTime.now()))).concat("/").concat(Utils.generateRandomCode()).concat("/").concat(Utils.generateRandomCode()));
 		staff.setTitle(title);
-		staff.setStatus(status);
+		staff.setStatus(ApplicationConstant.PENDING_STATUS);
+		staff.setStaffDepartment(new Department(Long.parseLong(staffDepartment)));
+		staff.setUser(new User(Long.parseLong(user)));
 		return staff;
 	}
 }

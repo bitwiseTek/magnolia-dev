@@ -138,9 +138,27 @@
 		            <sec:authorize access="hasRole('ROLE_SUPER_ADMIN') or hasRole('ROLE_ADMIN')">
 		            	<li class="start ${current == 'users' ? 'active' : '' }"> <a href="#"><i class="material-icons">supervisor_account</i> <span class="title">Users</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
 			              <ul class="sub-menu">
-			                <li> <a href="<c:url value="/users" /> ">List</a></li>
+			                <li> <a href="<c:url value="/users/list" /> ">List</a></li>
 			                <li> <a href="<c:url value="/users/edit" /> ">Edit</a></li>
 			                 <sec:authorize access="hasRole('ROLE_SUPER_ADMIN')"><li> <a href="<c:url value="/users/delete" /> ">Delete</a></li></sec:authorize>
+			              </ul>
+			            </li>
+		            </sec:authorize>
+
+		            <sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')">
+		            	<li class="start ${current == 'students' ? 'active' : '' }"> <a href="#"><i class="material-icons">school</i> <span class="title">Students</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/admin/students/list" /> ">List</a></li>
+			                <li class=""> <a href="<c:url value="/admin/students/edit" /> ">Edit</a></li>
+			              </ul>
+			            </li>
+		            </sec:authorize>
+
+		            <sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')">
+		            	<li class="start ${current == 'staff' ? 'active' : '' }"> <a href="#"><i class="material-icons">recent_actors</i> <span class="title">Staff</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/admin/staff/list" /> ">List</a></li>
+			                <li class=""> <a href="<c:url value="/admin/staff/edit" /> ">Edit</a></li>
 			              </ul>
 			            </li>
 		            </sec:authorize>
@@ -150,7 +168,6 @@
 			              <ul class="sub-menu">
 			                <li> <a href="<c:url value="/students/register" /> ">Register</a></li>
 			                <li class=""> <a href="<c:url value="/students/edit" /> ">Edit</a></li>
-			                <li class=""> <a href="<c:url value="/students/show" /> ">View</a></li>
 			                <li class=""> <a href="<c:url value="/students/handbook" /> ">Handbook</a></li>
 			              </ul>
 			            </li>
@@ -175,6 +192,65 @@
 			              <ul class="sub-menu">
 			                <li> <a href="<c:url value="/students/hostels/book" /> ">Hostel Booking</a></li>
 			                <li> <a href="<c:url value="/students/hostels/status" /> ">Hostel Status</a></li>
+			              </ul>
+			            </li>
+		            </sec:authorize>
+		            
+		            <sec:authorize access="hasRole('ROLE_STAFF')">
+		            	<li class="start ${current == 'staff' ? 'active' : '' }"> <a href="#"><i class="material-icons">recent_actors</i> <span class="title">Staff</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/staff/register" /> ">Register</a></li>
+			                <li class=""> <a href="<c:url value="/staff/edit" /> ">Edit</a></li>
+			                <li class=""> <a href="<c:url value="/staff/handbook" /> ">Handbook</a></li>
+			              </ul>
+			            </li>
+			            
+			            <li class="start ${current == 'students' ? 'active' : '' }"> <a href="#"><i class="material-icons">school</i> <span class="title">Student</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/staff/students/list" /> ">List</a></li>
+			                <li class=""> <a href="<c:url value="/staff/students/edit" /> ">Edit</a></li>
+			              </ul>
+			            </li>
+			            
+			            <li class="start ${current == 'courses' ? 'active' : '' }"> <a href="#"><i class="material-icons">library_books</i> <span class="title">Course</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/staff/courses/attach" /> ">Attach</a></li>
+			                <li class=""> <a href="<c:url value="/staff/courses/attached" /> ">Attached</a></li>
+			                <li class=""> <a href="<c:url value="/staff/courses/pending" /> ">Pending</a></li>
+			                <li class=""> <a href="<c:url value="/staff/timetable" /> ">Timetable</a></li>
+			              </ul>
+			            </li>
+		            </sec:authorize>
+		            
+		            <sec:authorize access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ACCOUNTANT')">
+		            	<li class="start ${current == 'staff' ? 'active' : '' }"> <a href="#"><i class="material-icons">recent_actors</i> <span class="title">Staff</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/manager/staff/register" /> ">Register</a></li>
+			                <li class=""> <a href="<c:url value="/manager/staff/edit" /> ">Edit</a></li>
+			                <li class=""> <a href="<c:url value="/manager/staff/handbook" /> ">Handbook</a></li>
+			              </ul>
+			            </li>
+			            
+			            <li class="start ${current == 'students' ? 'active' : '' }"> <a href="#"><i class="material-icons">school</i> <span class="title">Student</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/manager/students/list" /> ">List</a></li>
+			                <li class=""> <a href="<c:url value="/manager/students/edit" /> ">Edit</a></li>
+			              </ul>
+			            </li>
+			            
+			            <li class="start ${current == 'courses' ? 'active' : '' }"> <a href="#"><i class="material-icons">library_books</i> <span class="title">Course</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/manager/staff/courses/attach" /> ">Attach</a></li>
+			                <li class=""> <a href="<c:url value="/manager/staff/courses/attached" /> ">Attached</a></li>
+			                <li class=""> <a href="<c:url value="/manager/staff/courses/pending" /> ">Pending</a></li>
+			                <li class=""> <a href="<c:url value="/manager/staff/timetable" /> ">Timetable</a></li>
+			              </ul>
+			            </li>
+			            
+			            <li class="start ${current == 'transactions' ? 'active' : '' }"> <a href="#"><i class="material-icons">equalizer</i> <span class="title">Transactions</span> <span class="selected"></span> <span class="arrow  close "></span> </a>
+			              <ul class="sub-menu">
+			                <li> <a href="<c:url value="/manager/staff/transactions/list" /> ">List</a></li>
+			                <li class=""> <a href="<c:url value="/manager/staff/transactions/show" /> ">Show</a></li>
 			              </ul>
 			            </li>
 		            </sec:authorize>

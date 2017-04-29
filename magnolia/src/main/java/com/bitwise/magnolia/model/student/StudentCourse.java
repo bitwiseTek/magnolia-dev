@@ -31,6 +31,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.course.Course;
+import com.bitwise.magnolia.model.finance.BillingDetails;
 
 @Entity
 @Table(name="STUDENT_COURSES")
@@ -61,6 +62,8 @@ public class StudentCourse implements Serializable {
 	private DateTime endDate;
 	
 	private Course course;
+	
+	private BillingDetails billing;
 	
 	private List<Student> students = new ArrayList<Student>();
 	
@@ -166,6 +169,16 @@ public class StudentCourse implements Serializable {
 
 	public void setCourseStatus(String courseStatus) {
 		this.courseStatus = courseStatus;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="BILLING_ID")
+	public BillingDetails getBilling() {
+		return billing;
+	}
+
+	public void setBilling(BillingDetails billing) {
+		this.billing = billing;
 	}
 
 	@Override

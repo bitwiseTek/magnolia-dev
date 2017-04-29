@@ -68,7 +68,7 @@ var userRegisterCtrl = {
 				
 				if($.trim($(firstName).val()) == '' && $.trim($(lastName).val()) == '' && $.trim($(priEmail).val()) == '' && $(dob).val() == '' && 
 						$(state).val() === '0' && $(lga).val() === '0' && $.trim($(priPhone).val()) == '' && $.trim($(address).val()) == '' 
-						&& $(photo).val() == '' && $(sex).val() === '0' && $(secretQ).val() === '0' && $(secAnswer).val() == '') {
+						&& $(photo).val() == '' && $(sex).val() === 'SG' && $(secretQ).val() === 'Q0' && $(secAnswer).val() == '') {
 					$('form[name=user] select').css({'border' : '1px solid #FF6666'});
 					isError = true;
 					errorMsg = 'Please fill in highlighted field(s)';
@@ -111,13 +111,13 @@ var userRegisterCtrl = {
 						errorMsg = 'Please fill in highlighted field(s)';
 					}
 					
-					if($.trim($(sex).val()) == '0') {
+					if($.trim($(sex).val()) == 'SG') {
 						$('#sex').css({'border' : '1px solid #FF6666'});
 						isError = true;
 						errorMsg = 'Please fill in highlighted field(s)';
 					}
 					
-					if($.trim($(secretQ).val()) == '0') {
+					if($.trim($(secretQ).val()) == 'Q0') {
 						$('#secretQ').css({'border' : '1px solid #FF6666'});
 						isError = true;
 						errorMsg = 'Please fill in highlighted field(s)';
@@ -197,6 +197,17 @@ var userRegisterCtrl = {
 				}).done(function(data) {
 					$('.alert-success').show();
 					$('.userSuccessMsg').text(successMsg);
+					$('input[name="firstName"]').val('');
+					$('input[name="lastName"]').val('');
+					$('input[name="middleName"]').val('');
+					$('input[name="priEmail"]').val('');
+					$('input[name="secEmail"]').val('');
+					$('input[name="dob"]').val('');
+					$('input[name="priPhone"]').val('');
+					$('input[name="secPhone"]').val('');
+					$('input[name="address"]').val('');
+					$('input[name=user_upload_photo]').val('');
+					$('input[name="secAnswer"]').val('');
 					$('#state option:selected').val(0);
 					$('#lga option:selected').val(0);
 					$('#sex option:selected').val(0);

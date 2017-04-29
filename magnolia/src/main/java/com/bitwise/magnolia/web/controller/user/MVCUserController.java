@@ -74,7 +74,7 @@ public class MVCUserController {
 	public String requestProfileUsersPage(ModelMap model) {
 		List<User> users = userService.findAll();
 		model.addAttribute("users", users);
-		String currentTime = org.joda.time.format.DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss").print(DateTime.now());
+		String currentTime = org.joda.time.format.DateTimeFormat.forPattern("E, MMM Y h:mm a").print(DateTime.now());
 		model.addAttribute("currentTime", currentTime);
 		return "users/profile/edit";
 	}
@@ -146,6 +146,13 @@ public class MVCUserController {
 		user = userService.findById(id);
 		model.addAttribute("user", user);
 		return "users/password/update";
+	}
+	
+	@RequestMapping(value = "/users/list", method = RequestMethod.GET)
+	public String requestUsersList(ModelMap model) {
+		List<User> users = userService.findAll();
+		model.addAttribute("users", users);
+		return "users/list";
 	}
 	
 	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")

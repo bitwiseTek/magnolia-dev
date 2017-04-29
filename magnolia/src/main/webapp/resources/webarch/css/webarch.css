@@ -551,7 +551,7 @@ body.boxed-layout .footer-widget {
   width: 45px;
   position: absolute;
   height: 100%;
-  background-color: #0aa699 !important;
+  background-color: #9CCF31 !important;
 }
 .page-sidebar .inner-menu {
   display: inline-block;
@@ -733,7 +733,7 @@ body.boxed-layout .footer-widget {
 .page-sidebar.mini {
   width: 50px;
   overflow: visible !important;
-  background-color: #0aa699 !important;
+  background-color: #9CCF31 !important;
   height: 100%;
   margin-top: 0;
   position: fixed;

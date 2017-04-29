@@ -21,6 +21,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import com.bitwise.magnolia.model.finance.BillingDetails;
+import com.bitwise.magnolia.model.staff.Staff;
+import com.bitwise.magnolia.model.student.Student;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.web.restful.resource.user.UserResource;
 
@@ -115,6 +118,147 @@ public class EmailServiceImpl implements EmailService {
 		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "updateTemplate.vm", "UTF-8", model);
 		helper.setText(emailText, true);
 		mailSender.send(message);
+	}
+
+	@Override
+	public void sendUpdateStudentEmail(String toEmail, Student account) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		String firstName = account.getUser().getFirstName();
+		String lastName = account.getUser().getLastName();
+		String updateMessage = "Your student profile has been successfully updated on magnoliacad.com";
+		String noticeMessage = "Make sure your bills are cleared else you won't be able to register courses for the session";
+		helper.setFrom("support@ntradex.com");
+		helper.setTo(account.getUser().getPrimaryEmail());
+		helper.setSubject("Magnolia Student Update");
+		helper.setSentDate(new Date());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("updateMessage", updateMessage);
+		model.put("noticeMessage", noticeMessage);
+		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "updateStudentTemplate.vm", "UTF-8", model);
+		helper.setText(emailText, true);
+		mailSender.send(message);
+	}
+
+	@Override
+	public void sendUpdateAdminStudentEmail(String toEmail, Student account) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		String firstName = account.getUser().getFirstName();
+		String lastName = account.getUser().getLastName();
+		String updateMessage = "Your student profile has been successfully updated on magnoliacad.com";
+		String proceedMessage = "You can proceed with your registration process";
+		String noticeMessage = "Make sure your bills are cleared else you won't be able to register courses for the session";
+		helper.setFrom("support@ntradex.com");
+		helper.setTo(account.getUser().getPrimaryEmail());
+		helper.setSubject("Magnolia Student Update");
+		helper.setSentDate(new Date());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("updateMessage", updateMessage);
+		model.put("proceedMessage", proceedMessage);
+		model.put("noticeMessage", noticeMessage);
+		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "updateAdminStudentTemplate.vm", "UTF-8", model);
+		helper.setText(emailText, true);
+		mailSender.send(message);
+		
+	}
+
+	@Override
+	public void sendUpdateStaffEmail(String toEmail, Staff account) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		String firstName = account.getUser().getFirstName();
+		String lastName = account.getUser().getLastName();
+		String updateMessage = "Your staff profile has been successfully updated on magnoliacad.com";
+		helper.setFrom("support@ntradex.com");
+		helper.setTo(account.getUser().getPrimaryEmail());
+		helper.setSubject("Magnolia Staff Update");
+		helper.setSentDate(new Date());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("updateMessage", updateMessage);
+		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "updateStaffTemplate.vm", "UTF-8", model);
+		helper.setText(emailText, true);
+		mailSender.send(message);
+		
+	}
+
+	@Override
+	public void sendUpdateAdminStaffEmail(String toEmail, Staff account) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		String firstName = account.getUser().getFirstName();
+		String lastName = account.getUser().getLastName();
+		String updateMessage = "Your staff profile has been successfully updated on magnoliacad.com";
+		String proceedMessage = "You can proceed with your registration process";
+		helper.setFrom("support@ntradex.com");
+		helper.setTo(account.getUser().getPrimaryEmail());
+		helper.setSubject("Magnolia Staff Update");
+		helper.setSentDate(new Date());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("updateMessage", updateMessage);
+		model.put("proceedMessage", proceedMessage);
+		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "updateAdminStaffTemplate.vm", "UTF-8", model);
+		helper.setText(emailText, true);
+		mailSender.send(message);
+		
+	}
+
+	@Override
+	public void sendUpdateAdminBillingEmail(String toEmail, BillingDetails account) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		String firstName = account.getUserId().getFirstName();
+		String lastName = account.getUserId().getLastName();
+		String billingMessage = "Your bill for the current session has been successfully completed";
+		String invoiceMessage = "Your invoice is attached to this email";
+		String proceedMessage = "You can proceed with your registration process";
+		helper.setFrom("support@ntradex.com");
+		helper.setTo(account.getUserId().getPrimaryEmail());
+		helper.setSubject("Magnolia Billing Update");
+		helper.setSentDate(new Date());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("billingMessage", billingMessage);
+		model.put("invoiceMessage", invoiceMessage);
+		model.put("proceedMessage", proceedMessage);
+		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "updateAdminStaffTemplate.vm", "UTF-8", model);
+		helper.setText(emailText, true);
+		mailSender.send(message);
+		
+	}
+
+	@Override
+	public void sendStudentBillingEmail(String toEmail, BillingDetails account) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		String firstName = account.getUserId().getFirstName();
+		String lastName = account.getUserId().getLastName();
+		String billingMessage = "Your bill for the current session has been successfully completed";
+		String invoiceMessage = "Your invoice is attached to this email";
+		String proceedMessage = "You can proceed with your registration process";
+		helper.setFrom("support@ntradex.com");
+		helper.setTo(account.getUserId().getPrimaryEmail());
+		helper.setSubject("Magnolia Billing Update");
+		helper.setSentDate(new Date());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("billingMessage", billingMessage);
+		model.put("invoiceMessage", invoiceMessage);
+		model.put("proceedMessage", proceedMessage);
+		String emailText = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "updateAdminStaffTemplate.vm", "UTF-8", model);
+		helper.setText(emailText, true);
+		mailSender.send(message);
+		
 	}
 
 }

@@ -26,10 +26,10 @@ public class StudentResourceAsm extends ResourceAssemblerSupport<Student, Studen
 		res.setRid(student.getId());
 		res.setStudentId(student.getStudentId());
 		res.setApiKey(student.getApiKey());
-		res.setPartType(student.getParticipationType());
-		res.setEnrolmentType(student.getCourseEnrolmentType());
-		res.setEndText(student.getStudyEndText());
-		res.setEndReason(student.getStudyEndReason());
+		res.setParticipationType(student.getParticipationType());
+		res.setCourseEnrolmentType(student.getCourseEnrolmentType());
+		res.setStudyEndText(student.getStudyEndText());
+		res.setStudyEndReason(student.getStudyEndReason());
 		res.setLodging(student.getLodging());
 		res.setStatus(student.getStatus());
 		res.setStudyStatus(student.getStudyStatus());

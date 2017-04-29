@@ -850,7 +850,7 @@ public class InitialDataSetup {
 							programme(InitialDataSetup.this.studyProgramme);
 							department(InitialDataSetup.this.department);
 							student("STD".concat("/").concat(org.joda.time.format.DateTimeFormat.forPattern("yyyy").print(new DateTime(DateTime.now()))).concat("/").concat(InitialDataSetup.this.department.getCode()).concat("/").concat(InitialDataSetup.this.user.getId().toString()), 
-									Utils.getEndReasons().get("R1"), null, "in view", Boolean.TRUE, Utils.getPartTypes().get("OC"), Utils.getEnrolmentTypes().get("OF"), Utils.randomString(30), ApplicationConstant.PENDING_STATUS, 
+									Utils.getEndReasons().get("R1"), null, "in view", Utils.getLodgings().get("ON"), Utils.getPartTypes().get("OC"), Utils.getEnrolmentTypes().get("OF"), Utils.randomString(30), ApplicationConstant.PENDING_STATUS, 
 									new DateTime(DateTime.now()), new DateTime(DateTime.now()), InitialDataSetup.this.studyProgramme.getEndDate());
 						}
 					}.build();

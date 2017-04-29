@@ -85,7 +85,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/users/createuser", "/students/createstudent", "/students/searchstudents", 
 						"/users/edituser", "/users/searchuserdialog", "/courses/searchcourses", 
 						"/projects/searchprojects", "/staff/createstaff")
-				.access("hasRole('ADMINISTRATOR') or hasRole('SUPER_ADMIN')").and().formLogin().loginPage("/auth/login")
+				.access("hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
+				.antMatchers("/students/**", "/programmes/**", "/programme/categories/**")
+				.access("hasRole('STUDENT') or hasRole('MANAGER')")
+				.and().formLogin().loginPage("/auth/login")
 				.loginProcessingUrl("/j_spring_security_check").usernameParameter("username")
 				.passwordParameter("password")
 				.failureHandler(new AuthenticationFailureHandler() {

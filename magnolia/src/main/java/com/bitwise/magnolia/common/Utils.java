@@ -26,17 +26,25 @@ public class Utils {
     
     private static final int PASSWORD_LENGTH = 8;
     
+    private static final int REF_LENGTH = 7;
+    
+    private static final int CODE_LENGTH = 4;
+    
     private static final Pattern UUID_PATTERN = Pattern.compile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$");
 
     private static Map<String, String> courseTypes = new TreeMap<String, String>();
     
     private static Map<String, String> statuses = new TreeMap<String, String>();
     
+    private static Map<String, String> lodgings = new TreeMap<String, String>();
+    
     private static Map<String, String> optionalityTypes = new TreeMap<String, String>();
     
     private static Map<String, String> partTypes = new TreeMap<String, String>();
     
     private static Map<Integer, String> levels = new TreeMap<Integer, String>();
+    
+    private static Map<String, String> statements = new TreeMap<String, String>();
     
     private static Map<String, String> questions = new TreeMap<String, String>();
     
@@ -76,6 +84,30 @@ public class Utils {
 	        String pw = "";
 	        
 	        for (int i = 0; i < PASSWORD_LENGTH; i++) {
+	            int index = (int) (RANDOM.nextDouble()*letters.length());
+	            pw += letters.substring(index, index+1);
+	        }
+	        return pw;
+	 }
+	 
+	 public static String generateRandomCode() {
+	        String numbers = "1234567890";
+	        
+	        String pw = "";
+	        
+	        for (int i = 0; i < CODE_LENGTH; i++) {
+	            int index = (int) (RANDOM.nextDouble()*numbers.length());
+	            pw += numbers.substring(index, index+1);
+	        }
+	        return pw;
+	 }
+	 
+	 public static String generateRandomRef() {
+	        String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789";
+	        
+	        String pw = "";
+	        
+	        for (int i = 0; i < REF_LENGTH; i++) {
 	            int index = (int) (RANDOM.nextDouble()*letters.length());
 	            pw += letters.substring(index, index+1);
 	        }
@@ -261,6 +293,21 @@ public class Utils {
 		return statuses;
 	}
 	
+	public static Map<String, String> getStatements() {
+		for (String option : listOfStatements().values()) {
+			System.out.println(option);
+		}
+		return statements;
+	}
+	
+	public static Map<String, String> listOfStatements() {
+		statements.put("completed", "COMPLETED STATEMENT");
+		statements.put("processing", "PROCESSING STATEMENT");
+		statements.put("cancelled", "CANCELLED STATEMENT");
+		
+		return statuses;
+	}
+	
 	public static Map<String, String> getStatuses() {
 		for (String option : listOfStatuses().values()) {
 			System.out.println(option);
@@ -294,6 +341,20 @@ public class Utils {
 			System.out.println(option);
 		}
 		return partTypes;
+	}
+	
+	public static Map<String, String> listOfLodgings() {
+		lodgings.put("ON", "ON-CAMPUS");
+		lodgings.put("OF", "OFF-CAMPUS");
+		
+		return lodgings;
+	}
+	
+	public static Map<String, String> getLodgings() {
+		for (String option : listOfLodgings().values()) {
+			System.out.println(option);
+		}
+		return lodgings;
 	}
 	
 	public static Map<Integer, String> listOfLevels() {
@@ -363,7 +424,7 @@ public class Utils {
 	}
 	
 	public static Map<String, String> listOfEndReasons() {
-		endReasons.put("R1", "None");
+		endReasons.put("R1", "Not Ended");
 		endReasons.put("R2", "Finacial");
 		endReasons.put("R3", "Expulsion");
 		endReasons.put("R4", "Medical");

@@ -12,6 +12,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
@@ -20,6 +22,8 @@ import com.bitwise.magnolia.model.staff.Staff;
 
 @Repository("staffDao")
 public class StaffDaoImpl extends AbstractDao<Long, Staff> implements StaffDao {
+	
+	final Logger logger = LoggerFactory.getLogger(StaffDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager em;
@@ -34,6 +38,13 @@ public class StaffDaoImpl extends AbstractDao<Long, Staff> implements StaffDao {
 	@Override
 	public Staff findByStaffId(String staffId) {
 		TypedQuery<Staff> query = em.createNamedQuery("Staff.findByStaffId", Staff.class).setParameter("staffId", staffId);
+		List<Staff> staff = query.getResultList();
+		return staff.size() == 1 ? staff.get(0) : null;
+	}
+	
+	@Override
+	public Staff findByUserId(Long userId) {
+		TypedQuery<Staff> query = em.createNamedQuery("Staff.findByUserId", Staff.class).setParameter("userId", userId);
 		List<Staff> staff = query.getResultList();
 		return staff.size() == 1 ? staff.get(0) : null;
 	}
@@ -62,7 +73,17 @@ public class StaffDaoImpl extends AbstractDao<Long, Staff> implements StaffDao {
 	@Override
 	@Transactional
 	public Staff save(Staff staff) {
-		return this.em.merge(staff);
+		logger.info("Adding/Updating staff with ID " + staff.getId());
+		persist(staff);
+		return staff;
+	}
+
+	@Override
+	@Transactional
+	public Staff update(Staff staff) {
+		logger.info("Adding/Updating student with ID " + staff.getId());
+		merge(staff);
+		return staff;
 	}
 
 }

@@ -57,7 +57,7 @@ public class Student implements Serializable {
 	
 	private String studyStatus;
 	
-	private Boolean lodging;
+	private String lodging;
 	
 	private String participationType;
 	
@@ -139,7 +139,7 @@ public class Student implements Serializable {
 	
 	@Transient
 	public String getStartDateString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(startDate);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, MMM Y h:mm a").print(startDate);
 	}
 	
 	@DateTimeFormat(iso=ISO.DATE_TIME)
@@ -169,7 +169,7 @@ public class Student implements Serializable {
 	
 	@Transient
 	public boolean getHasFinishedStudies() {
-		return programmeEndDate != null && studyProgramme.getEndDate().isBeforeNow();
+		return programmeEndDate != null && programmeEndDate.isBeforeNow();
 	}
 	
 	public void setStatus(String status) {
@@ -209,11 +209,11 @@ public class Student implements Serializable {
 	}
 
 	@Column(name = "LODGING", nullable=false)
-	public Boolean getLodging() {
+	public String getLodging() {
 		return lodging;
 	}
 
-	public void setLodging(Boolean lodging) {
+	public void setLodging(String lodging) {
 		this.lodging = lodging;
 	}
 
@@ -282,7 +282,4 @@ public class Student implements Serializable {
 				+ ", studyEndText=" + studyEndText + ", studyStatus=" + studyEndReason + ", apiKey=" + apiKey + ", "
 				+ "status=" + status +  ", department=" + studentDepartment + "]";
 	}
-
-	
-
 }

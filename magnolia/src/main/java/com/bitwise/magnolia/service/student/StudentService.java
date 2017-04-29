@@ -1,5 +1,7 @@
 package com.bitwise.magnolia.service.student;
 
+import java.util.List;
+
 import com.bitwise.magnolia.model.student.Student;
 import com.bitwise.magnolia.util.StudentList;
 
@@ -25,5 +27,9 @@ public interface StudentService {
 	
 	public StudentList findAllStudents();
 	
-	public Student save(Student student);
+	public List<Student> findAll();
+	
+	public Student save(Student data);
+	
+	public Student updateStudent(Student data);
 }

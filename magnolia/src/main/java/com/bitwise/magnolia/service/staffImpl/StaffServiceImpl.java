@@ -1,4 +1,8 @@
 package com.bitwise.magnolia.service.staffImpl;
+import java.util.List;
+
+import javax.persistence.EntityExistsException;
+
 /**
  *  
  * @author Sika Kay
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bitwise.magnolia.dao.staff.StaffDao;
+import com.bitwise.magnolia.exception.EntityDoesNotExistException;
 import com.bitwise.magnolia.model.staff.Staff;
 import com.bitwise.magnolia.service.staff.StaffService;
 import com.bitwise.magnolia.util.StaffList;
@@ -57,9 +62,41 @@ public class StaffServiceImpl implements StaffService {
 
 	@Override
 	@Transactional(readOnly=false)
-	public Staff save(Staff staff) {
-		logger.info("Adding/Updating staff with ID " + staff.getId());
-		return this.staffDao.save(staff);
+	public Staff save(Staff data) {
+		Staff staff = staffDao.findByUserId(data.getUser().getId());
+		if (staff != null) {
+			throw new EntityExistsException("Staff already exists");
+		}
+		return this.staffDao.save(data);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Staff> findAll() {
+		return this.staffDao.findAllStaff();
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public Staff updateStaff(Staff data) {
+		Staff staff = staffDao.findById(data.getId());
+		try {
+			if (staff != null) {
+				staff.setStaffId(data.getStaffId());
+				staff.setApiKey(data.getApiKey());
+				staff.setIsAcademic(data.getIsAcademic());
+				staff.setIsTemporary(data.getIsTemporary());
+				staff.setTitle(data.getTitle());
+				staff.setStatus(data.getStatus());
+				staff.setStaffDepartment(data.getStaffDepartment());
+				staff.setUser(data.getUser());
+			} else {
+				throw new EntityDoesNotExistException("Staff does not exist");
+			}
+		} catch(Exception e) {
+			throw new EntityDoesNotExistException("Staff does not exist");
+		}
+		return this.staffDao.update(staff);
 	}
 
 }

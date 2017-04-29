@@ -25,11 +25,11 @@ public class StudentResource extends ResourceSupport {
 	
 	private String apiKey;
 	
-	private String enrolmentType;
+	private String courseEnrolmentType;
 	
-	private Boolean lodging;
+	private String lodging;
 	
-	private String partType;
+	private String participationType;
 	
 	private String programmeEndDate;
 	
@@ -41,9 +41,9 @@ public class StudentResource extends ResourceSupport {
 	
 	private String studentId;
 	
-	private String endReason;
+	private String studyEndReason;
 	
-	private String endText;
+	private String studyEndText;
 	
 	private String studyStatus;
 	
@@ -69,28 +69,12 @@ public class StudentResource extends ResourceSupport {
 		this.apiKey = apiKey;
 	}
 
-	public String getEnrolmentType() {
-		return enrolmentType;
-	}
-
-	public void setEnrolmentType(String enrolmentType) {
-		this.enrolmentType = enrolmentType;
-	}
-
-	public Boolean getLodging() {
+	public String getLodging() {
 		return lodging;
 	}
 
-	public void setLodging(Boolean lodging) {
+	public void setLodging(String lodging) {
 		this.lodging = lodging;
-	}
-
-	public String getPartType() {
-		return partType;
-	}
-
-	public void setPartType(String partType) {
-		this.partType = partType;
 	}
 
 	public String getProgrammeEndDate() {
@@ -133,22 +117,6 @@ public class StudentResource extends ResourceSupport {
 		this.studentId = studentId;
 	}
 
-	public String getEndReason() {
-		return endReason;
-	}
-
-	public void setEndReason(String endReason) {
-		this.endReason = endReason;
-	}
-
-	public String getEndText() {
-		return endText;
-	}
-
-	public void setEndText(String endText) {
-		this.endText = endText;
-	}
-
 	public String getStudyStatus() {
 		return studyStatus;
 	}
@@ -163,6 +131,38 @@ public class StudentResource extends ResourceSupport {
 
 	public void setStudyProgramme(String studyProgramme) {
 		this.studyProgramme = studyProgramme;
+	}
+
+	public String getCourseEnrolmentType() {
+		return courseEnrolmentType;
+	}
+
+	public void setCourseEnrolmentType(String courseEnrolmentType) {
+		this.courseEnrolmentType = courseEnrolmentType;
+	}
+
+	public String getParticipationType() {
+		return participationType;
+	}
+
+	public void setParticipationType(String participationType) {
+		this.participationType = participationType;
+	}
+
+	public String getStudyEndReason() {
+		return studyEndReason;
+	}
+
+	public void setStudyEndReason(String studyEndReason) {
+		this.studyEndReason = studyEndReason;
+	}
+
+	public String getStudyEndText() {
+		return studyEndText;
+	}
+
+	public void setStudyEndText(String studyEndText) {
+		this.studyEndText = studyEndText;
 	}
 
 	public String getStudentDepartment() {
@@ -185,19 +185,19 @@ public class StudentResource extends ResourceSupport {
 		Student student = new Student();
 		student.setId(rid);
 		student.setApiKey(Utils.randomString(30));
-		student.setStatus(status);
-		student.setStudyEndReason(endReason);
-		student.setStudyEndText(endText);
-		student.setStudentId("STD".concat("/").concat(org.joda.time.format.DateTimeFormat.forPattern("yyyy").print(new DateTime(DateTime.now()))).concat("/").concat(new Department().getCode()).concat("/").concat(new User().getId().toString()));
-		student.setCourseEnrolmentType(enrolmentType);
-		student.setParticipationType(partType);
+		student.setStatus(ApplicationConstant.PENDING_STATUS);
+		student.setStudyEndReason(studyEndReason);
+		student.setStudyEndText(studyEndText);
+		student.setStudentId("STD".concat("/").concat(org.joda.time.format.DateTimeFormat.forPattern("yyyy").print(new DateTime(DateTime.now()))).concat("/").concat(Utils.generateRandomCode()).concat("/").concat(Utils.generateRandomCode()));
+		student.setCourseEnrolmentType(courseEnrolmentType);
+		student.setParticipationType(participationType);
 		student.setStartDate(new DateTime(DateTime.now()));
-		student.setProgrammeEndDate(new StudyProgramme().getEndDate());
 		student.setStudyStatus(ApplicationConstant.INVIEW_STATUS);
-		student.setActualEndDate(new StudyProgramme().getEndDate());
-		student.setLodging(Boolean.TRUE);
-		student.setStudyProgramme(new StudyProgramme(Long.parseLong(studyProgramme)));
+		student.setLodging(lodging);
 		student.setStudentDepartment(new Department(Long.parseLong(studentDepartment)));
+		student.setStudyProgramme(new StudyProgramme(Long.parseLong(studyProgramme)));
+		student.setProgrammeEndDate(new DateTime(DateTime.now().plusDays(1460)));
+		student.setActualEndDate(new DateTime(DateTime.now().plusDays(1460)));
 		student.setUser(new User(Long.parseLong(user)));
 		return student;
 	}

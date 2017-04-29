@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.school;
+import java.util.List;
+
 import com.bitwise.magnolia.model.school.Department;
 /**
  *  
@@ -18,6 +20,8 @@ public interface DepartmentService {
 	public DepartmentList findDepartmentsByFacultyId(Long facultyId);
 	
 	public DepartmentList findAllDepartments();
+	
+	public List<Department> findAll();
 	
 	public Department findByDepartmentId(Long id);
 	

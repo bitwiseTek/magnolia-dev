@@ -10,6 +10,8 @@
 	<class>com.bitwise.magnolia.model.common.StudyProgrammeCategory</class>
 	<class>com.bitwise.magnolia.model.course.Course</class>
 	<class>com.bitwise.magnolia.model.course.CourseLength</class>
+	<class>com.bitwise.magnolia.model.messages.Messages</class>
+	<class>com.bitwise.magnolia.model.finance.BillingDetails</class>
 	<class>com.bitwise.magnolia.model.school.Campus</class>
 	<class>com.bitwise.magnolia.model.school.Department</class>
 	<class>com.bitwise.magnolia.model.school.Faculty</class>

@@ -36,7 +36,7 @@ public class StudentBuilder extends EntityBuilder<Student> {
 		return this;
 	}
 	
-	public StudentBuilder student(String studentId, String studyEndReason, String studyEndText, String studyStatus, Boolean lodging, 
+	public StudentBuilder student(String studentId, String studyEndReason, String studyEndText, String studyStatus, String lodging, 
 			String participationType, String enrolmentType, String apiKey, String status, DateTime startDate, DateTime actualEndDate,
 			DateTime programmeEndDate) {
 		this.product.setStudentId(studentId);

@@ -80,9 +80,9 @@
 	                	<div class="col-md-6 col-sm-6">
 	                		<label for="dob" class="control-label">Date of Birth:</label>
 							<div class="input-append success date col-md-10 col-lg-10 no-padding">
-						 	 	<form:input type="date" placeholder="Date of Birth" id="dob" name="dob" path="birthday" class="form-control" />
+						 	 	<form:input type="text" placeholder="Date of Birth" id="dob" name="dob" path="birthday" class="form-control" />
 						 	 	<form:errors class="error" path="birthday" />
-						  		<span class="add-on" style="background-color: #BBB;"><span></span><i class="fa fa-th"></i></span>
+						  		<span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
 							</div>
 	                	</div>
 	                  	<div class="col-md-6 col-sm-6">

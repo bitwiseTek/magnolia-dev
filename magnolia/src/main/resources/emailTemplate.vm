@@ -5,8 +5,8 @@
 		<title>Magnolia Academy Welcome Page</title>
 	</head>
 	<body style="margin:0px; font-family:Tahoma, Geneva, sans-serif;">
-		<div style="padding:10px; background:#e9ecee; font-size:19px; color:#333;">
-				<a href="https://magnoliacad.com"><img src="http://portal.rssson.com/rivson/resources/images/magnolia_footer.png" alt="Magnolia"></a>
+		<div style="padding:10px; background:#e9ecee; font-size:29px; color:#333;">
+				<a href="https://portal.magnoliacad.com"><img src="http://portal.magnoliacad.com/magnolia/resources/assets/img/mid_logo.png" alt="Magnolia" width="30" height="30"></a>
 				Magnolia Registration
 		</div>
 		<div style="padding:24px; font-size:13px;">
@@ -26,7 +26,7 @@
 						<span style="font-weight:bold">So what next?</span>
 					</div>
 					<div>
-						Start by learning the entire process step-by-step <a href="https://magnoliacad.com/help">Magnolia Guide.</a>
+						Start by learning the entire process step-by-step <a href="https://portal.magnoliacad.com/help">Magnolia Guide.</a>
 					</div>
 				</p>
 				

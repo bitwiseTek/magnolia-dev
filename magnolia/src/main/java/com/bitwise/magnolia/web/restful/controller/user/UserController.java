@@ -157,7 +157,6 @@ public class UserController {
 	@ApiResponses(value={@ApiResponse(code=200, message="User updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find user", response=ErrorDetail.class)})
 	public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) /*throws MessagingException*/ {
 		logger.info("Updating user with ID " + updatedUser.getId());
-		System.err.println(updatedUser.getId());
 		try {
 			updatedUser = userService.findById(id);
 			if (updatedUser != null) {

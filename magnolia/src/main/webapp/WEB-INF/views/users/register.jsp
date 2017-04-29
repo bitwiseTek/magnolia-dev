@@ -78,10 +78,10 @@
 	               	<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
 	                	<div class="col-md-6 col-sm-6">
 							<div class="input-append success date col-md-10 col-lg-10 no-padding">
-						 	 	<input type="date" placeholder="Date of Birth" id="dob" name="dob" class="form-control">
-						  		<span class="add-on" style="background-color: #BBB;"><span></span><i class="fa fa-th"></i></span>
+						 	 	<input type="text" placeholder="Date of Birth" id="dob" name="dob" class="form-control">
+						  		<span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
 							</div>
-	                	</div>
+		                </div>
 	                  	<div class="col-md-6 col-sm-6">
 	                  		<select id="sex" style="width:100%">
 	                       		<option value="SG">Select Gender</option>

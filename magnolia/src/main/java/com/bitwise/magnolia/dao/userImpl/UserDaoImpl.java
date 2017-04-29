@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.dao.user.UserDao;
 import com.bitwise.magnolia.model.user.User;
 
@@ -71,7 +72,7 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 	@Override
 	public List<User> findAllActiveUsers(String status) {
 		String sql = "select u from User u where u.status = :status";
-		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("status", status);
+		TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("status", ApplicationConstant.ACTIVE_STATUS);
 		List<User> users = query.getResultList();
 		return users;
 	}

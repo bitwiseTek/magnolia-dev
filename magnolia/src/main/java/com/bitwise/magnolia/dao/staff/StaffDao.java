@@ -15,6 +15,8 @@ public interface StaffDao {
 	
 	//Get staff's record by staffId
 	public Staff findByStaffId(String staffId);
+	
+	public Staff findByUserId(Long userId);
 
 	//Get staff's record by staffApiKey
 	public Staff findByStaffApiKey(String apiKey);
@@ -24,4 +26,6 @@ public interface StaffDao {
 	public List<Staff> findAllStaff();
 	
 	public Staff save(Staff staff);
+	
+	public Staff update(Staff staff);
 }

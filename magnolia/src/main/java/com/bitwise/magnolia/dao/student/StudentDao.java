@@ -26,5 +26,7 @@ public interface StudentDao {
 	public List<Student> findAllStudents();
 	
 	public Student save(Student student);
+	
+	public Student update(Student student);
 
 }

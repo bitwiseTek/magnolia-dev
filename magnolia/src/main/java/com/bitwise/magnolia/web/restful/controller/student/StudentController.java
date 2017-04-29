@@ -9,6 +9,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.exception.EntityDoesNotExistException;
 import com.bitwise.magnolia.exception.EntityExistsException;
 import com.bitwise.magnolia.model.student.Student;
+import com.bitwise.magnolia.service.email.EmailService;
 import com.bitwise.magnolia.service.student.StudentService;
 import com.bitwise.magnolia.util.StudentList;
 import com.bitwise.magnolia.web.restful.exception.ConflictException;
@@ -49,6 +52,9 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@ApiOperation(value="Retrieves all the students", response=Student.class, responseContainer="List")
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/"}, 
@@ -114,7 +120,6 @@ public class StudentController {
 			method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value={@ApiResponse(code=201, message="Student created successfully", response=Void.class), @ApiResponse(code=500, message="Error creating student", response=ErrorDetail.class)})
 	public ResponseEntity<StudentResource> createStudent(@RequestBody StudentResource sentStudent) {
-		logger.info("Adding student with ID " + sentStudent.getRid());
 		try {
 			Student student = studentService.save(sentStudent.toStudent());
 			StudentResource res = new StudentResourceAsm().toResource(student);
@@ -130,12 +135,13 @@ public class StudentController {
 	@RequestMapping(value = {ApplicationConstant.API +  ApplicationConstant.VERSION + "/" + ApplicationConstant.SCHOOL_ALIAS + "/restful/students/edit/{id}"}, 
 			method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value={@ApiResponse(code=200, message="Student updated successfully", response=Void.class), @ApiResponse(code=404, message="Unable to find student", response=ErrorDetail.class)})
-	public ResponseEntity<StudentResource> updateStudent(@PathVariable Long id, @RequestBody StudentResource student) {
+	public ResponseEntity<StudentResource> updateStudent(@PathVariable Long id, @RequestBody StudentResource student) throws MessagingException {
 		logger.info("Updating student with ID " + student.getRid());
 		try {
 			Student updatedStudent = studentService.findById(id);
 			if (updatedStudent != null) {
 				updatedStudent = studentService.save(student.toStudent());
+				this.emailService.sendUpdateStudentEmail(updatedStudent.getUser().getPrimaryEmail(), updatedStudent);
 				StudentResource res = new StudentResourceAsm().toResource(updatedStudent);
 				return new ResponseEntity<StudentResource>(res, HttpStatus.OK);
 			} else {

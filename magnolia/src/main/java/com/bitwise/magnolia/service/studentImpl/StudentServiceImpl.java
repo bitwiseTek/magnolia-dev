@@ -1,4 +1,5 @@
 package com.bitwise.magnolia.service.studentImpl;
+import java.util.List;
 /**
  *  
  * @author Sika Kay
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bitwise.magnolia.dao.student.StudentDao;
+import com.bitwise.magnolia.exception.EntityDoesNotExistException;
+import com.bitwise.magnolia.exception.EntityExistsException;
 import com.bitwise.magnolia.model.student.Student;
 import com.bitwise.magnolia.service.student.StudentService;
 import com.bitwise.magnolia.util.StudentList;
@@ -61,9 +64,47 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	@Transactional(readOnly=false)
-	public Student save(Student student) {
-		logger.info("Adding student with ID " + student.getId());
-		return this.studentDao.save(student);
+	public Student save(Student data) {
+		Student student = studentDao.findByStudentId(data.getStudentId());
+		if (student != null) {
+			throw new EntityExistsException("Student already exists");
+		}
+		return this.studentDao.save(data);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Student> findAll() {
+		return this.studentDao.findAllStudents();
+	}
+
+	@Override
+	public Student updateStudent(Student data) {
+		Student student = studentDao.findById(data.getId());
+		try {
+			if (student != null) {
+				student.setStudentId(data.getStudentId());
+				student.setStudentDepartment(data.getStudentDepartment());
+				student.setStudyEndReason(data.getStudyEndReason());
+				student.setStudyEndText(data.getStudyEndText());
+				student.setStudyProgramme(data.getStudyProgramme());
+				student.setStudyStatus(data.getStudyStatus());
+				student.setApiKey(data.getApiKey());
+				student.setLodging(data.getLodging());
+				student.setStatus(data.getStatus());
+				student.setCourseEnrolmentType(data.getCourseEnrolmentType());
+				student.setStartDate(data.getStartDate());
+				student.setProgrammeEndDate(data.getProgrammeEndDate());
+				student.setActualEndDate(data.getActualEndDate());
+				student.setParticipationType(data.getParticipationType());
+				student.setUser(data.getUser());
+			} else {
+				throw new EntityDoesNotExistException("Student does not exist");
+			}
+		} catch(Exception e) {
+			throw new EntityDoesNotExistException("Student does not exist");
+		}
+		return this.studentDao.update(student);
 	}
 
 }

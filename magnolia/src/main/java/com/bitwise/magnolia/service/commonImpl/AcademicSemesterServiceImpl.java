@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.commonImpl;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -48,6 +50,12 @@ public class AcademicSemesterServiceImpl implements AcademicSemesterService {
 	@Transactional(readOnly=true)
 	public AcademicSemester findByName(String name) {
 		return this.semesterDao.findByName(name);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<AcademicSemester> findAllSemesters() {
+		return this.semesterDao.findAll();
 	}
 
 }

@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.staff;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -22,5 +24,9 @@ public interface StaffService {
 	
 	public StaffList findAllStaff();
 	
-	public Staff save(Staff staff);
+	public List<Staff> findAll();
+	
+	public Staff save(Staff data);
+	
+	public Staff updateStaff(Staff data);
 }

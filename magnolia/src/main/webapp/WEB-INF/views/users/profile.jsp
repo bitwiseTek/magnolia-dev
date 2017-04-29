@@ -74,7 +74,7 @@
                       </div>
                     </div>
                     <c:if test="${not empty users}">
-	                    <div class="col-md-5 user-description-box  col-sm-5">
+	                    <div class="col-md-8 user-description-box  col-sm-8">
 	                    	<c:forEach items="${users}" var="user">
 	                    		<c:if test="${user.username == pageContext.request.userPrincipal.name}">
 			                      <h4 class="semi-bold no-margin">${user.firstName} ${user.lastName}</h4>
@@ -88,52 +88,6 @@
 	                      </c:forEach>
 	                    </div>
                     </c:if>
-                    <div class="col-md-3  col-sm-3">
-                      <h5 class="normal">Friends ( <span class="text-success">1223</span> )</h5>
-                      <ul class="my-friends">
-                        <li>
-                          <div class="profile-pic">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/d2x.jpg" data-src="assets/img/profiles/d.jpg" src="assets/img/profiles/d.jpg" alt="">
-                          </div>
-                        </li>
-                        <li>
-                          <div class="profile-pic">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/c2x.jpg" data-src="assets/img/profiles/c.jpg" src="assets/img/profiles/c.jpg" alt="">
-                          </div>
-                        </li>
-                        <li>
-                          <div class="profile-pic">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/h2x.jpg" data-src="assets/img/profiles/h.jpg" src="assets/img/profiles/h.jpg" alt="">
-                          </div>
-                        </li>
-                        <li>
-                          <div class="profile-pic">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/avatar_small2x.jpg" data-src="assets/img/profiles/avatar_small.jpg" src="assets/img/profiles/avatar_small.jpg" alt="">
-                          </div>
-                        </li>
-                        <li>
-                          <div class="profile-pic">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/e2x.jpg" data-src="assets/img/profiles/e.jpg" src="assets/img/profiles/e.jpg" alt="">
-                          </div>
-                        </li>
-                        <li>
-                          <div class="profile-pic">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/b2x.jpg" data-src="assets/img/profiles/b.jpg" src="assets/img/profiles/b.jpg" alt="">
-                          </div>
-                        </li>
-                        <li>
-                          <div class="profile-pic">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/h2x.jpg" data-src="assets/img/profiles/h.jpg" src="assets/img/profiles/h.jpg" alt="">
-                          </div>
-                        </li>
-                        <li>
-                          <div class="profile-pic">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/d2x.jpg" data-src="assets/img/profiles/d.jpg" src="assets/img/profiles/d.jpg" alt="">
-                          </div>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
                   </div>
                   <div class="tiles-body">
                     <div class="row">

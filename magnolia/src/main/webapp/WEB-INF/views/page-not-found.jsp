@@ -56,7 +56,7 @@
 	          <li><a href="#">Design</a></li>
 	        </ul>
 	        <br>
-	        <div class="copyright"> All work copyright of respective owner, 2013 webarch Incorporated </div>
+	        <div class="copyright"> All work copyright of respective owner, 2017 ManageMe Inc </div>
 	      </div>
 	    </div>
 </div>

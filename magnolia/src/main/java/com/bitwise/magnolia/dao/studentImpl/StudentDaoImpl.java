@@ -12,6 +12,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bitwise.magnolia.common.AbstractDao;
@@ -20,6 +22,8 @@ import com.bitwise.magnolia.model.student.Student;
 
 @Repository("studentDao")
 public class StudentDaoImpl extends AbstractDao<Long, Student> implements StudentDao {
+	
+	final Logger logger = LoggerFactory.getLogger(StudentDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager em;
@@ -65,7 +69,17 @@ public class StudentDaoImpl extends AbstractDao<Long, Student> implements Studen
 	@Override
 	@Transactional
 	public Student save(Student student) {
-		return this.em.merge(student);
+		logger.info("Adding/Updating student with ID " + student.getId());
+		persist(student);
+		return student;
+	}
+
+	@Override
+	@Transactional
+	public Student update(Student student) {
+		logger.info("Adding/Updating student with ID " + student.getId());
+		merge(student);
+		return student;
 	}
 
 }
