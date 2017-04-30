@@ -88,16 +88,6 @@ public class MVCStaffController {
 		return "staff/edit";
 	}
 	
-	@PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
-	@RequestMapping(value="/admin/staff/edit", method=RequestMethod.GET)
-	public String requestEditAdminStaffPage(ModelMap model) {
-		List<Staff> staff = staffService.findAll();
-		model.addAttribute("staff", staff);
-		String currentTime = org.joda.time.format.DateTimeFormat.forPattern("E, MMM Y h:mm a").print(DateTime.now());
-		model.addAttribute("currentTime", currentTime);
-		return "admin/staff/edit";
-	}
-	
 	@PreAuthorize("hasRole('STAFF')")
 	@RequestMapping(value="/staff/edit/staff/{id}", method={RequestMethod.GET})
 	public String requestStaffEditPage(@PathVariable("id") Long id, @ModelAttribute Staff staff, ModelMap model) {
@@ -107,6 +97,10 @@ public class MVCStaffController {
 		model.addAttribute("depts", depts);
 		Map<String, String> titles = Utils.getTitles();
 		model.addAttribute("titles", titles);
+		Map<String, String> statuses = Utils.getStatuses();
+		model.addAttribute("statuses", statuses);
+		String currentStatus = staff.getStatus();
+		model.addAttribute("currentStatus", currentStatus);
 		return "staff/edit/staff";
 	}
 	
@@ -117,8 +111,10 @@ public class MVCStaffController {
 		model.addAttribute("staff", staff);
 		List<Department> depts = deptService.findAll();
 		model.addAttribute("depts", depts);
-		Map<String, String> titles = Utils.getTitles();
-		model.addAttribute("titles", titles);
+		Map<String, String> statuses = Utils.getStatuses();
+		model.addAttribute("statuses", statuses);
+		String currentStatus = staff.getStatus();
+		model.addAttribute("currentStatus", currentStatus);
 		return "admin/staff/edit/staff";
 	}
 	

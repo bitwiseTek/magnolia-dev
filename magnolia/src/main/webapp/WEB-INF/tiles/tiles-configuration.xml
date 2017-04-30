@@ -147,6 +147,16 @@
         <put-attribute name="current" value="admin/students/list" cascade="true" />
     </definition>
     
+    <definition name="admin/staff/edit/staff" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/editstaff.jsp" />
+        <put-attribute name="current" value="admin/staff/edit/staff" cascade="true" />
+    </definition>
+    
+    <definition name="admin/staff/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/stafflist.jsp" />
+        <put-attribute name="current" value="admin/staff/list" cascade="true" />
+    </definition>
+    
     <definition name="staff/register" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/staff/register.jsp" />
         <put-attribute name="current" value="staff/register" cascade="true" />

@@ -8,16 +8,17 @@ package com.bitwise.magnolia.validation;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import com.bitwise.magnolia.model.staff.Staff;
+
 public class StaffValidator implements Validator {
 
 	@Override
-	public boolean supports(Class<?> arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean supports(Class<?> clazz) {
+		return (Staff.class).isAssignableFrom(clazz);
 	}
 
 	@Override
-	public void validate(Object arg0, Errors arg1) {
+	public void validate(Object target, Errors errors) {
 		// TODO Auto-generated method stub
 		
 	}
