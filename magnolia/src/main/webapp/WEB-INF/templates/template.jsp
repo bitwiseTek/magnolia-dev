@@ -110,6 +110,10 @@
     <script src="<c:url value="/resources/assets/js/form_elements.js" /> " type="text/javascript"></script>
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="<c:url value="/resources/assets/js/email_comman.js" /> " type="text/javascript"></script>
+     <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="<c:url value="/resources/assets/plugins/jquery-mixitup/jquery.mixitup.min.js" /> " type="text/javascript"></script>
+    <!-- END PAGE LEVEL JS -->
+    <script src="<c:url value="/resources/assets/js/search_results.js" /> " type="text/javascript"></script>
     <script>
 	    $(document).ready(function()
 		    {

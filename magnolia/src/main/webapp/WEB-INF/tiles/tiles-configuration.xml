@@ -207,6 +207,11 @@
         <put-attribute name="current" value="messages/trash" cascade="true" />
     </definition>
     
+    <definition name="search/all" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/search.jsp" />
+        <put-attribute name="current" value="search/all" cascade="true" />
+    </definition>
+    
     <definition name="resourceNotFound" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/page-not-found.jsp" />
         <put-attribute name="current" value="resourceNotFound" cascade="true" />

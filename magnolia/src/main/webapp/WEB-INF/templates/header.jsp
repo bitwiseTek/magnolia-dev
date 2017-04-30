@@ -49,8 +49,11 @@
             </ul>
             <ul class="nav quick-section">
               <li class="m-r-10 input-prepend inside search-form no-boarder">
-                <span class="add-on"> <i class="material-icons">search</i></span>
-                <input name="" type="text" class="no-boarder " placeholder="Search Magnolia" style="width:250px;">
+              	<spring:url value="/search/all" var="search"></spring:url>
+              	<form action="${search}" method="post">
+	                <span class="add-on"> <i class="material-icons">search</i></span>
+	                <input name="" type="text" class="no-boarder " placeholder="Search Magnolia" style="width:250px;">
+                </form>
               </li>
             </ul>
           </div>
