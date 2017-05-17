@@ -10,6 +10,7 @@ import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.common.StudyProgrammeCategory;
 
 public class StudyProgrammeCategoryResource extends ResourceSupport {
@@ -72,9 +73,9 @@ public class StudyProgrammeCategoryResource extends ResourceSupport {
 		StudyProgrammeCategory category = new StudyProgrammeCategory();
 		category.setId(rid);
 		category.setName(name);
-		category.setStatus(status);
-		category.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
-		category.setUpdatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		category.setStatus(ApplicationConstant.ACTIVE_STATUS);
+		category.setCreatedAt(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
+		category.setUpdatedAt(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
 		return category;
 	}
 }

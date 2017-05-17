@@ -78,16 +78,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "x-requested-with")).and()
 				.sessionManagement().sessionFixation().newSession().and().authorizeRequests()
 				.antMatchers("/", "/index", "/auth/login",  "/users/register", "/defaulterror", "/resourceNotFound",
-						"/dataAccessFailure")
+						"/dataAccessFailure", "/accessdenied", "/page-not-found")
 				.permitAll()
-				.antMatchers("/users/**", "/courses/**", "/programmes/**", "/programme/categories/**", "/schools/**")
-				.authenticated().antMatchers("/admin/**", "/users/edit/users", "/users/searchusersdialog", 
-						"/users/createuser", "/students/createstudent", "/students/searchstudents", 
-						"/users/edituser", "/users/searchuserdialog", "/courses/searchcourses", 
-						"/projects/searchprojects", "/staff/createstaff")
+				.antMatchers("/admin/**", "/users/**", "/courses/**", "/course/**", "/programmes/**", 
+						"/programme/categories/**")
+				.authenticated().antMatchers("/admin/**","/courses/**", "/course/**", "/programmes/**", 
+						"/programme/categories/**")
 				.access("hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
-				.antMatchers("/students/**", "/programmes/**", "/programme/categories/**")
-				.access("hasRole('STUDENT') or hasRole('MANAGER')")
+				.antMatchers("/students/**")
+				.access("hasRole('STUDENT')")
+				.antMatchers("/staff/**")
+				.access("hasRole('STAFF')")
 				.and().formLogin().loginPage("/auth/login")
 				.loginProcessingUrl("/j_spring_security_check").usernameParameter("username")
 				.passwordParameter("password")

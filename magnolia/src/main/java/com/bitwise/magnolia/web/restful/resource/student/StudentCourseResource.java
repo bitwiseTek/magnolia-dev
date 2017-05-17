@@ -10,6 +10,7 @@ import org.springframework.hateoas.ResourceSupport;
 
 import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.course.Course;
+import com.bitwise.magnolia.model.finance.BillingDetails;
 import com.bitwise.magnolia.model.student.StudentCourse;
 
 public class StudentCourseResource extends ResourceSupport {
@@ -29,6 +30,8 @@ public class StudentCourseResource extends ResourceSupport {
 	private Boolean toggleOnOff;
 	
 	private String course;
+	
+	private String billing;
 
 	public Long getRid() {
 		return rid;
@@ -78,6 +81,14 @@ public class StudentCourseResource extends ResourceSupport {
 		this.course = course;
 	}
 	
+	public String getBilling() {
+		return billing;
+	}
+
+	public void setBilling(String billing) {
+		this.billing = billing;
+	}
+
 	public StudentCourse toStudentCourse() {
 		StudentCourse studentCourse = new StudentCourse();
 		studentCourse.setId(rid);
@@ -86,6 +97,7 @@ public class StudentCourseResource extends ResourceSupport {
 		studentCourse.setEndDate(new DateTime(DateTime.now().plusDays(90)));
 		studentCourse.setCourse(new Course(Long.parseLong(course)));
 		studentCourse.setToggleOnOff(Boolean.FALSE);
+		studentCourse.setBilling(new BillingDetails(Long.parseLong(billing)));
 		return studentCourse;
 	}
 }

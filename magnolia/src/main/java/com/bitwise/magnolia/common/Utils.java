@@ -34,6 +34,8 @@ public class Utils {
 
     private static Map<String, String> courseTypes = new TreeMap<String, String>();
     
+    private static Map<String, String> schoolTypes = new TreeMap<String, String>();
+    
     private static Map<String, String> statuses = new TreeMap<String, String>();
     
     private static Map<String, String> lodgings = new TreeMap<String, String>();
@@ -343,6 +345,22 @@ public class Utils {
 		return partTypes;
 	}
 	
+	public static Map<String, String> listOfSchoolTypes() {
+		schoolTypes.put("GRADUATE", "Graduate");
+		schoolTypes.put("UNDERGRADUATE", "Undergraduate");
+		schoolTypes.put("RESEARCH", "Research");
+		schoolTypes.put("SANDWICH", "Sandwich");
+		
+		return partTypes;
+	}
+	
+	public static Map<String, String> getSchoolTypes() {
+		for (String option : listOfSchoolTypes().values()) {
+			System.out.println(option);
+		}
+		return schoolTypes;
+	}
+	
 	public static Map<String, String> listOfLodgings() {
 		lodgings.put("ON", "ON-CAMPUS");
 		lodgings.put("OF", "OFF-CAMPUS");
@@ -441,15 +459,15 @@ public class Utils {
 	}
 	
 	public static Map<Double, String> listOfUnits() {
-		units.put(1.0, "1");
-		units.put(2.0, "2");
-		units.put(3.0, "3");
-		units.put(4.0, "4");
-		units.put(5.0, "5");
-		units.put(6.0, "6");
-		units.put(7.0, "6");
-		units.put(8.0, "6");
-		units.put(9.0, "6");
+		units.put(1.0, "1.0");
+		units.put(2.0, "2.0");
+		units.put(3.0, "3.0");
+		units.put(4.0, "4.0");
+		units.put(5.0, "5.0");
+		units.put(6.0, "6.0");
+		units.put(7.0, "7.0");
+		units.put(8.0, "8.0");
+		units.put(9.0, "9.0");
 		return units;
 	}
 	

@@ -13,6 +13,8 @@ public interface StudentCourseDao {
 
 	public StudentCourse findById(Long id);
 	
+	public StudentCourse findByBillingIdAndCourseId(Long billingId, Long courseId);
+	
 	public List<StudentCourse> findAllRegisteredCoursesOne(Long semesterId, Boolean toggle);
 	
 	public List<StudentCourse> findAllRegisteredCoursesTwo(Long semesterId, Boolean toggle);
@@ -32,4 +34,6 @@ public interface StudentCourseDao {
 	public List<StudentCourse> findAllCourses();
 	
 	public StudentCourse save(StudentCourse sc);
+	
+	public StudentCourse update(StudentCourse sc);
 }

@@ -34,12 +34,12 @@ public class MessagesDaoImpl extends AbstractDao<Long, Messages> implements Mess
 
 	@Override
 	public List<Messages> findAllBySender(String sender) {
-		return this.em.createNamedQuery("Messages.findAllBySender", Messages.class).setParameter("sender", sender).getResultList();
+		return this.em.createNamedQuery("Messages.findAllBySenderName", Messages.class).setParameter("sender", sender).getResultList();
 	}
 
 	@Override
 	public List<Messages> findAllByReceiver(String receiver) {
-		return this.em.createNamedQuery("Messages.findAllByReceiver", Messages.class).setParameter("receiver", receiver).getResultList();
+		return this.em.createNamedQuery("Messages.findAllByReceiverName", Messages.class).setParameter("receiver", receiver).getResultList();
 	}
 
 	@Override

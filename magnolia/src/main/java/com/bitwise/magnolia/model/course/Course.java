@@ -226,7 +226,7 @@ public class Course implements Serializable {
 	
 	@Transient
 	public String getCreatedAtString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(createdAt);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(createdAt);
 	}
 
 	@DateTimeFormat(iso=ISO.DATE_TIME)
@@ -242,7 +242,7 @@ public class Course implements Serializable {
 	
 	@Transient
 	public String getUpdatedAtString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(updatedAt);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(updatedAt);
 	}
 	
 	@ManyToOne

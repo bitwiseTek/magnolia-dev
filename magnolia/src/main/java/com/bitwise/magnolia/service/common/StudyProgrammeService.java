@@ -29,5 +29,7 @@ public interface StudyProgrammeService {
 	
 	public List<StudyProgramme> findAll();
 	
-	public StudyProgramme save(StudyProgramme programme);
+	public StudyProgramme save(StudyProgramme data);
+	
+	public StudyProgramme update(StudyProgramme data);
 }

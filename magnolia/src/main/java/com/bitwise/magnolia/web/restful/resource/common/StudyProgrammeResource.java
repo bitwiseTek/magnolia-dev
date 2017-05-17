@@ -8,6 +8,7 @@ package com.bitwise.magnolia.web.restful.resource.common;
 import org.joda.time.DateTime;
 import org.springframework.hateoas.ResourceSupport;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.common.StudyProgramme;
 import com.bitwise.magnolia.model.common.StudyProgrammeCategory;
 import com.bitwise.magnolia.model.course.CourseLength;
@@ -185,7 +186,7 @@ public class StudyProgrammeResource extends ResourceSupport {
 		programme.setId(rid);
 		programme.setCode(code);
 		programme.setName(name);
-		programme.setStatus(status);
+		programme.setStatus(ApplicationConstant.ACTIVE_STATUS);
 		programme.setDescription(description);
 		programme.setMaxParticipationCount(maxParticipants);
 		programme.setParticipants(participants);

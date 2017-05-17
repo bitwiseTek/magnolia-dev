@@ -663,7 +663,7 @@ public class InitialDataSetup {
 				{
 					InitialDataSetup.this.school = new SchoolBuilder() {
 						{
-							school("info@magnoliacad.com", "Choba", ApplicationConstant.SCHOOL_ALIAS, "https://magnoliacad.com", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), 365, "logo", "Magnolia", "a5ukhxhEObzv8TBW8yxeNYy6hm1knu", ApplicationConstant.ACTIVE_STATUS);
+							school("info@magnoliacad.com", "Choba", ApplicationConstant.SCHOOL_ALIAS, "https://magnoliacad.com", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), 365, "logo", "Magnolia", "a5ukhxhEObzv8TBW8yxeNYy6hm1knu", ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 				}
@@ -673,14 +673,14 @@ public class InitialDataSetup {
 					InitialDataSetup.this.subSchool = new SubSchoolBuilder() {
 						{
 							school(InitialDataSetup.this.school);
-							subSchool("School of Undergraduate Studies", "Academic", "Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							subSchool("School of Undergraduate Studies", "Academic", "Choba", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 					
 					new SubSchoolBuilder() {
 						{
 							school(InitialDataSetup.this.school);
-							subSchool("School of Graduate Studies", "Academic", "Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							subSchool("School of Graduate Studies", "Academic", "Choba", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 				}
@@ -690,14 +690,14 @@ public class InitialDataSetup {
 					InitialDataSetup.this.campus = new CampusBuilder() {
 						{
 							subSchool(InitialDataSetup.this.subSchool);
-							campus("Abuja", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							campus("Abuja", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 					
 					new CampusBuilder() {
 						{
 							subSchool(InitialDataSetup.this.subSchool);
-							campus("Choba", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							campus("Choba", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 				}
@@ -707,14 +707,14 @@ public class InitialDataSetup {
 					InitialDataSetup.this.faculty = new FacultyBuilder() {
 						{
 							campus(InitialDataSetup.this.campus);
-							faculty("Faculty of Engineering", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							faculty("Faculty of Engineering", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 					
 					new FacultyBuilder() {
 						{
 							campus(InitialDataSetup.this.campus);
-							faculty("Faculty of Sciences", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							faculty("Faculty of Sciences", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 				}
@@ -724,21 +724,21 @@ public class InitialDataSetup {
 					InitialDataSetup.this.department = new DepartmentBuilder() {
 						{
 							faculty(InitialDataSetup.this.faculty);
-							department("Department of Electrical/Electronics Engineering", "3015", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							department("Department of Electrical/Electronics Engineering", "3015", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 					
 					new DepartmentBuilder() {
 						{
 							faculty(InitialDataSetup.this.faculty);
-							department("Department of Petroleum Engineering", "3065", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							department("Department of Petroleum Engineering", "3065", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 					
 					new DepartmentBuilder() {
 						{
 							faculty(InitialDataSetup.this.faculty);
-							department("Department of Mathematics and Statistics", "2025", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							department("Department of Mathematics and Statistics", "2025", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 				}
@@ -777,19 +777,19 @@ public class InitialDataSetup {
 				{
 					InitialDataSetup.this.studyProgrammeCategory = new StudyProgrammeCategoryBuilder() {
 						{
-							category("Taught Programme (Full-Time)", new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							category("Taught Programme (Full-Time)", new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 					
 					new StudyProgrammeCategoryBuilder() {
 						{
-							category("Taught Programme (Part-Time)",  new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							category("Taught Programme (Part-Time)",  new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 					
 					new StudyProgrammeCategoryBuilder() {
 						{
-							category("Research Programme",  new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
+							category("Research Programme",  new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()), ApplicationConstant.ACTIVE_STATUS);
 						}
 					}.build();
 				}

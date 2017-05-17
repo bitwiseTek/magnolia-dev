@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.school;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -20,8 +22,14 @@ public interface FacultyService {
 	
 	public FacultyList findAllFaculties();
 	
+	public List<Faculty> findAll();
+	
 	public Faculty findById(Long id);
 	
 	public Faculty findByName(String name);
+	
+	public Faculty save(Faculty data);
+	
+	public Faculty update(Faculty data);
 	
 }

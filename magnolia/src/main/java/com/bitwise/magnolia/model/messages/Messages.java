@@ -118,7 +118,7 @@ public class Messages implements Serializable {
 	
 	@Transient
 	public String getSentAtString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("M dd H:mm:ss").print(sentAt);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(sentAt);
 	}
 
 	@DateTimeFormat(iso=ISO.DATE_TIME)
@@ -134,6 +134,6 @@ public class Messages implements Serializable {
 	
 	@Transient
 	public String getRecievedAtString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("M dd H:mm:ss").print(receivedAt);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(receivedAt);
 	}
 }

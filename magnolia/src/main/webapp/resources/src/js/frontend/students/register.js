@@ -49,7 +49,7 @@ var stdRegisterCtrl = {
 				var dept = $('#dept option:selected');
 				var programme = $('#programme option:selected');
 				var endReason = $('#endReason option:selected');
-				var endText = $('input[name="endText"]');
+				var endText = $('textarea[name="endText"]');
 				var status = $('input[name="status"]');
 				
 				$('form[name=std] select').css({'border' : '1px solid #FFF'});

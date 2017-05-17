@@ -2,6 +2,14 @@ package com.bitwise.magnolia.service.course;
 /**
  *  
  * @author Sika Kay
+ * @date 27/02/17
+ *
+ */
+import java.util.List;
+
+/**
+ *  
+ * @author Sika Kay
  * @date 02/03/17
  *
  */
@@ -16,5 +24,9 @@ public interface CourseLengthService {
 	
 	public CourseLengthList findAllCourseLengths();
 	
-	public CourseLength save(CourseLength length);
+	public List<CourseLength> findAll();
+	
+	public CourseLength save(CourseLength data);
+	
+	public CourseLength update(CourseLength data);
 }

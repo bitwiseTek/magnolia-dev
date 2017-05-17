@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.schoolImpl;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bitwise.magnolia.dao.school.SubSchoolDao;
+import com.bitwise.magnolia.exception.EntityDoesNotExistException;
+import com.bitwise.magnolia.exception.EntityExistsException;
 import com.bitwise.magnolia.model.school.SubSchool;
 import com.bitwise.magnolia.service.school.SubSchoolService;
 import com.bitwise.magnolia.util.SubSchoolList;
@@ -51,8 +55,39 @@ public class SubSchoolServiceImpl implements SubSchoolService {
 
 	@Override
 	@Transactional(readOnly=false)
-	public SubSchool save(SubSchool school) {
-		logger.info("Adding subschool with ID " + school.getSubSchoolId());
-		return this.subSchoolDao.save(school);
+	public SubSchool save(SubSchool data) {
+		logger.info("Adding subschool with ID " + data.getSubSchoolId());
+		SubSchool school = subSchoolDao.findByName(data.getName());
+		if (school != null) {
+			throw new EntityExistsException("SubSchool already exists");
+		}
+		return this.subSchoolDao.save(data);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<SubSchool> findAll() {
+		return this.subSchoolDao.findAllSubSchools();
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public SubSchool update(SubSchool data) {
+		SubSchool school = subSchoolDao.findById(data.getSubSchoolId());
+		try {
+			if (school != null) {
+				school.setAddress(data.getAddress());
+				school.setCreatedAt(data.getCreatedAt());
+				school.setName(data.getName());
+				school.setStatus(data.getStatus());
+				school.setType(data.getType());
+				school.setSchool(data.getSchool());
+			} else {
+				throw new EntityDoesNotExistException("SubSchool does not exist");
+			}
+		} catch(Exception e) {
+			throw new EntityDoesNotExistException("SubSchool does not exist");
+		}
+		return school;
 	}
 }

@@ -25,7 +25,7 @@
         	<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">	
               	<div class="col-md-2 col-sm-2">
               		<div class="col-md-12">
-	           			<a href="#loc_photo" ></a><div id="preview_photo" class="centered" ><img src="<c:url value="/resources/assets/img/mg/${pageContext.request.userPrincipal.name}.png" /> " class="img-circle" width="80"></div>
+	           			<a href="#loc_photo" ></a><div id="preview_photo" class="centered" ><img src="<c:url value="/resources/assets/img/mg/${username}.png" /> " class="img-circle" width="80"></div>
 	           		</div>
            		</div>
            		
@@ -147,13 +147,15 @@
 	                <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
 	                  	<div>&nbsp;</div>
 	                  	<div class="col-md-1 col-sm-1">
-	                  		<button class="btn btn-success btn-cons">
+	                  		<button class="btn btn-danger btn-cons">
 	                  			<div class="lsf-icon" title="edit">Edit</div>
 	               			</button>
 	                  	</div>
 	                </div>
               	</div>
              </div>
+             <form:hidden id="apiKey" name="apiKey" path="apiKey" />
+             <form:hidden id="status" name="status" path="status" />
         </form:form>
 	</div>
 </div>

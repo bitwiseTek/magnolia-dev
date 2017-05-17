@@ -37,6 +37,12 @@ public class StudentServiceImpl implements StudentService{
 	public Student findByStudentId(String studentId) {
 		return this.studentDao.findByStudentId(studentId);
 	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Student findByUserId(Long userId) {
+		return this.studentDao.findByUserId(userId);
+	}
 
 	@Override
 	@Transactional(readOnly=true)
@@ -65,7 +71,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	@Transactional(readOnly=false)
 	public Student save(Student data) {
-		Student student = studentDao.findByStudentId(data.getStudentId());
+		Student student = studentDao.findByUserId(data.getUser().getId());
 		if (student != null) {
 			throw new EntityExistsException("Student already exists");
 		}
@@ -106,5 +112,4 @@ public class StudentServiceImpl implements StudentService{
 		}
 		return this.studentDao.update(student);
 	}
-
 }

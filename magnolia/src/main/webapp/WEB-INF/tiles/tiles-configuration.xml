@@ -27,11 +27,6 @@
         <put-attribute name="current" value="users/register" cascade="true" />
     </definition>
     
-    <definition name="users/edit" extends="fullTemplate">
-        <put-attribute name="content" value="/WEB-INF/views/users/edit.jsp" />
-        <put-attribute name="current" value="users/edit" cascade="true" />
-    </definition>
-    
     <definition name="users/profile/edit" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/users/profile.jsp" />
         <put-attribute name="current" value="users/profile/edit" cascade="true" />
@@ -40,6 +35,11 @@
     <definition name="users/edit/user" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/users/edituser.jsp" />
         <put-attribute name="current" value="users/edit/user" cascade="true" />
+    </definition>
+    
+    <definition name="users/show/user" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/users/showuser.jsp" />
+        <put-attribute name="current" value="users/show/user" cascade="true" />
     </definition>
     
     <definition name="users/profile/edit/user" extends="fullTemplate">
@@ -122,6 +122,41 @@
         <put-attribute name="current" value="students/billing/status/view" cascade="true" />
     </definition>
     
+    <definition name="students/courses/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/students/courses/list.jsp" />
+        <put-attribute name="current" value="students/courses/list" cascade="true" />
+    </definition>
+    
+    <definition name="students/courses/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/students/courses/addcourse.jsp" />
+        <put-attribute name="current" value="students/courses/add" cascade="true" />
+    </definition>
+    
+    <definition name="students/courses/register" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/students/courses/register.jsp" />
+        <put-attribute name="current" value="students/courses/register" cascade="true" />
+    </definition>
+    
+    <definition name="students/courses/show" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/students/courses/showcourse.jsp" />
+        <put-attribute name="current" value="students/courses/show" cascade="true" />
+    </definition>
+    
+    <definition name="students/courses/registered" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/students/courses/registered.jsp" />
+        <put-attribute name="current" value="students/courses/registered" cascade="true" />
+    </definition>
+    
+    <definition name="students/courses/pending" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/students/courses/pending.jsp" />
+        <put-attribute name="current" value="students/courses/pending" cascade="true" />
+    </definition>
+    
+    <definition name="students/courses/completed" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/students/courses/completed.jsp" />
+        <put-attribute name="current" value="students/courses/completed" cascade="true" />
+    </definition>
+    
      <definition name="finance/billing/status" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/finance/bills.jsp" />
         <put-attribute name="current" value="finance/billing/status" cascade="true" />
@@ -192,6 +227,166 @@
         <put-attribute name="current" value="admin/staff/list" cascade="true" />
     </definition>
     
+    <definition name="admin/campuses/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/school/addcampus.jsp" />
+        <put-attribute name="current" value="admin/campuses/add" cascade="true" />
+    </definition>
+    
+    <definition name="admin/campuses/edit/campus" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/editcampus.jsp" />
+        <put-attribute name="current" value="admin/campuses/edit/campus" cascade="true" />
+    </definition>
+    
+    <definition name="admin/campuses/show/campus" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/showcampus.jsp" />
+        <put-attribute name="current" value="admin/campuses/show/campus" cascade="true" />
+    </definition>
+    
+    <definition name="admin/campuses/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/campuslist.jsp" />
+        <put-attribute name="current" value="admin/campuses/list" cascade="true" />
+    </definition>
+    
+    <definition name="admin/departments/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/school/adddepartment.jsp" />
+        <put-attribute name="current" value="admin/departments/add" cascade="true" />
+    </definition>
+    
+    <definition name="admin/departments/edit/department" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/editdepartment.jsp" />
+        <put-attribute name="current" value="admin/departments/edit/department" cascade="true" />
+    </definition>
+    
+    <definition name="admin/departments/show/department" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/showdepartment.jsp" />
+        <put-attribute name="current" value="admin/departments/show/department" cascade="true" />
+    </definition>
+    
+    <definition name="admin/departments/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/departmentlist.jsp" />
+        <put-attribute name="current" value="admin/departments/list" cascade="true" />
+    </definition>
+    
+    <definition name="admin/subschools/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/school/addsubschool.jsp" />
+        <put-attribute name="current" value="admin/subschools/add" cascade="true" />
+    </definition>
+    
+    <definition name="admin/subschools/edit/subschool" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/editsubschool.jsp" />
+        <put-attribute name="current" value="admin/subschools/edit/subschool" cascade="true" />
+    </definition>
+    
+    <definition name="admin/subschools/show/subschool" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/showsubschool.jsp" />
+        <put-attribute name="current" value="admin/subschools/show/subschool" cascade="true" />
+    </definition>
+    
+    <definition name="admin/subschools/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/subschoollist.jsp" />
+        <put-attribute name="current" value="admin/subschools/list" cascade="true" />
+    </definition>
+    
+    <definition name="admin/faculties/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/school/addfaculty.jsp" />
+        <put-attribute name="current" value="admin/faculties/add" cascade="true" />
+    </definition>
+    
+    <definition name="admin/faculties/edit/faculty" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/editfaculty.jsp" />
+        <put-attribute name="current" value="admin/faculties/edit/faculty" cascade="true" />
+    </definition>
+    
+    <definition name="admin/faculties/show/faculty" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/showfaculty.jsp" />
+        <put-attribute name="current" value="admin/faculties/show/faculty" cascade="true" />
+    </definition>
+    
+    <definition name="admin/faculties/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/admin/facultylist.jsp" />
+        <put-attribute name="current" value="admin/faculties/list" cascade="true" />
+    </definition>
+    
+    <definition name="programme/categories/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/programmes/addprogrammecategory.jsp" />
+        <put-attribute name="current" value="programme/categories/add" cascade="true" />
+    </definition>
+    
+    <definition name="programme/categories/edit/category" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/programmes/editprogrammecategory.jsp" />
+        <put-attribute name="current" value="programme/categories/edit/category" cascade="true" />
+    </definition>
+    
+    <definition name="programme/categories/show/category" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/programmes/showprogrammecategory.jsp" />
+        <put-attribute name="current" value="programme/categories/show/category" cascade="true" />
+    </definition>
+    
+    <definition name="programme/categories/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/programmes/programmecategorieslist.jsp" />
+        <put-attribute name="current" value="programme/categories/list" cascade="true" />
+    </definition>
+    
+    <definition name="programmes/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/programmes/addprogramme.jsp" />
+        <put-attribute name="current" value="programmes/add" cascade="true" />
+    </definition>
+    
+    <definition name="programmes/edit/programme" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/programmes/editprogramme.jsp" />
+        <put-attribute name="current" value="programmes/edit/programme" cascade="true" />
+    </definition>
+    
+    <definition name="programmes/show/programme" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/programmes/showprogramme.jsp" />
+        <put-attribute name="current" value="programmes/show/programme" cascade="true" />
+    </definition>
+    
+    <definition name="programmes/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/programmes/programmelist.jsp" />
+        <put-attribute name="current" value="programmes/list" cascade="true" />
+    </definition>
+    
+    <definition name="course/lengths/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/courses/addcourselength.jsp" />
+        <put-attribute name="current" value="course/lengths/add" cascade="true" />
+    </definition>
+    
+    <definition name="course/lengths/edit/courselength" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/courses/editcourselength.jsp" />
+        <put-attribute name="current" value="course/lengths/edit/courselength" cascade="true" />
+    </definition>
+    
+    <definition name="course/lengths/show/courselength" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/courses/showcourselength.jsp" />
+        <put-attribute name="current" value="course/lengths/show/courselength" cascade="true" />
+    </definition>
+    
+    <definition name="course/lengths/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/courses/courselengthlist.jsp" />
+        <put-attribute name="current" value="course/lengths/list" cascade="true" />
+    </definition>
+    
+    <definition name="courses/add" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/courses/addcourse.jsp" />
+        <put-attribute name="current" value="courses/add" cascade="true" />
+    </definition>
+    
+    <definition name="courses/edit/course" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/courses/editcourse.jsp" />
+        <put-attribute name="current" value="courses/edit/course" cascade="true" />
+    </definition>
+    
+    <definition name="courses/show/course" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/courses/showcourse.jsp" />
+        <put-attribute name="current" value="courses/show/course" cascade="true" />
+    </definition>
+    
+    <definition name="courses/list" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/courses/courselist.jsp" />
+        <put-attribute name="current" value="courses/list" cascade="true" />
+    </definition>
+    
     <definition name="messages/inbox" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/messages/inbox.jsp" />
         <put-attribute name="current" value="messages/inbox" cascade="true" />
@@ -210,6 +405,11 @@
     <definition name="messages/sent" extends="fullTemplate">
         <put-attribute name="content" value="/WEB-INF/views/messages/sent.jsp" />
         <put-attribute name="current" value="messages/sent" cascade="true" />
+    </definition>
+    
+    <definition name="messages/view" extends="fullTemplate">
+        <put-attribute name="content" value="/WEB-INF/views/messages/view.jsp" />
+        <put-attribute name="current" value="messages/view" cascade="true" />
     </definition>
     
     <definition name="messages/trash" extends="fullTemplate">

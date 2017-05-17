@@ -65,7 +65,15 @@ public class CourseDaoImpl extends AbstractDao<Long, Course> implements CourseDa
 	@Override
 	@Transactional
 	public Course save(Course course) {
-		return this.em.merge(course);
+		persist(course);
+		return course;
+	}
+
+	@Override
+	@Transactional
+	public Course update(Course course) {
+		merge(course);
+		return course;
 	}
 
 }

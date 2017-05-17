@@ -47,7 +47,7 @@
 	                
         			<div class="col-md-10 col-sm-10">
         				<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
-        					<div class="col-md-7 col-sm-7">
+        					<div class="col-md-6 col-sm-6">
         						<label for="roleName" class="control-label"><spring:message code="roles.add.role.name" /></label>
 		                    	<input class="form-control" id="roleName" name="roleName" placeholder="Enter Role Name" type="text" required>
         					</div>

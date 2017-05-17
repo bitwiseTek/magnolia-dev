@@ -329,8 +329,8 @@ public class UserResource extends ResourceSupport {
 		user.setPhotoBase64(Utils.saveBase64ToPath(photoBase64, ApplicationConstant.SCHOOL_ALIAS, firstName.toLowerCase().concat(".").concat(lastName.toLowerCase()).concat("@magnoliacad.com") + ".png"));
 		user.setStatus(status);
 		user.setCreatedAt(new DateTime(DateTime.now()));
-		user.setLastLogin(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
-		user.setLastLogout(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		user.setLastLogin(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
+		user.setLastLogout(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
 		user.setRecoveryTime(null);
 		user.setRecoveryToken(recoveryToken);
 		return user;

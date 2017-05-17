@@ -44,7 +44,15 @@ public class StudyProgrammeCategoryDaoImpl extends AbstractDao<Long, StudyProgra
 	@Override
 	@Transactional
 	public StudyProgrammeCategory save(StudyProgrammeCategory category) {
-		return this.em.merge(category);
+		persist(category);
+		return category;
+	}
+
+	@Override
+	@Transactional
+	public StudyProgrammeCategory update(StudyProgrammeCategory category) {
+		merge(category);
+		return category;
 	}
 
 }

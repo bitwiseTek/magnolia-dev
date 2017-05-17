@@ -66,10 +66,10 @@
 			                        <td class="v-align-middle">${staff.staffDepartment.name}</td>
 			                        <td class="v-align-middle">
 			                        	<div>
-			                          	<c:if test="${staff.isAcademic == '1'}">
+			                          	<c:if test="${staff.isAcademic == true}">
 			                            	<span class="label label-success">Academic</span>
 			                            </c:if>
-			                            <c:if test="${staff.isTemporary == '1'}">
+			                            <c:if test="${staff.isTemporary == true}">
 			                            	<span class="label label-warning">Temporary</span>
 			                            </c:if>
 			                          </div>

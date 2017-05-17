@@ -17,6 +17,9 @@ public interface StudentService {
 	
 	//Get student's record by studentId
 	public Student findByStudentId(String studentId);
+	
+	//Get student's record by studentId
+	public Student findByUserId(Long userId);
 
 	//Get student's record by studentApiKey
 	public Student findByStudentApiKey(String apiKey);

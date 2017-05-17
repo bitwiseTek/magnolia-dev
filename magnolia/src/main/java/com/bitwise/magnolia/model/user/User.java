@@ -384,7 +384,7 @@ public class User implements Serializable {
 	
 	@Transient
 	public String getCreatedAtString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("E, MMM Y h:mm a").print(createdAt);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(createdAt);
 	}
 
 	@Column(name="RECOVERY_TOKEN")
@@ -422,7 +422,7 @@ public class User implements Serializable {
 
 	@Transient
 	public String getRecoveryTimeString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("E, MMM Y h:mm a").print(recoveryTime);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(recoveryTime);
 	}
 
 	@Override

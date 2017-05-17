@@ -54,7 +54,8 @@ public class StudyProgrammeDaoImpl extends AbstractDao<Long, StudyProgramme> imp
 	@Override
 	@Transactional
 	public StudyProgramme save(StudyProgramme programme) {
-		return this.em.merge(programme);
+		persist(programme);
+		return programme;
 	}
 
 	@Override
@@ -67,6 +68,13 @@ public class StudyProgrammeDaoImpl extends AbstractDao<Long, StudyProgramme> imp
 		TypedQuery<StudyProgramme> query = em.createNamedQuery("StudyProgramme.findByCategoryId", StudyProgramme.class).setParameter("categoryId", categoryId);
 		List<StudyProgramme> programmes = query.getResultList();
 		return programmes;
+	}
+
+	@Override
+	@Transactional
+	public StudyProgramme update(StudyProgramme programme) {
+		merge(programme);
+		return programme;
 	}
 
 }

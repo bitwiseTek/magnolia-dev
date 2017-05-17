@@ -10,6 +10,7 @@ import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.school.School;
 import com.bitwise.magnolia.model.school.SubSchool;
 
@@ -92,9 +93,10 @@ public class SubSchoolResource extends ResourceSupport {
 	public SubSchool toSubSchool() {
 		SubSchool subSchool = new SubSchool();
 		subSchool.setSubSchoolId(rid);
+		subSchool.setName(name);
 		subSchool.setAddress(address);
-		subSchool.setStatus(status);
-		subSchool.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		subSchool.setStatus(ApplicationConstant.ACTIVE_STATUS);
+		subSchool.setCreatedAt(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
 		subSchool.setType(type);
 		subSchool.setSchool(new School(Long.parseLong(school)));
 		return subSchool;

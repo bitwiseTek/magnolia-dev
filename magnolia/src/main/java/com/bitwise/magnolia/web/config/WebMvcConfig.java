@@ -40,7 +40,7 @@ import com.bitwise.magnolia.interceptors.SchoolInterceptor;
 import com.bitwise.magnolia.util.converter.PermissionConverter;
 import com.bitwise.magnolia.util.converter.RoleConverter;
 import com.bitwise.magnolia.util.converter.StaffToSubjectConverter;
-import com.bitwise.magnolia.util.converter.StudentToSubjectConverter;
+import com.bitwise.magnolia.util.converter.StudentToCourseConverter;
 import com.bitwise.magnolia.web.security.CredentialValidation;
 import com.bitwise.magnolia.web.security.MagnoliaAuthenticationProvider;
 import com.bitwise.magnolia.web.security.MagnoliaUserContext;
@@ -117,8 +117,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     	mappings.setProperty("NoValidDaysException", "schooldeactivated");
     	Properties statusCodes = new Properties();
     	mappings.setProperty("auth/login", String.valueOf(HttpServletResponse.SC_UNAUTHORIZED));
-    	exceptionResolver.setDefaultErrorView("defaulterror");
-    	exceptionResolver.setExceptionMappings(mappings);
+    	//exceptionResolver.setDefaultErrorView("defaulterror");
+    	//exceptionResolver.setExceptionMappings(mappings);
     	exceptionResolver.setStatusCodes(statusCodes);
     	return exceptionResolver;
     }
@@ -150,8 +150,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     }
     
     @Bean
-    public StudentToSubjectConverter studentToSubjectConverter() {
-    	return new StudentToSubjectConverter();
+    public StudentToCourseConverter studentToCourseConverter() {
+    	return new StudentToCourseConverter();
     }
     
     @Bean
@@ -183,7 +183,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(roleToUserConverter());
         registry.addConverter(permissionToRoleConverter());
-        registry.addConverter(studentToSubjectConverter());
+        registry.addConverter(studentToCourseConverter());
         registry.addConverter(staffToSubjectConverter());
     }
 }

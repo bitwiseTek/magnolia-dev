@@ -26,5 +26,9 @@ public interface DepartmentService {
 	public Department findByDepartmentId(Long id);
 	
 	public Department findByName(String name);
+	
+	public Department save(Department data);
+	
+	public Department update(Department data);
 
 }

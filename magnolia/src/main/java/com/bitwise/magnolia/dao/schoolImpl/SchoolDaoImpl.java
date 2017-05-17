@@ -81,7 +81,15 @@ public class SchoolDaoImpl extends AbstractDao<Long, School> implements SchoolDa
 	@Override
 	@Transactional
 	public School save(School school) {
-		return this.em.merge(school);
+		persist(school);
+		return school;
+	}
+
+	@Override
+	@Transactional
+	public School update(School school) {
+		merge(school);
+		return school;
 	}
 
 }

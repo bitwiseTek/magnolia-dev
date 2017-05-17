@@ -34,6 +34,13 @@ public class StudentDaoImpl extends AbstractDao<Long, Student> implements Studen
 		List<Student> students = query.getResultList();
 		return students.size() == 1 ? students.get(0) : null;
 	}
+	
+	@Override
+	public Student findByUserId(Long userId) {
+		TypedQuery<Student> query = em.createNamedQuery("Student.findByUserId", Student.class).setParameter("userId", userId);
+		List<Student> students = query.getResultList();
+		return students.size() == 1 ? students.get(0) : null;
+	}
 
 	@Override
 	public Student findByStudentApiKey(String apiKey) {
@@ -44,7 +51,9 @@ public class StudentDaoImpl extends AbstractDao<Long, Student> implements Studen
 
 	@Override
 	public Student findById(Long id) {
-		return this.em.createNamedQuery("Student.findById", Student.class).setParameter("id", id).getSingleResult();
+		TypedQuery<Student> query = em.createNamedQuery("Student.findById", Student.class).setParameter("id", id);
+		List<Student> students = query.getResultList();
+		return students.size() == 1 ? students.get(0) : null;
 	}
 
 	@Override
@@ -81,5 +90,4 @@ public class StudentDaoImpl extends AbstractDao<Long, Student> implements Studen
 		merge(student);
 		return student;
 	}
-
 }

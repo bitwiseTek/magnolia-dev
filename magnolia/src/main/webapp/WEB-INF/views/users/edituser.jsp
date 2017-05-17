@@ -10,7 +10,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 <%@ page isELIgnored="false" %>
+
+<spring:message code="created.date.pattern" var="createdDatePattern" />
 
 <div align="left" class="container">
 	<div align="left" class="login-container animated fadeInUp">
@@ -171,7 +174,7 @@
 	                    
 	                  	<div class="col-md-6 col-sm-6">
 	                  		<label for="createdAt" class="control-label">Created At:</label>
-	                  		<label for="createdAt" class="form-control">${user.createdAt}</label>
+	                  		<label for="createdAt" class="form-control"><joda:format value="${user.createdAt}" pattern="${createdDatePattern}"/></label>
 	                  		<form:hidden class="form-control" id="createdAt" name="createdAt" placeholder="Created At" path="createdAt" />
 	                    </div>
 	               	</div>
@@ -207,7 +210,7 @@
                 
 	                <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
 	                  <div class="col-md-1 col-sm-1">
-	                  	<button class="btn btn-success btn-cons">
+	                  	<button class="btn btn-danger btn-cons">
 	                  		<div class="lsf-icon" title="edit">Edit</div>
 	               		</button>
 	                  </div>

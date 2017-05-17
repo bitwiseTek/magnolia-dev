@@ -51,7 +51,15 @@ public class CampusDaoImpl extends AbstractDao<Long, Campus> implements CampusDa
 	@Override
 	@Transactional
 	public Campus save(Campus campus) {
-		return this.em.merge(campus);
+		persist(campus);
+		return campus;
+	}
+
+	@Override
+	@Transactional
+	public Campus update(Campus campus) {
+		merge(campus);
+		return campus;
 	}
 
 }

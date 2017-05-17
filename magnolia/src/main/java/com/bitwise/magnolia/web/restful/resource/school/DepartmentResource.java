@@ -10,6 +10,7 @@ import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.school.Department;
 import com.bitwise.magnolia.model.school.Faculty;
 
@@ -22,6 +23,8 @@ public class DepartmentResource extends ResourceSupport {
 	private Long rid;
 	
 	private String name;
+	
+	private String code;
 	
 	private String status;
 	
@@ -45,6 +48,14 @@ public class DepartmentResource extends ResourceSupport {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getStatus() {
@@ -82,10 +93,11 @@ public class DepartmentResource extends ResourceSupport {
 	public Department toDepartment() {
 		Department dept = new Department();
 		dept.setDepartmentId(rid);
-		dept.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
-		dept.setUpdatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		dept.setCreatedAt(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
+		dept.setUpdatedAt(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
 		dept.setName(name);
-		dept.setStatus(status);
+		dept.setCode(code);
+		dept.setStatus(ApplicationConstant.ACTIVE_STATUS);
 		dept.setFaculty(new Faculty(Long.parseLong(faculty)));
 		return dept;
 	}

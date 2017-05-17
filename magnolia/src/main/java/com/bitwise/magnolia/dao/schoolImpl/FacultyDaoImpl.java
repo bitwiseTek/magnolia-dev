@@ -63,6 +63,14 @@ public class FacultyDaoImpl extends AbstractDao<Long, Faculty> implements Facult
 	@Override
 	@Transactional
 	public Faculty save(Faculty faculty) {
-		return this.em.merge(faculty);
+		persist(faculty);
+		return faculty;
+	}
+
+	@Override
+	@Transactional
+	public Faculty update(Faculty faculty) {
+		merge(faculty);
+		return faculty;
 	}
 }

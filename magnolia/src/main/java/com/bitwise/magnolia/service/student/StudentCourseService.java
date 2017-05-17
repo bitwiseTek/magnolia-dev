@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.student;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -7,7 +9,12 @@ package com.bitwise.magnolia.service.student;
  */
 import com.bitwise.magnolia.model.student.StudentCourse;
 import com.bitwise.magnolia.util.StudentCourseList;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 27/02/17
+ *
+ */
 public interface StudentCourseService {
 
 	public StudentCourse findById(Long id);
@@ -30,6 +37,26 @@ public interface StudentCourseService {
 	
 	public StudentCourseList findAllCourses();
 	
-	public StudentCourse save(StudentCourse sc);
+	public List<StudentCourse> findAll();
+	
+	public List<StudentCourse> findAllRegisteredOne(Long semesterId, Boolean toggle);
+	
+	public List<StudentCourse> findAllRegisteredTwo(Long semesterId, Boolean toggle);
+	
+	public List<StudentCourse> findAllPendingOne(Long semesterId, String status);
+	
+	public List<StudentCourse> findAllPendingTwo(Long semesterId, String status);
+	
+	public List<StudentCourse> findAllCompletedOne(Long semesterId, String status);
+	
+	public List<StudentCourse> findAllCompletedTwo(Long semesterId, String status);
+	
+	public List<StudentCourse> findAllOne(Long semesterId);
+	
+	public List<StudentCourse> findAllTwo(Long semesterId);
+	
+	public StudentCourse save(StudentCourse data);
+	
+	public StudentCourse update(StudentCourse data);
 
 }

@@ -10,6 +10,7 @@ import java.util.Date;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.school.Campus;
 import com.bitwise.magnolia.model.school.Faculty;
 
@@ -82,10 +83,10 @@ public class FacultyResource extends ResourceSupport {
 	public Faculty toFaculty() {
 		Faculty faculty = new Faculty();
 		faculty.setFacultyId(rid);
-		faculty.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
-		faculty.setUpdatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		faculty.setCreatedAt(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
+		faculty.setUpdatedAt(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
 		faculty.setName(name);
-		faculty.setStatus(status);
+		faculty.setStatus(ApplicationConstant.ACTIVE_STATUS);
 		faculty.setCampus(new Campus(Long.parseLong(campus)));
 		return faculty;
 	}

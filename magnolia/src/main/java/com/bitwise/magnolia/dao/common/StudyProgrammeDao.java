@@ -24,4 +24,6 @@ public interface StudyProgrammeDao {
 	public List<StudyProgramme> findAllProgrammes();
 	
 	public StudyProgramme save(StudyProgramme programme);
+	
+	public StudyProgramme update(StudyProgramme programme);
 }

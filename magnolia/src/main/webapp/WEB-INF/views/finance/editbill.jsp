@@ -46,7 +46,7 @@
            			<div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
 	                  <div class="col-md-6 col-sm-6">
 	                  	<label for="username" class="control-label">Username:</label>
-	                    <label for="username" class="form-control">${bill.userId.user.username}</label>
+	                    <label for="username" class="form-control">${bill.userId.username}</label>
 	                    <form:input class="form-control" id="username" name="username" placeholder="Username" path="userId.id" type="hidden" />
 	                  </div>
 	                  <div class="col-md-6 col-sm-6">
@@ -76,8 +76,8 @@
 		              
 	                  <div class="col-md-6 col-sm-6">
 	                  	<label for="programme" class="control-label">Study Programme:</label>
-	                  	<label for="programme" class="form-control">${bill.studyProgramme.name}</label>
-	                  	<form:input class="form-control" id="programme" name="programme" placeholder="Programme" path="studyProgramme.id"type="hidden" />
+	                  	<label for="programme" class="form-control">${bill.studyProgramme.studyProgramme.name}</label>
+	                  	<form:input class="form-control" id="programme" name="programme" placeholder="Programme" path="studyProgramme.id" type="hidden" />
 	                  	<form:errors class="error" path="studyProgramme" />
 	                  </div>
 	                </div>
@@ -85,10 +85,10 @@
 	                <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
 	                    <div class="col-md-6 col-sm-6">
 	                    	<label for="state" class="control-label">State of Origin:</label>
-	                  		<form:select id="state" path="state.id" style="width:100%; font-weight: 0; font-size: 12px;" disabled="disabled">
-			                		<c:if test="${not empty bills}">
-				                      	<c:forEach items="${bills}" var="bill">
-				                      	 	<form:option value="${bill.state.id}">${bill.state.name}</form:option>
+	                  		<form:select id="state" path="state.id" style="width:100%; font-weight: 0; font-size: 12px;">
+			                		<c:if test="${not empty students}">
+				                      	<c:forEach items="${students}" var="student">
+				                      	 	<form:option value="${student.id}">${student.user.state.name}</form:option>
 				                      	</c:forEach>
 			                      </c:if>
 							</form:select>
@@ -97,10 +97,10 @@
 	                    
 	                  	<div class="col-md-6 col-sm-6">
 	                  		<label for="lga" class="control-label">LGA:</label>
-	                  		<form:select id="lga" path="lga.id" style="width:100%; font-weight: 0; font-size: 12px;" disabled="disabled">
-			                		<c:if test="${not empty bills}">
-				                      	<c:forEach items="${bills}" var="bill">
-				                      	 	<form:option value="${bill.lga.id}">${bill.lga.name}</form:option>
+	                  		<form:select id="lga" path="lga.id" style="width:100%; font-weight: 0; font-size: 12px;">
+			                		<c:if test="${not empty students}">
+				                      	<c:forEach items="${students}" var="student">
+				                      	 	<form:option value="${student.id}">${student.user.lga.name}</form:option>
 				                      	</c:forEach>
 			                      </c:if>
 							</form:select>
@@ -176,20 +176,26 @@
 						
 	               		<div class="col-md-6 col-sm-6">
 	               			<label for="notes" class="control-label">Notes:</label>
-		                    <form:textarea class="form-control" id="endText" name="notes" placeholder="Notes" rows="7" path="notes" />
+		                    <form:textarea class="form-control" id="notes" name="notes" placeholder="Notes" rows="7" path="notes" />
 		                    <form:errors class="error" path="notes" />
 	                  	</div>
 	               	</div>
                 
 	                <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
 	                  <div class="col-md-1 col-sm-1">
-	                  	<button class="btn btn-success btn-cons">
+	                  	<button class="btn btn-danger btn-cons">
 	                  		<div class="lsf-icon" title="edit">Edit</div>
 	               		</button>
 	                  </div>
 	                </div>
               	</div>
              </div>
+             <form:hidden id="productId" name="productId" path="productId" />
+             <form:hidden id="payItemId" name="payItemId" path="payItemId" />
+             <form:hidden id="feesAmountKobo" name="feesAmountKobo" path="feesAmountKobo" />
+             <form:hidden id="siteRedirectUrl" name="siteRedirectUrl" path="siteRedirectUrl" />
+             <form:hidden id="macKey" name="macKey" path="macKey" />
+             <form:hidden id="hashVal" name="hashVal" path="hashVal" />
         </form:form>
 	</div>
 </div>

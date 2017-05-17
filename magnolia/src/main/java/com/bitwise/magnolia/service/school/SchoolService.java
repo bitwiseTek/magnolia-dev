@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.school;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -23,6 +25,10 @@ public interface SchoolService {
 	
 	public SchoolList findAllSchools();
 	
-	public School save(School school);
+	public List<School> findAll();
+	
+	public School save(School data);
+	
+	public School update(School data);
 
 }

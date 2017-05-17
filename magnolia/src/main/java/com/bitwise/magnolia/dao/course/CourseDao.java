@@ -24,4 +24,6 @@ public interface CourseDao {
 	public List<Course> findAllCourses();
 	
 	public Course save(Course course);
+	
+	public Course update(Course course);
 }

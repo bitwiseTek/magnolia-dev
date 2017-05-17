@@ -25,5 +25,7 @@ public interface StudyProgrammeCategoryService {
 	
 	public List<StudyProgrammeCategory> findAllCategories();
 	
-	public StudyProgrammeCategory save(StudyProgrammeCategory category);
+	public StudyProgrammeCategory save(StudyProgrammeCategory data);
+	
+	public StudyProgrammeCategory update(StudyProgrammeCategory data);
 }

@@ -38,8 +38,8 @@ public class Faculty implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "FACULTY_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long facultyId;
 	
 	@Column(name = "NAME")
@@ -73,7 +73,7 @@ public class Faculty implements Serializable{
 		return facultyId;
 	}
 
-	public void setFacultyId(long facultyId) {
+	public void setFacultyId(Long facultyId) {
 		this.facultyId = facultyId;
 	}
 

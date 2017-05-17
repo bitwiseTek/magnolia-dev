@@ -30,11 +30,11 @@ import com.bitwise.magnolia.model.finance.BillingDetails;
 import com.bitwise.magnolia.model.student.Student;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.common.AcademicSemesterService;
-import com.bitwise.magnolia.service.email.EmailService;
+//import com.bitwise.magnolia.service.email.EmailService;
 import com.bitwise.magnolia.service.finance.BillingDetailsService;
 import com.bitwise.magnolia.service.student.StudentService;
 import com.bitwise.magnolia.service.user.UserService;
-import com.bitwise.magnolia.validation.StudentValidator;
+import com.bitwise.magnolia.validation.BillingValidator;
 import com.bitwise.magnolia.web.util.UrlUtil;
 
 @Controller
@@ -52,12 +52,12 @@ public class MVCBillingDetailsController {
 	@Autowired
 	private AcademicSemesterService semesterService;
 	
-	@Autowired
-	private EmailService emailService;
+//	@Autowired
+//	private EmailService emailService;
 	
-	@InitBinder("billing")
+	@InitBinder("bill")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new StudentValidator());
+		binder.setValidator(new BillingValidator());
 	}
 	
 	@PreAuthorize("hasRole('STUDENT')")
@@ -96,6 +96,10 @@ public class MVCBillingDetailsController {
 	public String requestEditStudentBillingPage(@PathVariable("id") Long id, @ModelAttribute BillingDetails bill, ModelMap model) {
 		bill = billingService.findById(id);
 		model.addAttribute("bill", bill);
+		List<Student> students = studentService.findAll();
+		model.addAttribute("students", students);
+		String username = bill.getUserId().getUsername();
+		model.addAttribute("username", username);
 		Map<String, String> statuses = Utils.getStatuses();
 		model.addAttribute("statuses", statuses);
 		String currentStatus = bill.getStatus();
@@ -143,9 +147,8 @@ public class MVCBillingDetailsController {
 	@RequestMapping(value="/finance/billing/status/edit/{id}", method={RequestMethod.PUT})
 	public String editSystemUser(@PathVariable("id") Long id, @Valid @ModelAttribute BillingDetails bill, BindingResult result, HttpServletRequest request) throws MessagingException {
 		if (!result.hasErrors()) {
-			bill = billingService.findById(id);
 			this.billingService.update(bill);
-			this.emailService.sendUpdateAdminBillingEmail(bill.getUserId().getPrimaryEmail(), bill);
+			//this.emailService.sendUpdateAdminBillingEmail(bill.getUserId().getPrimaryEmail(), bill);
 			return "redirect:/finance/billing/status/edit/" + UrlUtil.encodeUrlPathSegment(bill.getId().toString(), request);
 		} else {
 			return "redirect:/finance/billing/status/edit/" + UrlUtil.encodeUrlPathSegment(bill.getId().toString(), request);

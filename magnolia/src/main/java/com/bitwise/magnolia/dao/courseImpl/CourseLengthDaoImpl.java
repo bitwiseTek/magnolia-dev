@@ -44,7 +44,15 @@ public class CourseLengthDaoImpl extends AbstractDao<Long, CourseLength> impleme
 	@Override
 	@Transactional
 	public CourseLength save(CourseLength length) {
-		return this.em.merge(length);
+		persist(length);
+		return length;
+	}
+
+	@Override
+	@Transactional
+	public CourseLength update(CourseLength length) {
+		merge(length);
+		return length;
 	}
 
 }

@@ -20,4 +20,6 @@ public interface CampusDao {
 	public List<Campus> findCampusesBySubSchoolId(Long subSchoolId);
 	
 	public Campus save(Campus campus);
+	
+	public Campus update(Campus campus);
 }

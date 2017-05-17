@@ -25,5 +25,7 @@ public interface DepartmentDao {
 	public Department findByName(String name);
 	
 	public Department save(Department dept);
+	
+	public Department update(Department dept);
 
 }

@@ -74,6 +74,14 @@ public class DepartmentDaoImpl extends AbstractDao<Long, Department> implements 
 	@Override
 	@Transactional
 	public Department save(Department dept) {
-		return this.em.merge(dept);
+		persist(dept);
+		return dept;
+	}
+
+	@Override
+	@Transactional
+	public Department update(Department dept) {
+		merge(dept);
+		return dept;
 	}
 }

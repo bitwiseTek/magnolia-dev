@@ -8,6 +8,7 @@ package com.bitwise.magnolia.web.restful.resource.course;
 import org.joda.time.DateTime;
 import org.springframework.hateoas.ResourceSupport;
 
+import com.bitwise.magnolia.common.ApplicationConstant;
 import com.bitwise.magnolia.model.common.AcademicSemester;
 import com.bitwise.magnolia.model.common.StudyProgramme;
 import com.bitwise.magnolia.model.course.Course;
@@ -175,7 +176,7 @@ public class CourseResource extends ResourceSupport {
 		course.setId(rid);
 		course.setCode(code);
 		course.setName(name);
-		course.setStatus(status);
+		course.setStatus(ApplicationConstant.ACTIVE_STATUS);
 		course.setDescription(description);
 		course.setAcademicLevel(academicLevel);
 		course.setOptionality(optionality);

@@ -38,6 +38,7 @@ import com.bitwise.magnolia.model.user.User;
 @NamedQueries({
 	@NamedQuery(name="Student.findById", query="select distinct s from Student s where s.id=:id"),
 	@NamedQuery(name="Student.findByStudentId", query="select distinct s from Student s where s.studentId=:studentId"),
+	@NamedQuery(name="Student.findByUserId", query="select distinct s from Student s where s.user.id=:userId"),
 	@NamedQuery(name="Student.findByApiKey", query="select distinct s from Student s where s.apiKey=:apiKey"),
 	@NamedQuery(name="Student.findByDepartmentId", query="select s from Student s where s.studentDepartment.departmentId=:deptId"),
 	@NamedQuery(name="Student.findByProgrammeId", query="select s from Student s where s.studyProgramme.id=:programmeId"),
@@ -139,7 +140,7 @@ public class Student implements Serializable {
 	
 	@Transient
 	public String getStartDateString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("E, MMM Y h:mm a").print(startDate);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(startDate);
 	}
 	
 	@DateTimeFormat(iso=ISO.DATE_TIME)

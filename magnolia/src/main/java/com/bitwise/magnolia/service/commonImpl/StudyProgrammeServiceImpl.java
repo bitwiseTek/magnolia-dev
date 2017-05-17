@@ -7,12 +7,7 @@ package com.bitwise.magnolia.service.commonImpl;
  */
 import java.util.List;
 
-/**
- *  
- * @author Sika Kay
- * @date 27/02/17
- *
- */
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bitwise.magnolia.dao.common.StudyProgrammeDao;
+import com.bitwise.magnolia.exception.EntityDoesNotExistException;
 import com.bitwise.magnolia.model.common.StudyProgramme;
 import com.bitwise.magnolia.service.common.StudyProgrammeService;
 import com.bitwise.magnolia.util.ProgrammeList;
@@ -65,15 +61,48 @@ public class StudyProgrammeServiceImpl implements StudyProgrammeService {
 
 	@Override
 	@Transactional(readOnly=false)
-	public StudyProgramme save(StudyProgramme programme) {
-		logger.info("Adding/Updating study programme with ID " + programme.getId());
-		return this.programmeDao.save(programme);
+	public StudyProgramme save(StudyProgramme data) {
+		logger.info("Adding/Updating study programme with ID " + data.getId());
+		StudyProgramme programme = programmeDao.findByName(data.getName());
+		if (programme != null) {
+			throw new EntityDoesNotExistException("Programme does not exist");
+		}
+		return this.programmeDao.save(data);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public List<StudyProgramme> findAll() {
 		return this.programmeDao.findAllProgrammes();
+	}
+
+	@Override
+	@Transactional(readOnly=false)
+	public StudyProgramme update(StudyProgramme data) {
+		StudyProgramme programme = programmeDao.findById(data.getId());
+		try {
+			if (programme != null) {
+				programme.setCode(data.getCode());
+				programme.setCreatedAt(data.getCreatedAt());
+				programme.setMaxParticipationCount(data.getMaxParticipationCount());
+				programme.setDescription(data.getDescription());
+				programme.setName(data.getName());
+				programme.setParticipants(data.getParticipants());
+				programme.setProgramDays(data.getProgramDays());
+				programme.setStatus(data.getStatus());
+				programme.setUpdatedAt(new DateTime(DateTime.now()));
+				programme.setCategory(data.getCategory());
+				programme.setCourseLength(data.getCourseLength());
+				programme.setCreatedBy(data.getCreatedBy());
+				programme.setUpdatedBy(data.getUpdatedBy());
+				programme.setEndDate(new DateTime(DateTime.now()).plusDays(data.getProgramDays()));
+			} else {
+				throw new EntityDoesNotExistException("Programme does not exist");
+			}
+		} catch(Exception e) {
+			throw new EntityDoesNotExistException("Programme does not exist");
+		}
+		return programme;
 	}
 
 }

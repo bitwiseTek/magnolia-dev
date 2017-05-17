@@ -22,4 +22,6 @@ public interface FacultyDao {
 	
 	public Faculty save(Faculty faculty);
 	
+	public Faculty update(Faculty faculty);
+	
 }

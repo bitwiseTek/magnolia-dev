@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.schoolImpl;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -107,6 +109,18 @@ public class SchoolServiceImpl implements SchoolService {
 	public School save(School school) {
 		logger.info("Adding school with ID " + school.getSchoolId());
 		return this.schoolDao.save(school);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<School> findAll() {
+		return this.schoolDao.findAllSchools();
+	}
+
+	@Override
+	public School update(School data) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

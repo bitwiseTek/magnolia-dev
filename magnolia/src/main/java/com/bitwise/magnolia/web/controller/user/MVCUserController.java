@@ -141,6 +141,34 @@ public class MVCUserController {
 		return "users/edit/user";
 	}
 	
+	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
+	@RequestMapping(value="/users/show/user/{id}", method={RequestMethod.GET})
+	public String requestShowSystemUser(@PathVariable("id") Long id, @ModelAttribute User user, ModelMap model, HttpServletRequest request) {
+		user = userService.findById(id);
+		List<Role> roles = roleService.findAll();
+		model.addAttribute("user", user);
+		model.addAttribute("roles", roles);
+		String username = user.getUsername();
+		model.addAttribute("username", username);
+		Map<String, String> sexes = Utils.getSexes();
+		model.addAttribute("sexes", sexes);
+		Map<String, String> questions = Utils.getQuestions();
+		model.addAttribute("questions", questions);
+		String currentSex = user.getSex();
+		model.addAttribute("currentSex", currentSex);
+		Map<String, String> statuses = Utils.getStatuses();
+		model.addAttribute("statuses", statuses);
+		String currentStatus = user.getStatus();
+		model.addAttribute("currentStatus", currentStatus);
+		List<State> states = stateService.findAll();
+		model.addAttribute("states", states);
+		List<LGA> lgas = lgaService.findAll();
+		model.addAttribute("lgas", lgas);
+		String currentQuestion = user.getSecretQuestion();
+		model.addAttribute("currentQuestion", currentQuestion);
+		return "users/show/user";
+	}
+	
 	@RequestMapping(value = "/users/password/update/{id}", method = RequestMethod.GET)
 	public String requestUpdatePassword(@PathVariable("id") Long id, @ModelAttribute User user, ModelMap model) {
 		user = userService.findById(id);
@@ -148,6 +176,7 @@ public class MVCUserController {
 		return "users/password/update";
 	}
 	
+	@PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
 	@RequestMapping(value = "/users/list", method = RequestMethod.GET)
 	public String requestUsersList(ModelMap model) {
 		List<User> users = userService.findAll();

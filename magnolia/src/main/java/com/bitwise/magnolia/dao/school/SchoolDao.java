@@ -25,5 +25,7 @@ public interface SchoolDao {
 	public List<School> findAllSchools();
 	
 	public School save(School school);
+	
+	public School update(School school);
 
 }

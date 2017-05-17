@@ -18,4 +18,6 @@ public interface StudyProgrammeCategoryDao {
 	public List<StudyProgrammeCategory> findAll();
 	
 	public StudyProgrammeCategory save(StudyProgrammeCategory category);
+	
+	public StudyProgrammeCategory update(StudyProgrammeCategory category);
 }

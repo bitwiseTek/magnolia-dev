@@ -51,7 +51,15 @@ public class SubSchoolDaoImpl extends AbstractDao<Long, SubSchool> implements Su
 	@Override
 	@Transactional
 	public SubSchool save(SubSchool school) {
-		return this.em.merge(school);
+		persist(school);
+		return school;
+	}
+
+	@Override
+	@Transactional
+	public SubSchool update(SubSchool school) {
+		merge(school);
+		return school;
 	}
 
 }

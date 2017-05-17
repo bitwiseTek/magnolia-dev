@@ -126,14 +126,14 @@
 				                                  </div>
 				                                </td>
 				                                <td class="clickable v-align-middle">
-				                                  ${message.sender}
+				                                  ${message.receiver}
 				                                </td>
 				                                <td class="clickable tablefull v-align-middle">
 				                                  <span class="muted">${message.subject}</span>
 				                                </td>
 				                                <td></td>
 				                                <td class="clickable">
-				                                  <span class="muted"><joda:format value="${message.sentAt}" pattern="${createdDatePattern}"/></span>
+				                                  <span class="muted"><joda:format value="${message.receivedAt}" pattern="${createdDatePattern}"/></span>
 				                                </td>
 				                              </tr>
 		                              	</c:forEach>
@@ -170,7 +170,7 @@
 	                        <div class="control">
 	                          <div class="pull-left">
 	                            <div class="btn-group">
-	                              <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">${message.sender} <span class="caret"></span></a>
+	                              <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">${message.receiver} <span class="caret"></span></a>
 	                              <ul class="dropdown-menu">
 	                                <li>
 	                                  <a href="#">Action</a>
@@ -188,7 +188,7 @@
 	                                </li>
 	                              </ul>
 	                            </div>
-	                            <label class="inline"><span class="muted">&nbsp;&nbsp;to</span> <span class="bold small-text">${message.receiver}</span></label>
+	                            <label class="inline"><span class="muted">&nbsp;&nbsp;to</span> <span class="bold small-text">${message.sender}</span></label>
 	                          </div>
 	                          <div class="pull-right">
 	                            <span class="muted small-text"><joda:format value="${message.receivedAt}" pattern="${createdDatePattern}"/></span>

@@ -144,7 +144,7 @@ public class StudyProgramme implements Serializable {
 	
 	@Transient
 	public String getUpdatedAtString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(updatedAt);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(updatedAt);
 	}
 
 	@Column(name="PROGRAMME_DAYS", nullable=false)
@@ -169,7 +169,7 @@ public class StudyProgramme implements Serializable {
 
 	@Transient
 	public String getEndDateString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(endDate);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(endDate);
 	}
 	
 	public void setParticipants(Integer participants) {
@@ -212,7 +212,7 @@ public class StudyProgramme implements Serializable {
 	
 	@Transient
 	public String getCreatedAtString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss").print(createdAt);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(createdAt);
 	}
 
 	@ManyToOne

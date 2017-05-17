@@ -32,7 +32,7 @@ import com.bitwise.magnolia.model.staff.Staff;
 import com.bitwise.magnolia.model.student.Student;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.common.StudyProgrammeService;
-import com.bitwise.magnolia.service.email.EmailService;
+//import com.bitwise.magnolia.service.email.EmailService;
 import com.bitwise.magnolia.service.school.DepartmentService;
 import com.bitwise.magnolia.service.staff.StaffService;
 import com.bitwise.magnolia.service.student.StudentService;
@@ -58,8 +58,8 @@ public class MVCStaffController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private EmailService emailService;
+	/*@Autowired
+	private EmailService emailService;*/
 	
 	@InitBinder("staff")
 	public void initBinder(WebDataBinder binder) {
@@ -95,6 +95,8 @@ public class MVCStaffController {
 		model.addAttribute("staff", staff);
 		List<Department> depts = deptService.findAll();
 		model.addAttribute("depts", depts);
+		String username = staff.getUser().getUsername();
+		model.addAttribute("username", username);
 		Map<String, String> titles = Utils.getTitles();
 		model.addAttribute("titles", titles);
 		Map<String, String> statuses = Utils.getStatuses();
@@ -111,6 +113,8 @@ public class MVCStaffController {
 		model.addAttribute("staff", staff);
 		List<Department> depts = deptService.findAll();
 		model.addAttribute("depts", depts);
+		String username = staff.getUser().getUsername();
+		model.addAttribute("username", username);
 		Map<String, String> statuses = Utils.getStatuses();
 		model.addAttribute("statuses", statuses);
 		String currentStatus = staff.getStatus();
@@ -138,9 +142,8 @@ public class MVCStaffController {
 	@RequestMapping(value="/admin/staff/edit/staff/{id}", method={RequestMethod.PUT})
 	public String editAdminStaff(@PathVariable("id") Long id, @Valid @ModelAttribute Staff staff, BindingResult result, HttpServletRequest request) throws MessagingException {
 		if (!result.hasErrors()) {
-			staff = staffService.findById(id);
 			this.staffService.updateStaff(staff);
-			this.emailService.sendUpdateAdminStaffEmail(staff.getUser().getPrimaryEmail(), staff);
+			//this.emailService.sendUpdateAdminStaffEmail(staff.getUser().getPrimaryEmail(), staff);
 			return "redirect:/admin/staff/edit/staff/" + UrlUtil.encodeUrlPathSegment(staff.getId().toString(), request);
 		} else {
 			return "redirect:/admin/staff/edit/staff/" + UrlUtil.encodeUrlPathSegment(staff.getId().toString(), request);
@@ -152,7 +155,7 @@ public class MVCStaffController {
 	public String editStudent(@Valid @ModelAttribute Staff staff, BindingResult result, HttpServletRequest request) throws MessagingException {
 		if (!result.hasErrors()) {
 			this.staffService.updateStaff(staff);
-			this.emailService.sendUpdateStaffEmail(staff.getUser().getPrimaryEmail(), staff);
+			//this.emailService.sendUpdateStaffEmail(staff.getUser().getPrimaryEmail(), staff);
 			return "redirect:/staff/edit/staff/" + UrlUtil.encodeUrlPathSegment(staff.getId().toString(), request);
 		} else {
 			return "redirect:/staff/edit/staff/" + UrlUtil.encodeUrlPathSegment(staff.getId().toString(), request);

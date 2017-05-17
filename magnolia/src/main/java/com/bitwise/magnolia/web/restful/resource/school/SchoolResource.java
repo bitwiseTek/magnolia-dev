@@ -135,7 +135,7 @@ public class SchoolResource extends ResourceSupport {
 		school.setSchoolAddress(schoolAddress);
 		school.setAlias(alias);
 		school.setApiKey(Utils.randomString(30));
-		school.setCreatedAt(new SimpleDateFormat("dd/MM/yyyy HH.mm.ss").format(new Date()));
+		school.setCreatedAt(new SimpleDateFormat("E, dd MMM Y h:mm a").format(new Date()));
 		school.setEmail(email);
 		school.setStatus(status);
 		school.setSchoolLogo(schoolLogo);

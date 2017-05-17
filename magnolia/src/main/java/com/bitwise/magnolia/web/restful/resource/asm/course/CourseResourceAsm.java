@@ -36,7 +36,7 @@ public class CourseResourceAsm extends ResourceAssemblerSupport<Course, CourseRe
 		res.setCreatedBy(course.getUpdatedBy().getUsername());
 		res.setUpdatedBy(course.getUpdatedBy().getUsername());
 		res.setSemester(course.getSemester().getName());
-		res.setCourseLecturer(course.getCourseLecturer().getUser().getFullName());
+		//res.setCourseLecturer(course.getCourseLecturer().getUser().getFullName());
 		res.setStudyProgramme(course.getStudyProgramme().getName());
 		res.add(linkTo(methodOn(CourseController.class).findCourse(course.getId())).withSelfRel());
 		return res;

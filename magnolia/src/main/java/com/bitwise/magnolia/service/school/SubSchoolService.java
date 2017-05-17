@@ -1,4 +1,6 @@
 package com.bitwise.magnolia.service.school;
+import java.util.List;
+
 /**
  *  
  * @author Sika Kay
@@ -7,7 +9,12 @@ package com.bitwise.magnolia.service.school;
  */
 import com.bitwise.magnolia.model.school.SubSchool;
 import com.bitwise.magnolia.util.SubSchoolList;
-
+/**
+ *  
+ * @author Sika Kay
+ * @date 25/03/17
+ *
+ */
 public interface SubSchoolService {
 
 	public SubSchool findById(Long id);
@@ -18,5 +25,9 @@ public interface SubSchoolService {
 	
 	public SubSchoolList findAllSubSchools();
 	
-	public SubSchool save(SubSchool school);
+	public List<SubSchool> findAll();
+	
+	public SubSchool save(SubSchool data);
+	
+	public SubSchool update(SubSchool data);
 }

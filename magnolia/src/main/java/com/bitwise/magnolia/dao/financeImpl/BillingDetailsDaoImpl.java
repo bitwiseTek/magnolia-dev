@@ -31,7 +31,9 @@ public class BillingDetailsDaoImpl extends AbstractDao<Long, BillingDetails> imp
 	
 	@Override
 	public BillingDetails findById(Long id) {
-		return this.em.createNamedQuery("BillingDetails.findById", BillingDetails.class).setParameter("id", id).getSingleResult();
+		TypedQuery<BillingDetails> query = em.createNamedQuery("BillingDetails.findById", BillingDetails.class).setParameter("id", id);
+		List<BillingDetails> billingDetails = query.getResultList();
+		return billingDetails.size() == 1 ? billingDetails.get(0) : null;
 	}
 
 	@Override

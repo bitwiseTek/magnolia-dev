@@ -78,6 +78,14 @@
     <script src="<c:url value="/resources/src/js/frontend/staff/register.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/src/js/frontend/staff/list.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/src/js/frontend/finance/paybill.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/school/addsubschool.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/school/addcampus.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/school/addfaculty.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/school/adddept.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/programmes/addcategory.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/programmes/addprogramme.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/staff/courses/addstcourse.js" /> " type="text/javascript"></script>
+    <script src="<c:url value="/resources/src/js/frontend/courses/addcourselength.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/src/js/common/imagepreview.js" /> " type="text/javascript"></script>
     <script src="<c:url value="/resources/src/js/common/utils.js" /> " type="text/javascript"></script>
     <!-- END CORE JS DEPENDECENCIES-->

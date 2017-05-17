@@ -37,6 +37,7 @@ import com.bitwise.magnolia.model.finance.BillingDetails;
 @Table(name="STUDENT_COURSES")
 @NamedQueries({
 	@NamedQuery(name="StudentCourse.findById", query="select distinct s from StudentCourse s where s.id=:id"),
+	@NamedQuery(name="StudentCourse.findByBillingIdAndCourseId", query="select distinct s from StudentCourse s where s.billing.id=:billingId and s.course.id=:courseId"),
 	@NamedQuery(name="StudentCourse.findAllRegisteredOne", query="select s from StudentCourse s where s.course.semester.id=:semesterId and s.toggleOnOff=:toggle"),
 	@NamedQuery(name="StudentCourse.findAllRegisteredTwo", query="select s from StudentCourse s where s.course.semester.id=:semesterId and s.toggleOnOff=:toggle"),
 	@NamedQuery(name="StudentCourse.findAllPendingOne", query="select s from StudentCourse s where s.course.semester.id=:semesterId and s.courseStatus=:status"),
@@ -53,7 +54,7 @@ public class StudentCourse implements Serializable {
 	
 	private Long id;
 	
-	private Boolean toggleOnOff;
+	private Boolean toggleOnOff = Boolean.FALSE;
 	
 	private String courseStatus;
 
@@ -214,6 +215,6 @@ public class StudentCourse implements Serializable {
 
 	@Override
 	public String toString() {
-		return "StudentSubject [id=" + id + ", toggleOnOff=" + toggleOnOff + "]";
+		return "StudentCourse [id=" + id + ", toggleOnOff=" + toggleOnOff + "]";
 	}
 }

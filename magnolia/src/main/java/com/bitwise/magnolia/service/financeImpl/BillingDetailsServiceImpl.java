@@ -88,6 +88,14 @@ public class BillingDetailsServiceImpl implements BillingDetailsService {
 				billing.setUserId(data.getUserId());
 				billing.setStreetAddress(data.getStreetAddress());
 				billing.setFeesAmount(data.getFeesAmount());
+				billing.setStudyProgramme(data.getStudyProgramme());
+				billing.setPayItemId(data.getPayItemId());
+				billing.setProductId(data.getProductId());
+				billing.setFeesAmountKobo(data.getFeesAmountKobo());
+				billing.setSiteRedirectUrl(data.getSiteRedirectUrl());
+				billing.setMacKey(data.getMacKey());
+				billing.setHashVal(billing.getHashVal());
+				billing.setPaidAt(data.getPaidAt());
 			} else {
 				throw new EntityDoesNotExistException("Billing has not been initiated");
 			}

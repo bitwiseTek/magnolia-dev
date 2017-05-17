@@ -5,6 +5,14 @@ package com.bitwise.magnolia.service.course;
  * @date 27/02/17
  *
  */
+import java.util.List;
+
+/**
+ *  
+ * @author Sika Kay
+ * @date 27/02/17
+ *
+ */
 import com.bitwise.magnolia.model.course.Course;
 import com.bitwise.magnolia.util.CourseList;
 
@@ -22,5 +30,9 @@ public interface CourseService {
 	
 	public CourseList findAllCourses();
 	
-	public Course save(Course course);
+	public List<Course> findAll();
+	
+	public Course save(Course data);
+	
+	public Course update(Course data);
 }

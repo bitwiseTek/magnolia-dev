@@ -24,6 +24,7 @@ public class DepartmentResourceAsm extends ResourceAssemblerSupport<Department, 
 		res.setCreatedAt(dept.getCreatedAt());
 		res.setUpdatedAt(dept.getUpdatedAt());
 		res.setRid(dept.getDepartmentId());
+		res.setCode(dept.getCode());
 		res.setName(dept.getName());
 		res.setStatus(dept.getStatus());
 		res.setFaculty(dept.getFaculty().getName());

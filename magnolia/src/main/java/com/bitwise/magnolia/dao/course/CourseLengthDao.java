@@ -18,4 +18,6 @@ public interface CourseLengthDao {
 	public List<CourseLength> findAllCourseLengths();
 	
 	public CourseLength save(CourseLength length);
+	
+	public CourseLength update(CourseLength length);
 }

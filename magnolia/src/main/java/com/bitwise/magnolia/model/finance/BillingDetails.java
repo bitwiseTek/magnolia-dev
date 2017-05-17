@@ -52,6 +52,10 @@ public class BillingDetails implements Serializable {
 	public BillingDetails() {
 		
 	}
+	
+	public BillingDetails(Long id) {
+		this.id = id;
+	}
 
 	private Long id;
 	
@@ -310,7 +314,7 @@ public class BillingDetails implements Serializable {
 	
 	@Transient
 	public String getPaidAtString() {
-		return org.joda.time.format.DateTimeFormat.forPattern("E, MMM Y h:mm a").print(paidAt);
+		return org.joda.time.format.DateTimeFormat.forPattern("E, dd MMM Y h:mm a").print(paidAt);
 	}
 
 	@Column(name="PRODUCT_ID", nullable=false)

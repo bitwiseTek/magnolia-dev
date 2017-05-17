@@ -26,4 +26,6 @@ public interface SubSchoolDao {
 	public List<SubSchool> findAllSubSchools();
 	
 	public SubSchool save(SubSchool school);
+	
+	public SubSchool update(SubSchool school);
 }

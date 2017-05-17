@@ -31,7 +31,7 @@ import com.bitwise.magnolia.model.school.Department;
 import com.bitwise.magnolia.model.student.Student;
 import com.bitwise.magnolia.model.user.User;
 import com.bitwise.magnolia.service.common.StudyProgrammeService;
-import com.bitwise.magnolia.service.email.EmailService;
+//import com.bitwise.magnolia.service.email.EmailService;
 import com.bitwise.magnolia.service.school.DepartmentService;
 import com.bitwise.magnolia.service.student.StudentService;
 import com.bitwise.magnolia.service.user.UserService;
@@ -53,8 +53,8 @@ public class MVCStudentController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private EmailService emailService;
+	/*@Autowired
+	private EmailService emailService;*/
 	
 	@InitBinder("student")
 	public void initBinder(WebDataBinder binder) {
@@ -100,6 +100,8 @@ public class MVCStudentController {
 		model.addAttribute("student", student);
 		List<Department> depts = deptService.findAll();
 		model.addAttribute("depts", depts);
+		String username = student.getUser().getUsername();
+		model.addAttribute("username", username);
 		List<StudyProgramme> programmes = programmeService.findAll();
 		model.addAttribute("programmes", programmes);
 		Map<String, String> enrolTypes = Utils.getEnrolmentTypes();
@@ -128,6 +130,8 @@ public class MVCStudentController {
 		model.addAttribute("student", student);
 		List<Department> depts = deptService.findAll();
 		model.addAttribute("depts", depts);
+		String username = student.getUser().getUsername();
+		model.addAttribute("username", username);
 		List<StudyProgramme> programmes = programmeService.findAll();
 		model.addAttribute("programmes", programmes);
 		Map<String, String> enrolTypes = Utils.getEnrolmentTypes();
@@ -167,9 +171,8 @@ public class MVCStudentController {
 	@RequestMapping(value="/admin/students/edit/student/{id}", method={RequestMethod.PUT})
 	public String editAdminStudent(@PathVariable("id") Long id, @Valid @ModelAttribute Student student, BindingResult result, HttpServletRequest request) throws MessagingException {
 		if (!result.hasErrors()) {
-			student = studentService.findById(id);
 			this.studentService.updateStudent(student);
-			this.emailService.sendUpdateAdminStudentEmail(student.getUser().getPrimaryEmail(), student);
+			//this.emailService.sendUpdateAdminStudentEmail(student.getUser().getPrimaryEmail(), student);
 			return "redirect:/admin/students/edit/student/" + UrlUtil.encodeUrlPathSegment(student.getId().toString(), request);
 		} else {
 			return "redirect:/admin/students/edit/student/" + UrlUtil.encodeUrlPathSegment(student.getId().toString(), request);
@@ -181,7 +184,7 @@ public class MVCStudentController {
 	public String editStudent(@Valid @ModelAttribute Student student, BindingResult result, HttpServletRequest request) throws MessagingException {
 		if (!result.hasErrors()) {
 			this.studentService.updateStudent(student);
-			this.emailService.sendUpdateStudentEmail(student.getUser().getPrimaryEmail(), student);
+			//this.emailService.sendUpdateStudentEmail(student.getUser().getPrimaryEmail(), student);
 			return "redirect:/students/edit/student/" + UrlUtil.encodeUrlPathSegment(student.getId().toString(), request);
 		} else {
 			return "redirect:/students/edit/student/" + UrlUtil.encodeUrlPathSegment(student.getId().toString(), request);
